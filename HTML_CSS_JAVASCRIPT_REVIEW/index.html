@@ -32,6 +32,13 @@
             text-align: center; /* Centers the text inside the content */
         }
 
+        img.avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%; /* Makes the image circular */
+            margin-top: 15px;
+        }
+
         footer {
             text-align: center;
             padding: 10px;
@@ -41,19 +48,20 @@
 </head>
 <body>
 
-    <header>
-        <nav>
-            <ul>
-                <li><a href="#personal">Personal Information</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="skills.html">Skills</a></li>
-            </ul>
-        </nav>
-    </header>
+    <nav>
+        <ul>
+            <li><a href="#personal">Personal Information</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="skills.html">Skills</a></li>
+        </ul>
+    </nav>
 
-    <main >
+    <main id="content">
         <h1>My CV</h1>
+        <!-- Avatar image after the H1 tag -->
+        <img src="images/avatar.jpg" alt="Avatar" class="avatar">
+        
         <h2>Personal Information</h2>
         <p>Name: John Doe</p>
         <p>Address: 123 Main St, Springfield, IL 62701</p>
