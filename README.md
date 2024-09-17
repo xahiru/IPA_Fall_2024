@@ -2,6 +2,13 @@
 Repository for the course IPA
 
 
+# Vue JS
+
+### Prerequisite 
+    1. Install Node Js
+        https://nodejs.org/en/learn/getting-started/how-to-install-nodejs
+        
+
 ## references
     1. Web basics
         https://www.w3schools.com/
