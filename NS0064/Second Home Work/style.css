@@ -1,0 +1,35 @@
+header {
+    background-color: gray;
+    padding: 10px;
+}
+
+header a {
+    color: white;
+    margin: 10px;
+    text-decoration: none;
+}
+
+header a:hover {
+    color: aquamarine;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+input, textarea {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+input[type="submit"] {
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #555;
+}
