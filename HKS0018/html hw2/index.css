@@ -1,0 +1,41 @@
+h1{
+    background-color: palevioletred;
+    font-style: italic;
+    text-align: center;
+}
+
+.bar{
+
+    background-color: pink;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    margin: 0 10px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+body{
+    margin: auto;
+  width: 60%;
+  border: 3px solid #bc255f;
+  padding: 10px;
+    background-color: bisque;
+}
+.image-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.image-row img {
+    width: 250px;
+    height: 250px;
+    object-fit: cover;
+    border: 2px solid #bc255f;
+}
+
+a:hover {
+    background-color: lightcoral;
+}
