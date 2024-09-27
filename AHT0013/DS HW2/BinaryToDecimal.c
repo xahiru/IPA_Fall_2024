@@ -10,7 +10,7 @@ int converter(long long n) {
         i *= 2;
         n /= 10;
     }
-    
+
     return decimalNum;
 }
 
@@ -18,7 +18,7 @@ int main() {
     long long binaryNum;
 
 
-    printf(*Enter a binary number: *);
+    printf("Enter a binary number: ");
     scanf("%lld" , &binaryNum);
 
 
