@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from 'vue';
 // import FormDemo from './components/FormDemo.vue';
+import LoginForm from './components/LoginForm.vue';
 import ReactivityDemo from './components/ReactivityDemo.vue';
 
 const message = ref('Hello, Vue 3!');
@@ -65,6 +66,7 @@ const handleClick = () => {
 
     <!-- <FormDemo /> -->
     <!-- <ReactivityDemo /> -->
+    <LoginForm />
 
   </main>
 </template>
