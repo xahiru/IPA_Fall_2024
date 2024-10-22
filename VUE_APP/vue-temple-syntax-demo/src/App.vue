@@ -66,7 +66,7 @@ const handleClick = () => {
 
     <!-- <FormDemo /> -->
     <!-- <ReactivityDemo /> -->
-    <LoginForm />
+    <!-- <LoginForm /> -->
 
   </main>
 </template>
