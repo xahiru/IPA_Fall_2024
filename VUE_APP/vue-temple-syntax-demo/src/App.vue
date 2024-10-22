@@ -3,6 +3,8 @@ import { ref } from 'vue';
 // import FormDemo from './components/FormDemo.vue';
 import LoginForm from './components/LoginForm.vue';
 import ReactivityDemo from './components/ReactivityDemo.vue';
+import ExpressionDemo from './components/ExpressionDemo.vue';
+import EventDemo from './components/EventDemo.vue';
 
 const message = ref('Hello, Vue 3!');
 const rawHtml = ref('<strong>This is bold text rendered as HTML</strong>');
@@ -67,6 +69,8 @@ const handleClick = () => {
     <!-- <FormDemo /> -->
     <!-- <ReactivityDemo /> -->
     <!-- <LoginForm /> -->
+    <!-- <ExpressionDemo /> -->
+    <EventDemo />
 
   </main>
 </template>
