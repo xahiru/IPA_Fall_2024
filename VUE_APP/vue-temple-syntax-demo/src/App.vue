@@ -8,7 +8,7 @@ import { ref } from 'vue';
 // import ToggleVisibility from './components/ToggleVisibility.vue'
 
 const message = ref('Hi, Vue 3!');
-const rawHtml = ref('<strong>This is bold text rendered as HTML</strong>');
+const rawHtml = ref('<h1>This is bold text rendered as HTML</h1>');
 const imageUrl = ref('https://vuejs.org/images/logo.png');
 const imageAlt = ref('Vue.js Logo');
 const linkUrl = ref('https://vuejs.org');
