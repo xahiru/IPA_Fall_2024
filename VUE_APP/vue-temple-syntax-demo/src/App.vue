@@ -12,10 +12,13 @@ const rawHtml = ref('<h1>This is bold text rendered as HTML</h1>');
 const imageUrl = ref('https://vuejs.org/images/logo.png');
 const imageAlt = ref('Vue.js Logo');
 const linkUrl = ref('https://vuejs.org');
+
+// for conditional rendering
 const isChecked = ref(true);
 const isVisible = ref(false);
 const showText = ref(false);
 const number = ref(5);
+
 const a = ref(3);
 const b = ref(7);
 const items = ref(['Item 1', 'Item 2', 'Item 3']);
