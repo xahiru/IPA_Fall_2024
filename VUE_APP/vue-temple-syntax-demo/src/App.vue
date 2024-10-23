@@ -31,7 +31,7 @@ const buttonAttributes = ref({
 });
 
 
-
+// for event handling
 const handleClick = () => {
   alert('Button clicked!');
 };
