@@ -29,3 +29,6 @@ npm run dev
 ```sh
 npm run build
 ```
+
+#TODO 
+1. Clean up code
