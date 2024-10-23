@@ -5,15 +5,16 @@ import LoginForm from './components/LoginForm.vue';
 import ReactivityDemo from './components/ReactivityDemo.vue';
 import ExpressionDemo from './components/ExpressionDemo.vue';
 import EventDemo from './components/EventDemo.vue';
+import ToggleVisibility from './components/ToggleVisibility.vue'
 
-const message = ref('Hello, Vue 3!');
+const message = ref('Hi, Vue 3!');
 const rawHtml = ref('<strong>This is bold text rendered as HTML</strong>');
 const imageUrl = ref('https://vuejs.org/images/logo.png');
 const imageAlt = ref('Vue.js Logo');
 const linkUrl = ref('https://vuejs.org');
 const isChecked = ref(true);
-const isVisible = ref(true);
-const showText = ref(true);
+const isVisible = ref(false);
+const showText = ref(false);
 const number = ref(5);
 const a = ref(3);
 const b = ref(7);
@@ -21,7 +22,7 @@ const items = ref(['Item 1', 'Item 2', 'Item 3']);
 const buttonAttributes = ref({
   id: 'dynamic-button',
   class: 'btn btn-primary',
-  disabled: false
+  disabled: true
 });
 
 
@@ -70,7 +71,8 @@ const handleClick = () => {
     <!-- <ReactivityDemo /> -->
     <!-- <LoginForm /> -->
     <!-- <ExpressionDemo /> -->
-    <EventDemo />
+    <!-- <EventDemo /> -->
+    <ToggleVisibility/>
 
   </main>
 </template>
