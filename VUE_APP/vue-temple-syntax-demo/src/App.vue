@@ -7,7 +7,7 @@ import { ref } from 'vue';
 // import EventDemo from './components/EventDemo.vue';
 // import ToggleVisibility from './components/ToggleVisibility.vue'
 
-const message = ref('Hi, Vue 3!');
+const message = ref('Hello, Vue 3!');
 const rawHtml = ref('<h1>This is bold text rendered as HTML</h1>');
 const imageUrl = ref('https://vuejs.org/images/logo.png');
 const imageAlt = ref('Vue.js Logo');
