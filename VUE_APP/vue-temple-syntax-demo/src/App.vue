@@ -11,6 +11,8 @@ const message = ref('Hello, Vue 3!');
 
 // for raw HTML
 const rawHtml = ref('<h1>This is bold text rendered as HTML</h1>');
+
+// for attribute bindings
 const imageUrl = ref('https://vuejs.org/images/logo.png');
 const imageAlt = ref('Vue.js Logo');
 const linkUrl = ref('https://vuejs.org');
