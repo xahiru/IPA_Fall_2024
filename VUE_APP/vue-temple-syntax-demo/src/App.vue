@@ -13,7 +13,7 @@ const imageUrl = ref('https://vuejs.org/images/logo.png');
 const imageAlt = ref('Vue.js Logo');
 const linkUrl = ref('https://vuejs.org');
 
-// for conditional rendering
+// for conditional rendering (directives)
 const isChecked = ref(true);
 const isVisible = ref(false);
 const showText = ref(false);
