@@ -17,8 +17,9 @@ const linkUrl = ref('https://vuejs.org');
 const isChecked = ref(true);
 const isVisible = ref(false);
 const showText = ref(false);
-const number = ref(5);
 
+// for javascript expressions
+const number = ref(5);
 const a = ref(3);
 const b = ref(7);
 const items = ref(['Item 1', 'Item 2', 'Item 3']);
