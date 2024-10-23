@@ -19,6 +19,8 @@ const number = ref(5);
 const a = ref(3);
 const b = ref(7);
 const items = ref(['Item 1', 'Item 2', 'Item 3']);
+
+// for dynamically binding multiple attributes
 const buttonAttributes = ref({
   id: 'dynamic-button',
   class: 'btn btn-primary',
