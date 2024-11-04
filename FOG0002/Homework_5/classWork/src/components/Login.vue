@@ -1,21 +1,33 @@
 <script setup>
 import {ref} from 'vue';
+import EventDemo from './EventDemo.vue';
 
 const name = ref('');
 const password = ref('');
-const isActive = ref(true);
+const loginView = ref(true);
+const homeViews = ref(false);
+const seeOtherPage = ref(false);
 
 const handleSubmit=()=>{
     alert(name.value);
-    isActive.value = false;
+    loginView.value = false;
+    homeViews.value=true;
 }
+
+const handlePage=()=>{
+    seeOtherPage.value=true;
+    homeViews.value = false;
+}
+
+
+
 
 
 </script>
 
 <template>
     <div>
-        <div id="from-body" v-if="isActive">
+        <div id="from-body" v-if="loginView">
             <div class="login-container">
                 <form @submit.prevent="handleSubmit"  class="login-form">
                   <h2>Login</h2>
@@ -32,8 +44,15 @@ const handleSubmit=()=>{
               </div>          
         </div>
 
-        <div id="home-body" v-if="!isActive">
-            <h1>Hello {{name}}, welcome</h1>
+
+        <div>
+            <div class="home-views" v-if="homeViews">
+                <h1>Hello {{name}}, welcome</h1>
+                <button @click="handlePage">Go to 2nd homework</button>
+            </div>
+            <div v-if="seeOtherPage">
+                <EventDemo />
+            </div>
         </div>
     </div>
     
