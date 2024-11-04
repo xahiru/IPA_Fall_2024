@@ -40,6 +40,7 @@ const handleCalculator = () => {
                     <h2>Difference = {{difference}}</h2>
                     <h2>Product = {{product}}</h2>
                     <h2>Quotient = {{quotient}}</h2>
+                    <router-link to="/toggle-visibility" id="btnStyle">Go to 4th homework</router-link>
                 </div>
             </div>
         </div>
