@@ -17,6 +17,10 @@ const clickHandelBtn=()=>{
             <div class="btn">
                 <button @click.stop="clickHandelBtn">BTN</button>
             </div>
+            <div class="btn">
+                <router-link to="/expression-demo" id="btnStyle">Go to 3rd homework</router-link>
+            </div>
+
         </div>
     </div>
 </template>
@@ -50,6 +54,20 @@ const clickHandelBtn=()=>{
       }
       
       button:hover {
+        background-color: #4186c6;
+      }
+
+      #btnStyle {
+        width: 40%;
+        padding: 10px;
+        background-color: #0f4550;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      
+      #btnStyle:hover {
         background-color: #4186c6;
       }
 </style>
