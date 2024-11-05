@@ -17,7 +17,7 @@ const clickHandelBtn=()=>{
             <div class="btn">
                 <button @click.stop="clickHandelBtn">BTN</button>
             </div>
-            <div class="btn">
+            <div class="btn" @click.stop="">
                 <router-link to="/expression-demo" id="btnStyle">Go to 3rd homework</router-link>
             </div>
 
