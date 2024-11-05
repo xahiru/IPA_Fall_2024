@@ -1,7 +1,6 @@
 <template>
-    <div @click="onDivClick" style="padding: 20px; border: 1px solid black;">
-      <p>Click inside this area to see event propagation in action.</p>
-      <button @click.stop="onButtonClick">Click Me</button>
+    <div @click="handleDivClick">
+      <button @click.stop="handleButtonClick">Click me!</button>
     </div>
   </template>
   
@@ -9,18 +8,25 @@
   export default {
     name: 'EventDemo',
     methods: {
-      onDivClick() {
-        alert("Div clicked!");
+      handleDivClick() {
+        alert('Div clicked!');
       },
-      onButtonClick() {
-        alert("Button clicked!");
-      }
-    }
+      handleButtonClick() {
+        alert('Button clicked!');
+      },
+    },
   };
   </script>
   
   <style scoped>
-  button {
-    margin-top: 10px;
+  div {
+    padding: 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
   }
-  </style>  
+  
+  button {
+    margin: 10px;
+  }
+  </style>
+  
