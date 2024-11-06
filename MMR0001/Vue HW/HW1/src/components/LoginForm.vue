@@ -16,9 +16,9 @@
         <p>Welcome, {{ submittedUsername }}!</p>
       </div>
 
-      <router-link to="/expression-demo">Go to ExpressionDemo</router-link>
+      <router-link to="/expression-demo">Go to ExpressionDemo</router-link> <br>
 
-      <router-link  to="/event-demo">Go to EventDemo</router-link>
+      <router-link  to="/event-demo">Go to EventDemo</router-link> <br>
       
       <router-link to="/toggle-visibility">Go to ToggleVisibility</router-link>
     </div>
