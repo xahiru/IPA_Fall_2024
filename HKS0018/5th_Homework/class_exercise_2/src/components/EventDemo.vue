@@ -26,7 +26,10 @@
   button {
     padding: 30px 50px;
     cursor: pointer;
-    background-color: #df3c3c;
+    background-color: #d55c5c;
   }
+
+  :hover{color: #ffffff;}
+  
   </style>
   

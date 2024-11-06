@@ -65,7 +65,6 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
-    background: linear-gradient(135deg, #4b79a1, #283e51);
   }
   
   .login-form {
@@ -112,7 +111,7 @@
   }
   
   button {
-    background-color: #51565a;
+    background-color: #6fcf4f;
     color: #fff;
     padding: 10px 20px;
     border: none;
@@ -123,12 +122,12 @@
   }
   
   button:hover {
-    background-color: #355c7d;
+    background-color: #d46161;
   }
   
   .welcome-message {
     margin-top: 20px;
-    color: rgb(128, 0, 2);
+    color: green;
     font-weight: bold;
   }
   </style>

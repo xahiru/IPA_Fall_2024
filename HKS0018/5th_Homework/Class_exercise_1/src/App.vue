@@ -18,7 +18,7 @@ export default {
 <style>
 
 body{
-  background:white;
+  background:rgb(241, 243, 207);
 }
 #app {
   display: flex;
@@ -26,7 +26,6 @@ body{
   align-items: center;
   height: 100vh;
   margin: 100;
-  background: linear-gradient(135deg, #4b79a1, #283e51);
   font-family: Arial, sans-serif;
 }
 </style>

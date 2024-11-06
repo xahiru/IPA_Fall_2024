@@ -1,22 +1,24 @@
 <template>
   <div id="app">
-    <ExpressionDemo />
+    <ToggleVisibility />
   </div>
 </template>
 
 <script>
-import ExpressionDemo from './components/ExpressionDemo.vue';
+import ToggleVisibility from './components/ToggleVisibility.vue';
 
 export default {
   name: 'App',
   components: {
-    ExpressionDemo
+    ToggleVisibility
   }
 };
 </script>
 
 <style>
-
+body{
+  background: white;
+}
 #app {
   text-align: center;
   margin-top: 40px;
