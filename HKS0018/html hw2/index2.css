@@ -1,0 +1,26 @@
+h1{
+    background-color: palevioletred;
+    font-style: italic;
+    text-align: center;
+}
+
+
+body{
+    margin: auto;
+  width: 60%;
+  border: 3px solid #bc255f;
+  padding: 10px;
+    background-color: bisque;
+}
+.bar{
+  background-color: pink;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+    margin: 0 10px;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+a:hover {
+  background-color: lightcoral;
+}
