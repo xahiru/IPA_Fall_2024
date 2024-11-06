@@ -1,9 +1,11 @@
 <script setup>
 import {ref} from 'vue';
+const name = ref('');
 const email = ref('');
 const password = ref('');
 
 const LoginHandle=()=>{
+  console.log(name);
   console.log(email);
   console.log(password);
 }
@@ -19,6 +21,8 @@ const LoginHandle=()=>{
             </header>
           
             <form class="login-form" @click.prevent="LoginHandle">
+                <label for="name">Name</label>
+                <input type="name" id="name" class="input-field" v-model="name" placeholder="Enter your name" required>
               <label for="email">Email</label>
               <input type="email" id="email" class="input-field" v-model="email" placeholder="Enter your email" required>
           
@@ -27,8 +31,8 @@ const LoginHandle=()=>{
           
               <button type="submit" class="button login-button">Login</button>
               
-              <p class="signup-prompt"> Don't have an account?<a href="/signup" class="signup-link"> <router-link to="/sign-up"> Sign up here</router-link> </a></p>
-            </form>
+              <p class="signup-prompt"> Already have an account?<a href="/signup" class="signup-link"> <router-link to="/login"> Login here</router-link> </a></p>
+             </form>
           </div>
           
     </div>
@@ -126,12 +130,12 @@ const LoginHandle=()=>{
   .signup-link {
     color: #ffffff;
     font-weight: 500;
-    text-decoration: none;
-
+    text-decoration: underline;
   }
   
   .signup-link:hover {
     color: #b0d8b0;
+    text-decoration: none;
   }
   
 </style>
