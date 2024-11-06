@@ -22,7 +22,9 @@
       </section>
       
       <div class="buttons">
-        <button class="button login-button">Login</button>
+        <button class="button login-button">
+          <router-link to="/login">Login</router-link>
+        </button>
         <button class="button signup-button">Signup</button>
       </div>
     </div>
