@@ -22,10 +22,8 @@
       </section>
       
       <div class="buttons">
-        <button class="button login-button">
-          <router-link to="/login">Login</router-link>
-        </button>
-        <button class="button signup-button">Signup</button>
+          <router-link to="/login" class="button login-button">Login</router-link>
+          <router-link to="/login" class="button signup-button">Signup</router-link>
       </div>
     </div>
     
@@ -125,10 +123,12 @@ body {
 
 .login-button {
   background-color: #3498db;
+  text-decoration: none;
 }
 
 .signup-button {
   background-color: #2ecc71;
+  text-decoration: none;
 }
 
 .login-button:hover {

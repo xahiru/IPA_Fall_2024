@@ -101,7 +101,7 @@
     border: none;
     cursor: pointer;
     border-radius: 8px;
-    transition: background 0.3s ease;
+    transition: 0.3s ease;
   }
   
   .button:hover {
