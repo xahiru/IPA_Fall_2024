@@ -64,8 +64,8 @@
     methods: {
     handleSignup() {
       if (this.username && this.password) {
-        localStorage.setItem('authenticated', 'true'); // Set authentication flag
-        this.$router.push('/dashboard'); // Redirect to Dashboard
+        localStorage.setItem('authenticated', 'true');
+        this.$router.push('/dashboard');
       } else {
         alert('Please fill out all fields');
       }
