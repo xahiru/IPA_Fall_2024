@@ -25,7 +25,7 @@
     
     <section class="cta-section">
       <router-link to="/login" class="cta-btn login-btn">Log In</router-link>
-      <button @click="goToSignup" class="cta-btn signup-btn">Sign Up</button>
+      <router-link to="/sign-up" class="cta-btn signup-btn">Sign Up</router-link>
     </section>
     
   </main>

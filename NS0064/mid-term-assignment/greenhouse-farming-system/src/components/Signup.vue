@@ -3,27 +3,30 @@
 </script>
 
 <template>
-  <main id="login-page">
-    <section class="login-container">
-      <header class="login-header">
-        <h1 class="login-title">Welcome Back to EcoGrow</h1>
-        <p class="login-subtitle">Log in to manage your greenhouse</p>
+  <main id="signup-page">
+    <section class="signup-container">
+      <header class="signup-header">
+        <h1 class="signup-title">Join EcoGrow</h1>
+        <p class="signup-subtitle">Create an account to start managing your greenhouse</p>
       </header>
       
-      <form class="login-form">
+      <form class="signup-form">
         <label for="email" class="input-label">Email</label>
         <input type="email" id="email" class="input-field" placeholder="Enter your email" required>
         
         <label for="password" class="input-label">Password</label>
-        <input type="password" id="password" class="input-field" placeholder="Enter your password" required>
+        <input type="password" id="password" class="input-field" placeholder="Create a password" required>
         
-        <button type="submit" class="login-btn">Log In</button>
+        <label for="confirm-password" class="input-label">Confirm Password</label>
+        <input type="password" id="confirm-password" class="input-field" placeholder="Confirm your password" required>
+        
+        <button type="submit" class="signup-btn">Sign Up</button>
       </form>
       
-      <footer class="login-footer">
-        <p class="signup-link">
-          Don’t have an account? 
-          <router-link to="/sign-up" class="signup-link-text">Sign up here</router-link>
+      <footer class="signup-footer">
+        <p class="login-link">
+          Already have an account? 
+          <router-link to="/login" class="login-link-text">Log in here</router-link>
         </p>
       </footer>
     </section>
@@ -37,7 +40,7 @@
   padding: 0;
 }
 
-#login-page {
+#signup-page {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -47,7 +50,7 @@
   padding: 2rem;
 }
 
-.login-container {
+.signup-container {
   background-color: #ffffff;
   padding: 2rem;
   width: 100%;
@@ -57,21 +60,21 @@
   text-align: center;
 }
 
-.login-header {
+.signup-header {
   margin-bottom: 2rem;
 }
 
-.login-title {
+.signup-title {
   font-size: 2rem;
   color: #2c3e50;
 }
 
-.login-subtitle {
+.signup-subtitle {
   font-size: 1rem;
   color: #7f8c8d;
 }
 
-.login-form {
+.signup-form {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -93,12 +96,12 @@
 
 .input-field:focus {
   outline: none;
-  border-color: #3498db;
-  box-shadow: 0 0 8px rgba(52, 152, 219, 0.2);
+  border-color: #2ecc71;
+  box-shadow: 0 0 8px rgba(46, 204, 113, 0.2);
 }
 
-.login-btn {
-  background-color: #3498db;
+.signup-btn {
+  background-color: #2ecc71;
   color: white;
   padding: 0.75rem;
   border: none;
@@ -109,26 +112,26 @@
   transition: background-color 0.3s ease;
 }
 
-.login-btn:hover {
-  background-color: #2980b9;
+.signup-btn:hover {
+  background-color: #27ae60;
 }
 
-.login-footer {
+.signup-footer {
   margin-top: 1.5rem;
 }
 
-.signup-link {
+.login-link {
   font-size: 0.9rem;
   color: #7f8c8d;
 }
 
-.signup-link-text {
+.login-link-text {
   color: #3498db;
   text-decoration: none;
   font-weight: bold;
 }
 
-.signup-link-text:hover {
+.login-link-text:hover {
   text-decoration: underline;
 }
 </style>
