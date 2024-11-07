@@ -24,7 +24,7 @@
     </section>
     
     <section class="cta-section">
-      <button @click="goToLogin" class="cta-btn login-btn">Log In</button>
+      <router-link to="/login" class="cta-btn login-btn">Log In</router-link>
       <button @click="goToSignup" class="cta-btn signup-btn">Sign Up</button>
     </section>
     
@@ -42,7 +42,7 @@ function goToSignup() {
 </script>
 
 <style scoped>
-* {
+#agri-dashboard{
   box-sizing: border-box;
   margin: 0;
   padding: 0;
