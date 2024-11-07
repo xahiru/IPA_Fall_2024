@@ -9,6 +9,9 @@ npm install
 
 router
 npm install vue-router@4
+npm install vue-router
+
+npm install chart.js
 
 created a component for HomePage.
 

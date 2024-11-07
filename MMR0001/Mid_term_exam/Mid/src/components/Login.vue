@@ -24,7 +24,26 @@
           
     </div>
 </template>
-
+<script>
+export default {
+  data() {
+    return {
+      username: '',
+      password: ''
+    };
+  },
+  methods: {
+    handleLogin() {
+      if (this.username && this.password) {
+        localStorage.setItem('authenticated', 'true'); 
+        this.$router.push('/dashboard'); 
+      } else {
+        alert('Please enter valid credentials');
+      }
+    }
+  }
+};
+</script>
 
 <style>
 #bdy{

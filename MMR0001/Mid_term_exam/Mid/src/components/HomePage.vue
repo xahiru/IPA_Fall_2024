@@ -1,11 +1,9 @@
 <script setup>
 
-
 </script>
 
 <template>
   <div id="body">
-    
     <div class="home">
       <header class="header">
         <h1 class="title">Greenhouse Farming System</h1>
@@ -20,18 +18,16 @@
           <li>Data analytics for optimal crop growth</li>
         </ul>
       </section>
-      
       <div class="buttons">
         <router-link to="/login" class="button login-button">Login</router-link>
         <router-link to="/signup-page" class="button signup-page-button">Signup</router-link>
       </div>
     </div>
-    
+  
     
     
   </div>
 </template>
-
 <style scoped>
 #body{
   box-sizing: border-box;

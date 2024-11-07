@@ -62,15 +62,17 @@
       };
     },
     methods: {
-      handleSignup() {
-        this.message = `Welcome, ${this.username}! You have successfully signed up.`;
-        this.username = '';
-        this.email = '';
-        this.password = '';
-      },
-    },
-  };
-  </script>
+    handleSignup() {
+      if (this.username && this.password) {
+        localStorage.setItem('authenticated', 'true'); // Set authentication flag
+        this.$router.push('/dashboard'); // Redirect to Dashboard
+      } else {
+        alert('Please fill out all fields');
+      }
+    }
+  }
+};
+</script>
   
   <style scoped>
   .signup-container {
@@ -81,7 +83,7 @@
     padding: 5em;
     border: 1px solid #a59696;
     border-radius: 5px;
-    background: linear-gradient(135deg, #a3e5b0, #56ab2f);
+    background: linear-gradient(135deg, #a3e5b0, #92c17e);
     align-items: center;
     color: #f8faf8;
   }
