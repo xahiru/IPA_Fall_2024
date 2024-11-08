@@ -55,4 +55,8 @@
     <router-view></router-view>
 12. linked the routes to the homepage page
     <router-link to="/login">Login</router-link>
-13. 
+13. created the signup page
+14. connect the signup page with the login page using router
+    <router-link to="/sign-up"> Sign up here</router-link> 
+15. connect the login with signup also
+    <router-link to="/login"> Login here</router-link>
