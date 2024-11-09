@@ -1,35 +1,36 @@
-import { createApp } from 'vuex';
 
-export default createStore ({
-    state: {
-        isAuthenticated: !!localStorage.getItem("auth"),
-        user: JSON.parse(localStorage.getItem("auth")) || null,
-    },
 
-    mutations: {
-        login(state, userData) {
-            state.isAuthenticated = true;
-            state.user = userData;
-            localStorage.setItem("auth", JSON.stringify(userData));
-        },
-        logout(state) {
-            state.isAuthenticated = false;
-            state.user = null;
-            localStorage.removeItem("auth");
-        },
-    },
+export const useMainStore = defineStore ({
+    id: 'main',
+    state: () => ({
+        isAuthenticated: false,
+        user: null,
+    }),
 
     actions: {
-        login({ commit }, userData) {
-            commit('login', userData);
+        async login(email, password) {
+            if(email === 'user@example.com' && password === 'password'){
+                this.isAuthenticated = true;
+                this.user = { email };
+            } else {
+                throw new Error('Invalid User');
+            }
         },
-        logout({ commit }) {
-            commit('logout');
+        logout() {
+            this.isAuthenticated = false;
+            this.user = null;
         },
-    },
+    },    
+});
 
-    getters: {
-        isAuthenticated: (state) => state.isAuthenticated,
-        getUser: (state) => state.user,
+ ({
+    actions: {
+        async register(name, email, password) {
+            if(email && password) {
+                console.log('User registered with name: ${name}, email: {email},');
+            } else {
+                throw new Error('invalid registration details');
+            }
+        },
     },
 });

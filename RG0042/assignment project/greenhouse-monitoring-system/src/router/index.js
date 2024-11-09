@@ -1,31 +1,22 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from'../components/Home.vue';
-import LoginPage from '../components/LoginPage.vue';
-import SignupPage from '../components/SignupPage.vue';
+import Login from '../components/Login.vue';
+import Signup from '../components/Signup.vue';
 
 
 
 const routes = [
     {path: '/', name: 'Home', components: Home},
-    {path: '/', name: 'LoginPage', components: LoginPage},
-    {path: '/', name: 'SignupPage', components: SignupPage},
+    {path: '/', name: 'Login', components: Login},
+    {path: '/', name: 'Signup', components: Signup},
 ];
 
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHistory(process.env.BASE_URL),
     routes,
 });
 
-
-router.beforeEach((to, from, next) => {
-    const loggedIn = localStorage.getItem('auth');
-    if (to.matched.some(record => record.meta.requiresAuth) && !loggedIn) {
-      next('/login');
-    } else {
-      next();
-    }
-  });
-  
+ 
  
   export default router;
