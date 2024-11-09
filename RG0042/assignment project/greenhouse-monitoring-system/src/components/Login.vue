@@ -24,11 +24,11 @@
 import { useMainStore } from '../store';
 
 export default {
-    name: "Login",
+    name: 'Login',
     data () {
         return{
-            email: "",
-            password: "",
+            email: '',
+            password: '',
         };
     },
     methods: {
