@@ -1,11 +1,11 @@
 <template>
   <div id="app">
     <nav>
-      <router-link to="/" class="nav-link">Home</router-link>
-      <router-link to="/loginPage" class="nav-link">login</router-link>
-      <router-link to="/signuppage" class="nav-link">Sign Up</router-link>
+      <router-link to="/">Home</router-link>
+      <router-link to="/loginPage">login</router-link>
+      <router-link to="/signuppage">Sign Up</router-link>
 
-      <button v-if="isAuthenticated" @click="logout" class="nav-link logout-btn">logout</button>
+      <button v-if="isAuthenticated" @click="logout">logout</button>
     </nav>
 
     <main>

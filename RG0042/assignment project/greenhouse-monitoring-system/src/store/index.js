@@ -1,4 +1,4 @@
-
+import { defineStore } from 'pinia';
 
 export const useMainStore = defineStore ({
     id: 'main',
@@ -8,13 +8,9 @@ export const useMainStore = defineStore ({
     }),
 
     actions: {
-        async login(email, password) {
-            if(email === 'user@example.com' && password === 'password'){
+        login(userData) {
                 this.isAuthenticated = true;
-                this.user = { email };
-            } else {
-                throw new Error('Invalid User');
-            }
+                this.user = userData;
         },
         logout() {
             this.isAuthenticated = false;
