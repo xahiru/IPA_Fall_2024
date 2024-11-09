@@ -1,10 +1,12 @@
 <template>
-    <div class="home">
+    <div class="home-page">
         <h1> Welcome to the Greenhouse Monitoring System</h1>
-        <p>Moritor and manage your greenhouse environment sfficiently</p>
-    <div class="navigation-link">
-        <router-link to="/login" class="btn">Login</router-link>
-        <router-link to="/signup" class="btn">signup</router-link>
+        <p>Moritor and manage your greenhouse environment easily</p>
+    <div class="auth-buttons">
+        <router-link to="/login">
+            <button>Login</button></router-link>
+        <router-link to="/signup">
+            <button>Register</button></router-link>
     </div>
     </div>
 </template>
@@ -16,9 +18,12 @@ export default {
 </script>
 
 <style scoped>
-.home {
+.home-page {
+    display: flex;
+    flex-direction: column;
     text-align: center;
-    margin-top: 50px;
+    align-items: center;
+    padding: 2rem;
 }
 h1 {
     font-size: 2em;
@@ -29,14 +34,14 @@ p {
     margin-bottom: 30px;
 }
 
-.navigation-linkn.btn {
-    margin: 0 10px;
-    padding: 10px 20px;
-    background-color: white;
-    text-decoration: none;
-    border-radius: 5px;
+.auth-buttons{
+    margin-top: 1.5rem;
 }
-.navigation-linkn.btn:hover {
-    background-color: #330588;
+
+button {
+    margin: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
 }
 </style>
