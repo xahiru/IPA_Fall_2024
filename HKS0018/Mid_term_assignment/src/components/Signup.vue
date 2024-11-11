@@ -1,53 +1,55 @@
 <template>
-  <div>
-    <h1>Sign Up Page</h1>
-    <form @submit.prevent="handleSignUp">
-      <div>
-        <label for="username">Username:<br></label>
-        <input
-          type="text"
-          id="username"
-          v-model="username"
-          placeholder="Enter your username"
-          required
-        />
-      </div>
+  <div class="signup-container">
+    <div class="signup-card">
+      <h1>Sign Up</h1>
+      <form @submit.prevent="handleSignUp">
+        <div class="form-group">
+          <label for="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            v-model="username"
+            placeholder="Enter your username"
+            required
+          />
+        </div>
 
-      <div>
-        <label for="email">Email:<br></label>
-        <input
-          type="email"
-          id="email"
-          v-model="email"
-          placeholder="Enter your email"
-          required
-        />
-      </div>
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            v-model="email"
+            placeholder="Enter your email"
+            required
+          />
+        </div>
 
-      <div>
-        <label for="password">Password:<br></label>
-        <input
-          type="password"
-          id="password"
-          v-model="password"
-          placeholder="Enter your password"
-          required
-        />
-      </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            v-model="password"
+            placeholder="Enter your password"
+            required
+          />
+        </div>
 
-      <div>
-        <label for="confirmPassword">Confirm Password:</label>
-        <input
-          type="password"
-          id="confirmPassword"
-          v-model="confirmPassword"
-          placeholder="Confirm your password"
-          required
-        />
-      </div>
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password:</label>
+          <input
+            type="password"
+            id="confirmPassword"
+            v-model="confirmPassword"
+            placeholder="Confirm your password"
+            required
+          />
+        </div>
 
-      <button type="submit">Sign Up</button>
-    </form>
+        <button type="submit">Sign Up</button>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -85,38 +87,93 @@ export default {
 };
 </script>
 
-<style>
-form {
-  background-color: #369970;
+<style scoped>
+.signup-container {
   display: flex;
-  flex-direction: column;
-  width: 300px;
-  margin: 20px auto;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f4f7fa;
+  font-family: 'Roboto', sans-serif;
 }
+
+.signup-card {
+  background-color: #fff;
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #42b983;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
 label {
-  margin-top: 10px;
-  font-weight: bold;
+  font-size: 1rem;
+  color: #333;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 8px;
 }
+
 input {
-  margin: 5px 0 15px;
-  padding: 8px;
-  font-size: 16px;
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 6px;
+  transition: border-color 0.3s ease;
 }
+
+input:focus {
+  border-color: #42b983;
+  outline: none;
+}
+
 button {
-  padding: 10px;
+  width: 100%;
+  padding: 14px;
   background-color: #42b983;
   color: white;
-  font-weight: bold;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 1rem;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
+
 button:hover {
   background-color: #369970;
+  transform: translateY(-3px);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+@media (max-width: 768px) {
+  .signup-card {
+    padding: 30px;
+  }
+
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  input, button {
+    padding: 10px;
+  }
 }
 </style>

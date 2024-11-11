@@ -12,6 +12,6 @@ export default {
 
 <style>
 body{
-  background-color: greenyellow;
+  background-color: rgb(224, 229, 216);
 }
 </style>
