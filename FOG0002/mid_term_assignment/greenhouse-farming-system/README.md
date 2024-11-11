@@ -77,3 +77,9 @@
 27. created a components for setting page
 28. created another database file for greenhouse data
 29. fetch the data from dashboard 
+30. create a component for charts
+31. install vue-chartjs
+    1. npm install chart.js vue-chartjs
+32. install zoom plugin
+    1. npm install chartjs-plugin-zoom
+33. 

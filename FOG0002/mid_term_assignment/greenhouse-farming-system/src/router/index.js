@@ -5,6 +5,7 @@ import Signup from '../components/Signup.vue';
 import Dashboard from '../components/Dashboard.vue';
 import Overview from '../components/Overview.vue';
 import Settings from '../components/Settings.vue';
+import HistoricalDataChart from '../components/HistoricalDataChart.vue';
 	const routes = [
 	  {
 	    path: '/',
@@ -32,10 +33,17 @@ import Settings from '../components/Settings.vue';
 	    name: 'Overview',
 	    component: Overview,
 		meta: { requiresAuth: true }
-	  },{
+	  },
+	  {
 	    path: '/settings',
 	    name: 'Settings',
 	    component: Settings,
+		meta: { requiresAuth: true }
+	  },
+	  {
+	    path: '/historical-data-chart',
+	    name: 'HistoricalDataChart',
+	    component: HistoricalDataChart,
 		meta: { requiresAuth: true }
 	  },
 	  
