@@ -3,6 +3,7 @@ import Home from '../components/Home.vue';
 import Login from '../components/Login.vue';
 import Signup from '../components/Signup.vue';
 import Dashboard from '../components/Dashboard.vue';
+import Overview from '../components/Overview.vue';
 
 	const routes = [
 	  {
@@ -24,6 +25,12 @@ import Dashboard from '../components/Dashboard.vue';
 	    path: '/dashboard',
 	    name: 'Dashboard',
 	    component: Dashboard,
+		meta: { requiresAuth: true }
+	  },
+      {
+	    path: '/overview',
+	    name: 'Overview',
+	    component: Overview,
 		meta: { requiresAuth: true }
 	  }
 	  

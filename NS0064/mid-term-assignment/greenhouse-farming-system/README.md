@@ -19,4 +19,5 @@ Workflow
 18. complete the basic structure and styling
 19. used v-for to show cards data
 20. add router guards for dashboard authentication
-21. 
+21. create overview page, and complete the structures and style
+22.
