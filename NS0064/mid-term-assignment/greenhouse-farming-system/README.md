@@ -15,4 +15,7 @@ Workflow
 14. install axios
 15. complete the signup process
 16. complete the login process
-17. 
+17. create a vue component for dashboard
+18. complete the basic structure and styling
+19. used v-for to show cards data
+20. 
