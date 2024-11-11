@@ -36,46 +36,40 @@
     </div>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      // Array of card data
-      cards: [
-        {
-          title: 'Temperature',
-          value: '24°C',
-          icon: 'fas fa-thermometer-half',
-          class: 'temperature-card'
-        },
-        {
-          title: 'Humidity',
-          value: '65%',
-          icon: 'fas fa-tint',
-          class: 'humidity-card'
-        },
-        {
-          title: 'Soil Moisture',
-          value: '45%',
-          icon: 'fas fa-water',
-          class: 'moisture-card'
-        },
-        {
-          title: 'Light Level',
-          value: '300 lux',
-          icon: 'fas fa-sun',
-          class: 'light-card'
-        }
-      ]
-    }
+<script setup>
+import { ref } from 'vue';
+const cards = ref([
+  {
+    title: 'Temperature',
+    value: '24°C',
+    icon: 'fas fa-thermometer-half',
+    class: 'temperature-card'
   },
-  methods: {
-    logout() {
-      // Implement logout logic
-      console.log('Logged out');
-    }
+  {
+    title: 'Humidity',
+    value: '65%',
+    icon: 'fas fa-tint',
+    class: 'humidity-card'
+  },
+  {
+    title: 'Soil Moisture',
+    value: '45%',
+    icon: 'fas fa-water',
+    class: 'moisture-card'
+  },
+  {
+    title: 'Light Level',
+    value: '300 lux',
+    icon: 'fas fa-sun',
+    class: 'light-card'
   }
-}
+]);
+
+const logout = async () => {
+    localStorage.removeItem("user");
+    window.location.href = '/login';
+};
+
 </script>
 
 <style scoped>
@@ -90,7 +84,9 @@ body {
   background: #f5f5f7;
   color: #333;
 }
-
+a:hover{
+  cursor: pointer;
+}
 #dashboard {
   display: flex;
   flex-direction: column;
