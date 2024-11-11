@@ -66,4 +66,7 @@
     1. sudo npm install -g json-server
 19. create a database file by the name of db.json, run the database server
     1. json-server --watch db.json
-20. 
+20. create a js file (api.js) to handle the functionalitys
+21. complete the signup functionality
+21. create the login functionality
+22. 

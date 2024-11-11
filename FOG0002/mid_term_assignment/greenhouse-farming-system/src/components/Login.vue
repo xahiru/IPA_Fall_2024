@@ -1,12 +1,29 @@
 <script setup>
-import {ref} from 'vue';
-const email = ref('');
-const password = ref('');
+    import { ref, onMounted } from 'vue';
+    import { login } from '../api/api';
 
-const LoginHandle=()=>{
-  console.log(email);
-  console.log(password);
-}
+    const email = ref('');
+    const password = ref('');
+
+    const login_page = async () => {
+    const response = await login(email.value, password.value);
+    if (response.success) {
+        window.location.href = '/dashboard'; 
+    } else {
+        alert("Login failed: " + (response.error || "Unknown error"));
+    }
+};
+
+
+
+onMounted(() => {
+    const user = localStorage.getItem("user");
+    if (user) {
+        router.push({ name: 'Dashboard' });
+    }
+});
+
+
 
 </script>
 
@@ -18,7 +35,7 @@ const LoginHandle=()=>{
               <p class="subtitle">Login to access your dashboard</p>
             </header>
           
-            <form class="login-form" @click.prevent="LoginHandle">
+            <form class="login-form" @submit.prevent="login_page">
               <label for="email">Email</label>
               <input type="email" id="email" class="input-field" v-model="email" placeholder="Enter your email" required>
           
@@ -27,7 +44,7 @@ const LoginHandle=()=>{
           
               <button type="submit" class="button login-button">Login</button>
               
-              <p class="signup-prompt"> Don't have an account?<a href="/signup" class="signup-link"> <router-link to="/sign-up"> Sign up here</router-link> </a></p>
+              <p class="signup-prompt signup-link"> Don't have an account?<router-link to="/sign-up"> Sign up here</router-link> </p>
             </form>
           </div>
           
