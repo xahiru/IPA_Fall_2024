@@ -1,16 +1,17 @@
 <template>
   <div id="app">
-  <h1>{{ message }}</h1>
+    <h1>Welcome to the Login Page</h1>
+    <LoginForm />
   </div>
 </template>
 
 <script>
+import LoginForm from './components/LoginForm.vue';
+
 export default {
   name: 'App',
-  data() {
-    return {
-      message: 'Hello, Jane!'
-    };
+  components: {
+    LoginForm
   }
 };
 </script>
@@ -18,8 +19,6 @@ export default {
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;

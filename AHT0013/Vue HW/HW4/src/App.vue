@@ -1,16 +1,17 @@
 <template>
   <div id="app">
-  <h1>{{ message }}</h1>
+    <h1>Vue 3 Conditional Rendering Example</h1>
+    <ToggleVisibility />
   </div>
 </template>
 
 <script>
+import ToggleVisibility from './components/ToggleVisibility.vue';
+
 export default {
   name: 'App',
-  data() {
-    return {
-      message: 'Hello, Jane!'
-    };
+  components: {
+    ToggleVisibility
   }
 };
 </script>
@@ -21,7 +22,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #0a5198;
   margin-top: 60px;
 }
 </style>

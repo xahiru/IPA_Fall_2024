@@ -1,16 +1,17 @@
 <template>
   <div id="app">
-  <h1>{{ message }}</h1>
+    <h1>Vue 3 Arithmetic Operations</h1>
+    <ExpressionDemo />
   </div>
 </template>
 
 <script>
+import ExpressionDemo from './components/ExpressionDemo.vue';
+
 export default {
   name: 'App',
-  data() {
-    return {
-      message: 'Hello, Jane!'
-    };
+  components: {
+    ExpressionDemo
   }
 };
 </script>
@@ -21,7 +22,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #0e559d;
   margin-top: 60px;
 }
 </style>

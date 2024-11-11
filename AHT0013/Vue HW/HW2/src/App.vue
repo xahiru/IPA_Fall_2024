@@ -1,27 +1,26 @@
 <template>
   <div id="app">
-  <h1>{{ message }}</h1>
+    <h1>Event Propagation Demo</h1>
+    <EventDemo />
   </div>
 </template>
 
 <script>
+import EventDemo from './components/EventDemo.vue';
+
 export default {
   name: 'App',
-  data() {
-    return {
-      message: 'Hello, Jane!'
-    };
-  }
+  components: {
+    EventDemo,
+  },
 };
 </script>
 
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #0064c8;
   margin-top: 60px;
 }
 </style>
