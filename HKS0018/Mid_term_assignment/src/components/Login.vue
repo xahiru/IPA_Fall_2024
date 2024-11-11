@@ -27,6 +27,9 @@
 
         <button type="submit">Login</button>
       </form>
+      <p class="signup-link">
+        Don’t have an account? <a @click.prevent="navigateToSignup">Sign up here</a>
+      </p>
     </div>
   </div>
 </template>
@@ -44,21 +47,21 @@ export default {
     handleLogin() {
       if (this.username && this.password) {
         alert(`Logging in with Username: ${this.username}`);
-        // Redirect to Dashboard page after successful login
         this.$router.push({ name: 'Dashboard' });
-
         this.username = "";
         this.password = "";
       } else {
         alert("Please fill in all fields.");
       }
     },
+    navigateToSignup() {
+      this.$router.push({ name: 'Signup' });
+    },
   },
 };
 </script>
 
 <style scoped>
-
 .login-container {
   display: flex;
   justify-content: center;
@@ -132,6 +135,25 @@ button:hover {
 
 button:active {
   transform: translateY(1px);
+}
+
+.signup-link {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.signup-link a {
+  color: #42b983;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color 0.3s, text-decoration 0.3s;
+}
+
+.signup-link a:hover {
+  color: #369970;
+  text-decoration: underline;
+  font-weight: bold;
 }
 
 @media (max-width: 768px) {
