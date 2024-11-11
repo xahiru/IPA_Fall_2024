@@ -18,4 +18,5 @@ Workflow
 17. create a vue component for dashboard
 18. complete the basic structure and styling
 19. used v-for to show cards data
-20. 
+20. add router guards for dashboard authentication
+21. 
