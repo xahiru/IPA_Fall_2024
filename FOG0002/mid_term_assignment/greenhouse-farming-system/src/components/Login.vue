@@ -1,5 +1,5 @@
 <script setup>
-    import { ref, onMounted } from 'vue';
+    import { ref } from 'vue';
     import { login } from '../api/api';
 
     const email = ref('');
@@ -15,13 +15,6 @@
 };
 
 
-
-onMounted(() => {
-    const user = localStorage.getItem("user");
-    if (user) {
-        router.push({ name: 'Dashboard' });
-    }
-});
 
 
 
@@ -44,7 +37,7 @@ onMounted(() => {
           
               <button type="submit" class="button login-button">Login</button>
               
-              <p class="signup-prompt signup-link"> Don't have an account?<router-link to="/sign-up"> Sign up here</router-link> </p>
+              <p class="signup-prompt signup-link"> Don't have an account?<router-link to="/signup">      Sign up here</router-link> </p>
             </form>
           </div>
           

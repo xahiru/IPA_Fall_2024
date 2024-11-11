@@ -17,7 +17,7 @@ import Settings from '../components/Settings.vue';
 	    component: Login
 	  },
 	  {
-	    path: '/sign-up',
+	    path: '/signup',
 	    name: 'Signup',
 	    component: Signup
 	  },
@@ -49,16 +49,17 @@ import Settings from '../components/Settings.vue';
 
 
 	router.beforeEach((to, from, next) => {
-		if (to.matched.some(record => record.meta.requiresAuth)) {
-			const user = localStorage.getItem("user");
-			
-			if (!user) {
-				next({ name: 'Login' });
-			} else {
-				next();
-			}
-		} else {
-			next();
+		const user = localStorage.getItem("user");
+	  
+		if ((to.name === 'Login' || to.name === 'Signup') && user) {
+		  next({ name: 'Dashboard' });
+		} 
+		else if (to.matched.some(record => record.meta.requiresAuth) && !user) {
+		  next({ name: 'Login' });
+		} 
+		else {
+		  next();
 		}
-	});
+	  });
+	  
 	export default router;

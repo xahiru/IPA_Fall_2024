@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { signup } from '../api/api';
 import { useRouter } from 'vue-router';
 
@@ -20,12 +20,6 @@ const signup_page = async () => {
     }
 };
 
-onMounted(() => {
-    const user = localStorage.getItem("user");
-    if (user) {
-        router.push({ name: 'Dashboard' });
-    }
-});
 
 </script>
 

@@ -14,7 +14,6 @@
         <ul class="nav-links">
           <li><router-link to="/dashboard">Dashboard</router-link></li>
           <li><router-link to="/settings">Settings</router-link></li>
-          <li><router-link to="/logs">Logs</router-link></li>
         </ul>
       </nav>
   
