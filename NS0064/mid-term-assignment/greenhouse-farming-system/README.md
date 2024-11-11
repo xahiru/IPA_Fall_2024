@@ -9,3 +9,6 @@ Workflow
 8. create route for login add login route to the home page
 9. created a signup page, complete the structure
 10. create route for signup add signup route to the home
+11. install json server for database
+12. create a database file named "database.json" inside the prject directory. 
+13. run the database
