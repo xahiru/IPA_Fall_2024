@@ -13,7 +13,7 @@ async function login() {
     
     if (result.status === 200 && result.data.length > 0) {
       localStorage.setItem("user", JSON.stringify(result.data[0]));
-      router.push({ name: 'Home' });
+      router.push({ name: 'Dashboard' });
     }
   } catch (error) {
     console.error("Error logging in:", error);
@@ -23,7 +23,7 @@ async function login() {
 onMounted(() => {
   let user = localStorage.getItem("user");
   if (user) {
-    router.push({ name: "Home" });
+    router.push({ name: "Dashboard" });
   }
 });
 </script>

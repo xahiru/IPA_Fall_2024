@@ -18,7 +18,7 @@ async function signup() {
 
     if (result.status === 201) {
       localStorage.setItem("user", JSON.stringify(result.data));
-      router.push({ name: 'Home' });
+      router.push({ name: 'Dashboard' });
     }
   } catch (error) {
     console.error("Error signing up:", error);
@@ -28,7 +28,7 @@ async function signup() {
 onMounted(() => {
   let user = localStorage.getItem("user");
   if (user) {
-    router.push({ name: "Home" });
+    router.push({ name: "Dashboard" });
   }
 });
 </script>
