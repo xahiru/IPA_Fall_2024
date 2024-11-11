@@ -15,6 +15,13 @@ const logout = async () => {
     localStorage.removeItem("user");
     window.location.href = '/login';
 };
+
+const metrics = [
+  { title: "Temperature", value: "24°C", icon: "fas fa-thermometer-half", color: "#e74c3c" },
+  { title: "Humidity", value: "65%", icon: "fas fa-tint", color: "#16a085" },
+  { title: "Soil Moisture", value: "45%", icon: "fas fa-water", color: "#f39c12" },
+  { title: "Light Level", value: "300 lux", icon: "fas fa-sun", color: "#3498db" }
+];
 </script>
 
 <template>
@@ -35,33 +42,14 @@ const logout = async () => {
       </header>
 
       <section class="metrics">
-        <div class="card temperature-card">
-          <div class="card-icon">
-            <i class="fas fa-thermometer-half"></i>
-          </div>
-          <h2>Temperature</h2>
-          <p>24°C</p>
-        </div>
-        <div class="card humidity-card">
-          <div class="card-icon">
-            <i class="fas fa-tint"></i>
-          </div>
-          <h2>Humidity</h2>
-          <p>65%</p>
-        </div>
-        <div class="card moisture-card">
-          <div class="card-icon">
-            <i class="fas fa-water"></i>
-          </div>
-          <h2>Soil Moisture</h2>
-          <p>45%</p>
-        </div>
-        <div class="card light-card">
-          <div class="card-icon">
-            <i class="fas fa-sun"></i>
-          </div>
-          <h2>Light Level</h2>
-          <p>300 lux</p>
+        <div 
+          v-for="(metric, index) in metrics" 
+          :key="index" 
+          class="card"
+          :style="{ borderLeft: `5px solid ${metric.color}` }"
+        >
+          <h2>{{ metric.title }}</h2>
+          <p>{{ metric.value }}</p>
         </div>
       </section>
     </main>
@@ -161,11 +149,6 @@ header p {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
-.card-icon {
-  font-size: 2.5rem;
-  color: #3498db;
-  margin-bottom: 15px;
-}
 
 .card h2 {
   font-size: 1.5rem;

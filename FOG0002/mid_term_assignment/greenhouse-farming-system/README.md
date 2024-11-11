@@ -72,4 +72,5 @@
 22. To ensure that the dashboard is only accessible to authenticated users, implementd navigation guards with Vue Router.
 23. made the dashboard responsive
 24. create a components for the overview
-25. 
+25. complete the logout functionality
+26. 
