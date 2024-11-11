@@ -10,6 +10,11 @@ onMounted(() => {
         router.push({ name: 'Login' });
     }
 });
+
+const logout = async () => {
+    localStorage.removeItem("user");
+    window.location.href = '/login';
+};
 </script>
 
 <template>
@@ -17,9 +22,9 @@ onMounted(() => {
     <nav class="navbar">
       <div class="logo">Greenhouse</div>
       <ul class="nav-links">
-        <li><router-link to="/overview">Overview</router-link></li>
+        <li><router-link to="/over-view">Overview</router-link></li>
         <li><router-link to="/settings">Settings</router-link></li>
-        <li><router-link to="/logs">Logs</router-link></li>
+        <li> <a @click="logout">Logout</a> </li>
       </ul>
     </nav>
 
@@ -92,7 +97,9 @@ body {
   z-index: 100;
   overflow-x: auto;
 }
-
+a:hover{
+  cursor: pointer;
+}
 .logo {
   font-size: 1.8rem;
   font-weight: bold;
@@ -248,7 +255,7 @@ header p {
   header h1 {
     margin-top: 30px;
   }
-  
+
   .nav-links li {
     flex-shrink: 0;
   }

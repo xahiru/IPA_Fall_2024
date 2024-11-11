@@ -70,4 +70,6 @@
 21. complete the signup functionality
 21. create the login functionality
 22. To ensure that the dashboard is only accessible to authenticated users, implementd navigation guards with Vue Router.
-23. 
+23. made the dashboard responsive
+24. create a components for the overview
+25. 
