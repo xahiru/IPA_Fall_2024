@@ -12,8 +12,10 @@
       <nav class="navbar">
         <div class="logo">Greenhouse</div>
         <ul class="nav-links">
-          <li><router-link to="/dashboard">Dashboard</router-link></li>
-          <li><router-link to="/settings">Settings</router-link></li>
+            <li><router-link to="/">Home</router-link></li>
+            <li><router-link to="/dashboard">Dashboard</router-link></li>
+            <li><router-link to="/settings">Settings</router-link></li>
+            <li> <a @click="logout">Logout</a> </li>
         </ul>
       </nav>
   
@@ -206,7 +208,6 @@
     .overview-metrics {
       grid-template-columns: 1fr;
     }
-  
     header h1 {
       font-size: 2rem;
     }

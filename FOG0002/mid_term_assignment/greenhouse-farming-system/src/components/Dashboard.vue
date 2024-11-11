@@ -1,8 +1,9 @@
 <script setup>
-import { onMounted } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
+const metrics = ref([]);
 
 onMounted(() => {
     const user = localStorage.getItem("user");
@@ -16,12 +17,17 @@ const logout = async () => {
     window.location.href = '/login';
 };
 
-const metrics = [
-  { title: "Temperature", value: "24°C", icon: "fas fa-thermometer-half", color: "#e74c3c" },
-  { title: "Humidity", value: "65%", icon: "fas fa-tint", color: "#16a085" },
-  { title: "Soil Moisture", value: "45%", icon: "fas fa-water", color: "#f39c12" },
-  { title: "Light Level", value: "300 lux", icon: "fas fa-sun", color: "#3498db" }
-];
+const fetchData = async () => {
+  try {
+    const response = await fetch('../../DB/data.json'); 
+    metrics.value = await response.json();
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
+onMounted(fetchData);
+
 </script>
 
 <template>
@@ -29,6 +35,7 @@ const metrics = [
     <nav class="navbar">
       <div class="logo">Greenhouse</div>
       <ul class="nav-links">
+        <li><router-link to="/">Home</router-link></li>
         <li><router-link to="/over-view">Overview</router-link></li>
         <li><router-link to="/settings">Settings</router-link></li>
         <li> <a @click="logout">Logout</a> </li>
@@ -45,7 +52,7 @@ const metrics = [
         <div 
           v-for="(metric, index) in metrics" 
           :key="index" 
-          class="card"
+          class="card" 
           :style="{ borderLeft: `5px solid ${metric.color}` }"
         >
           <h2>{{ metric.title }}</h2>
@@ -194,7 +201,9 @@ header p {
   .metrics {
     grid-template-columns: 1fr;
   }
-
+  .navbar li{
+    margin-left: 20px;
+  }
   header h1 {
     font-size: 2rem;
   }
@@ -225,6 +234,9 @@ header p {
     padding: 1.2rem;
   }
 
+  .navbar li{
+    margin-left: 20px;
+  }
   .nav-links {
     display: flex;
     flex-direction: row;

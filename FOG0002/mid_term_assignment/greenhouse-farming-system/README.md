@@ -75,4 +75,5 @@
 25. complete the logout functionality
 26. delete the static code from template, use v-for to display dashboard page cards informations
 27. created a components for setting page
-28. 
+28. created another database file for greenhouse data
+29. fetch the data from dashboard 
