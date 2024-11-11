@@ -60,3 +60,10 @@
     <router-link to="/sign-up"> Sign up here</router-link> 
 15. connect the login with signup also
     <router-link to="/login"> Login here</router-link>
+16. create another components for Dashboard
+17. complete the structure and styling
+18. installed json server globally.(commands are for ubuntu)
+    1. sudo npm install -g json-server
+19. create a database file by the name of db.json, run the database server
+    1. json-server --watch db.json
+20. 
