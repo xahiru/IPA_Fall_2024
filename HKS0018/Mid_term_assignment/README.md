@@ -1,29 +1,5 @@
-# Mid_term_assignment
+#Mid_term_assignment
 
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+1. Create a vue app by using "npm create vue@latest" in VsCode terminal.
+2.Then install routing by using "npm install vue-router@4".
+3.Add Home.vue, Login.vue, Signup.vue

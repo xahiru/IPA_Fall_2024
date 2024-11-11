@@ -72,6 +72,8 @@ export default {
           this.email = "";
           this.password = "";
           this.confirmPassword = "";
+
+          this.$router.push({ name: 'Login' });
         } else {
           alert("Passwords do not match.");
         }
