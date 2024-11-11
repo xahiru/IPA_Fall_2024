@@ -1,5 +1,13 @@
 <script setup>
+import { useRouter } from 'vue-router';
+const router = useRouter();
 
+const afterLogin = () => {
+  const user = localStorage.getItem("user");
+  if (user) {
+    router.push({ name: 'Dashboard' });
+  }
+};
 
 </script>
 
@@ -22,8 +30,8 @@
       </section>
       
       <div class="buttons">
-          <router-link to="/login" class="button login-button">Login</router-link>
-          <router-link to="/sign-up" class="button signup-button">Signup</router-link>
+          <router-link to="/login" @click="afterLogin" class="button login-button">Login</router-link>
+          <router-link to="/sign-up" @click="afterLogin" class="button signup-button">Signup</router-link>
       </div>
     </div>
     

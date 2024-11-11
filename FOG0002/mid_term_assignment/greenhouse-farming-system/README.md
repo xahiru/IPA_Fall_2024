@@ -73,4 +73,6 @@
 23. made the dashboard responsive
 24. create a components for the overview
 25. complete the logout functionality
-26. 
+26. delete the static code from template, use v-for to display dashboard page cards informations
+27. created a components for setting page
+28. 
