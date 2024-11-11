@@ -1,14 +1,31 @@
 <script setup>
-import {ref} from 'vue';
-const name = ref('');
+import { ref, onMounted } from 'vue';
+import { signup } from '../api/api';
+import { useRouter } from 'vue-router';
+
+const username = ref('');
 const email = ref('');
 const password = ref('');
+const router = useRouter();
 
-const LoginHandle=()=>{
-  console.log(name);
-  console.log(email);
-  console.log(password);
-}
+const signup_page = async () => {
+    console.log("Attempting to sign up with:", username.value, email.value, password.value);
+
+    const response = await signup(username.value, email.value, password.value);
+    console.log("Response from signup:", response);
+    if (response.success) {
+        router.push({ name: 'Dashboard' });
+    } else {
+        alert("Signup failed: " + (response.error || "Unknown error"));
+    }
+};
+
+onMounted(() => {
+    const user = localStorage.getItem("user");
+    if (user) {
+        router.push({ name: 'Dashboard' });
+    }
+});
 
 </script>
 
@@ -20,18 +37,18 @@ const LoginHandle=()=>{
               <p class="subtitle">Login to access your dashboard</p>
             </header>
           
-            <form class="login-form" @click.prevent="LoginHandle">
+            <form class="login-form" @submit.prevent="signup_page">
                 <label for="name">Name</label>
-                <input type="name" id="name" class="input-field" v-model="name" placeholder="Enter your name" required>
+                <input type="name" id="name" class="input-field" v-model="username" placeholder="Enter your name" required>
               <label for="email">Email</label>
               <input type="email" id="email" class="input-field" v-model="email" placeholder="Enter your email" required>
           
               <label for="password">Password</label>
               <input type="password" id="password" class="input-field" v-model="password" placeholder="Enter your password" required>
           
-              <button type="submit" class="button login-button">Login</button>
+              <button type="submit" class="button login-button">Signup</button>
               
-              <p class="signup-prompt"> Already have an account?<a href="/signup" class="signup-link"> <router-link to="/login"> Login here</router-link> </a></p>
+              <p class="signup-prompt signup-link" > Already have an account?<router-link to="/login"> Login here</router-link></p>
              </form>
           </div>
           
