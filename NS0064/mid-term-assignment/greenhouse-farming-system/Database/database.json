@@ -1,4 +1,10 @@
 {
-    "user": [
-    ]
-  }
+  "user": [
+    {
+      "id": "bc67",
+      "name": "Suraia",
+      "email": "suraiyataenny2002@gmail.com",
+      "password": "123"
+    }
+  ]
+}

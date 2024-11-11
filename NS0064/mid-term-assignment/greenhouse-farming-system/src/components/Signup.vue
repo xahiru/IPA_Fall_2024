@@ -1,5 +1,36 @@
 <script setup>
+import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import axios from 'axios';
 
+const name = ref('');
+const email = ref('');
+const password = ref('');
+const router = useRouter();
+
+async function signup() {
+  try {
+    let result = await axios.post("http://localhost:3000/user", {
+      name: name.value,
+      email: email.value,
+      password: password.value
+    });
+
+    if (result.status === 201) {
+      localStorage.setItem("user", JSON.stringify(result.data));
+      router.push({ name: 'Home' });
+    }
+  } catch (error) {
+    console.error("Error signing up:", error);
+  }
+}
+
+onMounted(() => {
+  let user = localStorage.getItem("user");
+  if (user) {
+    router.push({ name: "Home" });
+  }
+});
 </script>
 
 <template>
@@ -10,15 +41,16 @@
         <p class="signup-subtitle">Create an account to start managing your greenhouse</p>
       </header>
       
-      <form class="signup-form">
+      <form class="signup-form" @submit.prevent="signup">
+        
+        <label for="name" class="input-label">Name</label>
+        <input type="test" id="name" class="input-field" v-model="name" placeholder="Enter your name" required>
+
         <label for="email" class="input-label">Email</label>
-        <input type="email" id="email" class="input-field" placeholder="Enter your email" required>
+        <input type="email" id="email" class="input-field" v-model="email" placeholder="Enter your email" required>
         
         <label for="password" class="input-label">Password</label>
-        <input type="password" id="password" class="input-field" placeholder="Create a password" required>
-        
-        <label for="confirm-password" class="input-label">Confirm Password</label>
-        <input type="password" id="confirm-password" class="input-field" placeholder="Confirm your password" required>
+        <input type="password" id="password" class="input-field" v-model="password" placeholder="Create a password" required>
         
         <button type="submit" class="signup-btn">Sign Up</button>
       </form>
