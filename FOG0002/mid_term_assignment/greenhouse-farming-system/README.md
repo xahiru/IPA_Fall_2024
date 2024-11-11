@@ -69,4 +69,5 @@
 20. create a js file (api.js) to handle the functionalitys
 21. complete the signup functionality
 21. create the login functionality
-22. 
+22. To ensure that the dashboard is only accessible to authenticated users, implementd navigation guards with Vue Router.
+23. 

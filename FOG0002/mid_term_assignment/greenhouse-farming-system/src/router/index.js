@@ -22,7 +22,8 @@ import Dashboard from '../components/Dashboard.vue';
 	  {
 	    path: '/dashboard',
 	    name: 'Dashboard',
-	    component: Dashboard
+	    component: Dashboard,
+		meta: { requiresAuth: true }
 	  },
 	  
 	];
@@ -30,5 +31,21 @@ import Dashboard from '../components/Dashboard.vue';
 	const router = createRouter({
 	  history: createWebHistory(),
 	  routes
+	});
+
+
+
+	router.beforeEach((to, from, next) => {
+		if (to.matched.some(record => record.meta.requiresAuth)) {
+			const user = localStorage.getItem("user");
+			
+			if (!user) {
+				next({ name: 'Login' });
+			} else {
+				next();
+			}
+		} else {
+			next();
+		}
 	});
 	export default router;
