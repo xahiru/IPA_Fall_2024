@@ -73,7 +73,6 @@
     },
     methods: {
       saveSettings() {
-        // Here you would handle saving the settings, e.g., making an API call or storing in local storage
         console.log('Settings saved:', this.settings);
         alert('Settings have been saved!');
       },

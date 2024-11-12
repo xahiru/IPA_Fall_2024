@@ -26,8 +26,7 @@
       </div>
 
       <div v-if="currentSection === 'Logs'" class="section">
-        <h3>Logs</h3>
-        <p>View your activity logs here.</p>
+        <Logs/>
       </div>
     </main>
   </div>
@@ -36,12 +35,14 @@
 <script>
 import DataDisplay from './DataDisplay.vue';
 import Settings from './Settings.vue';
+import Logs from './Logs.vue';
 
 export default {
   name: "Dashboard",
   components: {
     DataDisplay,
     Settings,
+    Logs,
   },
   data() {
     return {
