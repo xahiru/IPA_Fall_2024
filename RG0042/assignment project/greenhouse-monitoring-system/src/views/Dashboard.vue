@@ -39,5 +39,4 @@
       flex-direction: column;
     }
   }
-  </style>
-  
+  </style>  
