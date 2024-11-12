@@ -22,4 +22,5 @@ export default {
   text-align: center;
   margin-top: 40px;
 }
+
 </style>

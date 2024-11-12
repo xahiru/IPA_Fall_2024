@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>JavaScript Expressions in Vue</h2>
+    <h2>Calculate your math here</h2>
     
     <input type="number" v-model.number="num1" placeholder="Enter Num" />
     <input type="number" v-model.number="num2" placeholder="Enter Num" />
