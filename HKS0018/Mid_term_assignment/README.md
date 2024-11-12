@@ -10,5 +10,6 @@
 8. Import Home, Login, Signup and Dashboard in index.js and define there paths
 9.Home page is accessible with out any authentication But to access the Dashboard You need login or signup.
 10. "this.$router.push({ name: });" is used for navigate from one page to another. 
+11. Add more components for settings panel and DataDisplay.
 
 
