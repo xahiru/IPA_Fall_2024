@@ -21,3 +21,5 @@ router.beforeEach((to, _from, next) => {
     if (to.meta.reqiresAuth && !isAuthenticated) next('/login');
     else next();
 });
+
+export default router;
