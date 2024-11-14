@@ -37,6 +37,7 @@
   
   <style scoped>
   .login-page {
+      background-image: url("src/assets/login-background.jpg");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
