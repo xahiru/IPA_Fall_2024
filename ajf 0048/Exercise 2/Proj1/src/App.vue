@@ -1,6 +1,21 @@
 <template>
   <v-app>
-    <NavBar  v-if="showNav"/>
+    <!-- Mobile Header -->
+    <v-app-bar
+      v-if="$vuetify.display.smAndDown"
+      color="primary"
+      density="compact"
+    >
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>Greenhouse Monitor</v-toolbar-title>
+    </v-app-bar>
+
+    <!-- Navigation Drawer -->
+    <v-navigation-drawer v-model="drawer" permanent>
+      <NavBar />
+    </v-navigation-drawer>
+
+    <!-- Main Content -->
     <v-main>
       <router-view></router-view>
     </v-main>
@@ -8,12 +23,8 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref } from 'vue'
 import NavBar from './components/NavBar.vue'
 
-const route = useRoute()
-const showNav = computed(() => {
-  return !['/', '/login', '/register'].includes(route.path)
-})
+const drawer = ref(true)
 </script>

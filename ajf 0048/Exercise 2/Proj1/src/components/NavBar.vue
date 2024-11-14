@@ -1,41 +1,54 @@
 <template>
-    <v-navigation-drawer
-    v-model="drawer"
-    :permanent="$vuetify.display.mdAndUp"
-    :temporary="$vuetify.display.smAndDown"
-    >
+  <v-list>
+    <v-list-item
+      prepend-avatar="https://randomuser.me/api/portraits/men/78.jpg"
+      title="John Doe"
+      subtitle="Greenhouse Admin"
+    ></v-list-item>
+
+    <v-divider></v-divider>
+
+    <v-list density="compact" nav>
       <v-list-item
-        prepend-avatar="https://randomuser.me/api/portraits/men/78.jpg"
-        title="Greenhouse Admin"
-      ></v-list-item>
-  
-      <v-divider></v-divider>
-  
-      <v-list density="compact" nav>
-        
-       <v-list-item
         v-for="item in menuItems"
-        :key="item.path"
+        :key="item.title"
         :to="item.path"
         :prepend-icon="item.icon"
         :title="item.title"
+        rounded="lg"
       ></v-list-item>
-      </v-list>
-    </v-navigation-drawer>
+    </v-list>
 
- <!-- Mobile Header -->
- <v-app-bar v-if="$vuetify.display.smAndDown">
-    <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-    <v-toolbar-title>Greenhouse Monitor</v-toolbar-title>
-  </v-app-bar>
-  </template>
+    <v-divider class="mt-auto"></v-divider>
+    
+    <v-list density="compact" nav>
+      <v-list-item
+        prepend-icon="mdi-logout"
+        title="Logout"
+        @click="handleLogout"
+      ></v-list-item>
+    </v-list>
+  </v-list>
+</template>
 
 <script setup>
-import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
-const drawer = ref(true)
+const router = useRouter()
 const menuItems = [
   { title: 'Dashboard', icon: 'mdi-view-dashboard', path: '/dashboard' },
   { title: 'Settings', icon: 'mdi-cog', path: '/settings' }
 ]
+
+const handleLogout = () => {
+  router.push('/login')
+}
 </script>
+
+<style scoped>
+.nav-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+</style>
