@@ -10,14 +10,12 @@
   
   <script>
   import Navbar from "@/components/Navbar.vue";
-  import Sidebar from "@/components/Sidebar.vue";
   import DashboardContent from "@/components/DashboardContent.vue";
   
   export default {
     name: "Dashboard",
     components: {
       Navbar,
-      Sidebar,
       DashboardContent,
     },
   };
