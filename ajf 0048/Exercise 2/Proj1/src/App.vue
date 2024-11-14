@@ -1,14 +1,19 @@
 <template>
   <v-app>
-    <NavBar />
+    <NavBar  v-if="showNav"/>
     <v-main>
-      <v-container>
-        <h1>Dashboard</h1>
-      </v-container>
+      <router-view></router-view>
     </v-main>
   </v-app>
 </template>
 
 <script setup>
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
 import NavBar from './components/NavBar.vue'
+
+const route = useRoute()
+const showNav = computed(() => {
+  return !['/', '/login', '/register'].includes(route.path)
+})
 </script>
