@@ -19,6 +19,7 @@
           prepend-icon="mdi-cog"
           title="Settings"
           value="settings"
+       
         ></v-list-item>
       </v-list>
     </v-navigation-drawer>
