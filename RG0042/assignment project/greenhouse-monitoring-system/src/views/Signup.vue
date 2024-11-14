@@ -36,6 +36,7 @@
               placeholder="Enter your password"
             />
           </div>
+          <br>
           <button type="submit" class="btn-primary">Sign Up</button>
         </form>
         <p class="mt-4 text-center">
@@ -80,6 +81,17 @@
     </script>
     
     <style scoped>
+    .signup-page {
+      background-image: url("src/assets/signup-background.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      align-items: center;
+    }
     .signup-container {
       background-color: #f9fafb;
       border: 1px solid #e5e7eb;
