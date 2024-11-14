@@ -1,85 +1,70 @@
 <template>
-    <v-container fluid>
-      <v-row>
-        <v-col cols="12">
-          <h1 class="text-h4 mb-6">
-            <v-icon size="36" color="primary" class="mr-2">mdi-view-dashboard</v-icon>
-            Greenhouse Dashboard
-          </h1>
-        </v-col>
-      </v-row>
-  
-      <v-row>
-        <!-- Temperature Card -->
-        <v-col cols="12" sm="6" md="4">
-          <v-card class="metric-card">
-            <v-card-text class="d-flex flex-column align-center">
-              <v-icon size="48" color="error" class="mb-2">mdi-thermometer</v-icon>
-              <div class="text-h4 mb-2">25°C</div>
-              <div class="text-subtitle-1">Temperature</div>
-            </v-card-text>
-          </v-card>
-        </v-col>
-        <!-- Humidity Card -->
-      <v-col cols="12" sm="6" md="4">
+  <v-container fluid>
+    <v-row>
+      <v-col cols="12">
+        <h1 class="text-h4 mb-6">
+          <v-icon size="36" color="primary" class="mr-2">mdi-view-dashboard</v-icon>
+          Greenhouse Dashboard
+        </h1>
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <v-col v-for="(value, key) in metrics" :key="key" cols="12" sm="6" md="4">
         <v-card class="metric-card">
           <v-card-text class="d-flex flex-column align-center">
-            <v-icon size="48" color="blue" class="mb-2">mdi-water</v-icon>
-            <div class="text-h4 mb-2">60%</div>
-            <div class="text-subtitle-1">Humidity</div>
+            <v-icon size="48" :color="getMetricColor(key)" class="mb-2">{{ getMetricIcon(key) }}</v-icon>
+            <div class="text-h4 mb-2">{{ value.toFixed(1) }}</div>
+            <div class="text-subtitle-1">{{ key }}</div>
           </v-card-text>
         </v-card>
       </v-col>
-     <!-- Soil Moisture Card -->
-     <v-col cols="12" sm="6" md="4">
-        <v-card class="metric-card">
-          <v-card-text class="d-flex flex-column align-center">
-            <v-icon size="48" color="brown" class="mb-2">mdi-water-percent</v-icon>
-            <div class="text-h4 mb-2">45%</div>
-            <div class="text-subtitle-1">Soil Moisture</div>
-          </v-card-text>
-        </v-card>
-      </v-col>
-      <!-- Light Level Card -->
-<v-col cols="12" sm="6" md="4">
-  <v-card class="metric-card">
-    <v-card-text class="d-flex flex-column align-center">
-      <v-icon size="48" color="orange" class="mb-2">mdi-white-balance-sunny</v-icon>
-      <div class="text-h4 mb-2">1200 lux</div>
-      <div class="text-subtitle-1">Light Level</div>
-    </v-card-text>
-  </v-card>
-</v-col>
-<!-- CO2 Level Card -->
-<v-col cols="12" sm="6" md="4">
-  <v-card class="metric-card">
-    <v-card-text class="d-flex flex-column align-center">
-      <v-icon size="48" color="grey-darken-1" class="mb-2">mdi-molecule-co2</v-icon>
-      <div class="text-h4 mb-2">450 ppm</div>
-      <div class="text-subtitle-1">CO2 Level</div>
-    </v-card-text>
-  </v-card>
-</v-col>
-<!-- Nutrient Level Card -->
-<v-col cols="12" sm="6" md="4">
-  <v-card class="metric-card">
-    <v-card-text class="d-flex flex-column align-center">
-      <v-icon size="48" color="green" class="mb-2">mdi-leaf</v-icon>
-      <div class="text-h4 mb-2">75%</div>
-      <div class="text-subtitle-1">Nutrient Level</div>
-    </v-card-text>
-   </v-card>
-    </v-col>
-      </v-row>
-        </v-container>
-          </template>
+    </v-row>
+  </v-container>
+</template>
 
-<style scoped>
-.metric-card {
-  transition: all 0.3s ease;
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
+import api from '../../services/api';
+
+const metrics = ref({})
+let intervalId
+
+const getMetricIcon = (metric) => {
+  const icons = {
+    temperature: 'mdi-thermometer',
+    humidity: 'mdi-water',
+    soilMoisture: 'mdi-water-percent',
+    lightLevel: 'mdi-white-balance-sunny',
+    co2Level: 'mdi-molecule-co2',
+    nutrientLevel: 'mdi-leaf'
+  }
+  return icons[metric]
 }
 
-.metric-card:hover {
-  transform: translateY(-5px);
+const getMetricColor = (metric) => {
+  const colors = {
+    temperature: 'error',
+    humidity: 'blue',
+    soilMoisture: 'brown',
+    lightLevel: 'orange',
+    co2Level: 'grey-darken-1',
+    nutrientLevel: 'green'
+  }
+  return colors[metric]
 }
-</style>
+
+const fetchMetrics = async () => {
+  const data = await api.getMetrics()
+  metrics.value = data
+}
+
+onMounted(() => {
+  fetchMetrics()
+  intervalId = setInterval(fetchMetrics, 5000)
+})
+
+onUnmounted(() => {
+  if (intervalId) clearInterval(intervalId)
+})
+</script>
