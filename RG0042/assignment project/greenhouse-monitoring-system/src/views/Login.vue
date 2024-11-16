@@ -16,10 +16,10 @@
           <p class="signup-prompt">Don't have an account? <a href="/signup" class="signup-link">Sign up here</a></p>
       </div>
     </div>  
-  </template>
+</template>
     
     
-  <script>
+<script>
     export default {
       data() {
         return { username: '', password: '' };
@@ -32,51 +32,98 @@
         },
       },
     };
-  </script>
+</script>
     
   
-  <style scoped>
-  .login-page {
-      background-image: url("src/assets/login-background.jpg");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      height: 100vh;
-      
-      display: flex;
-      flex-direction: column;
-      text-align: center;
-      align-items: center;
-  }
+<style scoped>
+.login-page {
+  background-image: url("src/assets/login-background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-page {
+  background: rgba(222, 230, 224, 0.2);
+  padding: 2rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 6vw; /* Scales with screen size */
+  margin-bottom: 20px;
+  color: white;
+}
+
+.auth-buttons {
+  margin-top: 1rem;
+}
+
+input {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+button {
+  width: 100%;
+  margin: 0.5rem 0;
+  padding: 0.75rem;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #2563eb;
+}
+
+.signup-prompt {
+  font-size: 1rem;
+  color: white;
+  margin-top: 1rem;
+}
+
+.signup-link {
+  color: #3b82f6;
+  text-decoration: underline;
+}
+
+@media (min-width: 768px) {
   .content-page {
-      background: rgba(222, 230, 224, 0.156);
-      padding: 2rem;
-      border-radius: 12px;
-      max-width: 285px;
-      width: 90%;
-      text-align: center;
+    padding: 3rem;
   }
   h1 {
-      font-size: 2em;
-      margin-bottom: 30px;
-      color: white;
+    font-size: 2.4rem;
   }
-  p {
-      font-size: 1.2em;
-      margin-bottom: 30px;
+}
+
+@media (max-width: 480px) {
+  .content-page {
+    padding: 1.5rem;
   }
-  
-  .auth-buttons{
-    margin-top: 1.5rem;
-    size: 8px;
-  }
-  
+  input,
   button {
-      margin: 0.5rem;
-      padding: 0.75rem 1.5rem;
-      font-size: 1rem;
-      cursor: pointer;
-      background-color: #3b82f6;
-      color: aliceblue;
+    padding: 0.75rem;
   }
-  </style>
+  h1 {
+    font-size: 5vw;
+  }
+}
+</style>
