@@ -1,4 +1,24 @@
 <script setup>
+    import { ref } from 'vue';
+    import { login } from '../components/api';
+    import { useRoute } from 'vue-router';
+
+    const email = ref('');
+    const password = ref('');
+
+    const login_page = async () => {
+    const response = await login(email.value, password.value);
+    if (response.success) {
+        window.location.href = '/dashboard'; 
+    } else {
+        alert("Login failed: " + (response.error || "Unknown error"));
+    }
+};
+
+
+
+
+
 </script>
 
 <template>
@@ -9,41 +29,22 @@
               <p class="subtitle">Login to access your dashboard</p>
             </header>
           
-            <form class="login-form">
+            <form class="login-form" @submit.prevent="login_page">
               <label for="email">Email</label>
-              <input type="email" id="email" class="input-field" placeholder="Enter your email" required>
+              <input type="email" id="email" class="input-field" v-model="email" placeholder="Enter your email" required>
           
               <label for="password">Password</label>
-              <input type="password" id="password" class="input-field" placeholder="Enter your password" required>
+              <input type="password" id="password" class="input-field" v-model="password" placeholder="Enter your password" required>
           
               <button type="submit" class="button login-button">Login</button>
               
-              <p class="signup-prompt">Don't have an account? <a href="/signup-page" class="signup-link">Sign up here</a></p>
+              <p class="signup-prompt signup-link"> Don't have an account?<router-link to="/signup">Sign up here</router-link> </p>
             </form>
           </div>
           
     </div>
 </template>
-<script>
-export default {
-  data() {
-    return {
-      username: '',
-      password: ''
-    };
-  },
-  methods: {
-    handleLogin() {
-      if (this.username && this.password) {
-        localStorage.setItem('authenticated', 'true'); 
-        this.$router.push('/dashboard'); 
-      } else {
-        alert('Please enter valid credentials');
-      }
-    }
-  }
-};
-</script>
+
 
 <style>
 #bdy{
@@ -136,7 +137,8 @@ export default {
   .signup-link {
     color: #ffffff;
     font-weight: 500;
-    text-decoration: underline;
+    text-decoration: none;
+
   }
   
   .signup-link:hover {

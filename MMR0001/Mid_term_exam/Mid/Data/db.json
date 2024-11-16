@@ -1,16 +1,16 @@
 {
-    "user": [
-      {
-        "id": "cdad",
-        "username": "Rakib ",
-        "email": "esratulrakib@gmail.com",
-        "password": "Nishatrakib@6927"
-      },
-      {
-        "id": "542d",
-        "username": "Sakhawat ",
-        "email": "rakiber357@gmail.com",
-        "password": "1234"
-      }
-    ]
-  }
+  "user": [
+    {
+      "id": "8f22",
+      "username": "Sakhawat Ahmed Rakib",
+      "email": "rakiber357@gmail.com",
+      "password": "1234"
+    },
+    {
+      "id": "c4a1",
+      "username": "Sakhawat",
+      "email": "esratulrakib@gmail.com",
+      "password": "3578"
+    }
+  ]
+}

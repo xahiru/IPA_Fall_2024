@@ -13,7 +13,7 @@
       <nav class="navbar">
         <div class="logo">Greenhouse</div>
         <ul class="nav-links">
-            <li><router-link to="/">Home</router-link></li>
+            <li><router-link to="/dashboard">Home</router-link></li>
             <li><router-link to="/dashboard">Dashboard</router-link></li>
             <li><router-link to="/settings">Settings</router-link></li>
             <li> <a @click="logout">Logout</a> </li>
@@ -23,20 +23,20 @@
       <main>
         <header>
           <h1>Overview</h1>
-          <p>Explore the benefits, challenges, and real-time data of greenhouse monitoring.</p>
+          <p>Explore the Controlled environment, challenges, and real-time data of greenhouse monitoring.</p>
         </header>
   
         <section class="articles">
           <article>
-            <h2>Benefits of Greenhouse Farming</h2>
+            <h2>Controlled Environment</h2>
             <p>
-              Greenhouse farming offers numerous advantages, such as increased control over environmental factors, extended growing seasons, and protection from extreme weather. With the right monitoring tools, farmers can optimize conditions for plant growth, leading to higher yields and better-quality produce.
+             Greenhouses provide a controlled environment for crops, allowing farmers to manage temperature, humidity, light, and water precisely. This control extends the growing season and allows for year-round production, even in unfavorable climates.
             </p>
           </article>
           <article>
-            <h2>Challenges in Greenhouse Farming</h2>
+            <h2>Reduced Environmental Impact</h2>
             <p>
-              Despite its benefits, greenhouse farming can also present challenges. High initial costs, energy consumption, and the need for constant monitoring of temperature, humidity, and other factors are some of the key challenges faced by greenhouse operators. However, advancements in automation and technology are helping to address these issues.
+             By optimizing resources like water, fertilizer, and energy, greenhouses can minimize the environmental footprint of agriculture. They also allow for climate-sensitive crops to be grown locally, reducing the need for long-distance transportation.
             </p>
           </article>
           <article>

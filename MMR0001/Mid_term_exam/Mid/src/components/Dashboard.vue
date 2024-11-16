@@ -1,113 +1,314 @@
+<script setup>
+import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+const metrics = ref([]);
+
+onMounted(() => {
+    const user = localStorage.getItem("user");
+    if (!user) {
+        router.push({ name: 'Login' });
+    }
+});
+
+const logout = async () => {
+    localStorage.removeItem("user");
+    router.push({ name: 'Login' });
+};
+
+const fetchData = async () => {
+    try {
+        const response = await fetch('../../Data/data.json');
+        metrics.value = await response.json();
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+};
+
+const generateRandomValue = (min, max, unit = '') => {
+    return `${(Math.random() * (max - min) + min).toFixed(1)}${unit}`;
+};
+const updateMetrics = () => {
+    metrics.value = [
+        {
+            ...metrics.value[0],
+            value: generateRandomValue(15, 16, '°C')
+        },
+        {
+            ...metrics.value[1],
+            value: generateRandomValue(67, 68, '%')
+        },
+        {
+            ...metrics.value[2],
+            value: generateRandomValue(45, 45.5, '%')
+        },
+        {
+            ...metrics.value[3],
+            value: generateRandomValue(300, 312, ' lux')
+        }
+    ];
+};
+
+onMounted(async () => {
+    await fetchData();
+    const intervalId = setInterval(updateMetrics, 3000);
+    onUnmounted(() => {
+        clearInterval(intervalId);
+    });
+});
+</script>
+
+
 <template>
-    <div class="dashboard-container">
-      <header class="dashboard-header">
-    
-        <h1>Greenhouse Farming Dashboard</h1>
-        <button @click="logout">Logout</button>
+  <div id="dashboard">
+    <nav class="navbar">
+      <div class="logo">Greenhouse</div>
+      <ul class="nav-links">
+        <li><router-link to="/dashboard">Home</router-link></li>
+        <li><router-link to="/over-view">Overview</router-link></li>
+        <li><router-link to="/settings">Settings</router-link></li>
+        <li><router-link to="/data-chart">Logs</router-link></li>
+        <li> <a @click="logout">Logout</a> </li>
+      </ul>
+    </nav>
+
+    <main>
+      <header>
+        <h1>Dashboard</h1>
+        <p>Real-time Monitoring of Greenhouse Conditions</p>
       </header>
-      <nav class="dashboard-nav">
-        <button @click="selectTab('overview')" :class="{ active: activeTab === 'overview' }">Overview</button>
-        <button @click="selectTab('settings')" :class="{ active: activeTab === 'settings' }">Settings</button>
-        <button @click="selectTab('logs')" :class="{ active: activeTab === 'logs' }">Logs</button>
-      </nav>
-      <section class="dashboard-content">
-        <div v-if="activeTab === 'overview'" class="overview-section">
-          <h2>Overview of Greenhouse Farming with Technology</h2>
-          <p>
-            Greenhouse farming with technology allows farmers to monitor and control essential factors 
-            such as temperature, humidity, and light levels. This approach increases crop yield, conserves 
-            resources, and reduces dependency on external weather conditions. With advanced sensors and 
-            monitoring tools, growers can achieve optimized growth for a variety of crops in a controlled 
-            environment.
-          </p>
-        </div>
-  
-        <div v-if="activeTab === 'settings'">
-          <h2>Settings</h2>
-          <p>Configure alert thresholds and customize your dashboard here.</p>
-        </div>
-  
-        <div v-if="activeTab === 'logs'">
-          <h2>Logs</h2>
-          <p>View system logs and historical data for analysis.</p>
+
+      <section class="metrics">
+        <div 
+          v-for="(metric, index) in metrics" 
+          :key="index" 
+          class="card" 
+          :style="{ borderLeft: `5px solid ${metric.color}` }"
+        >
+          <h2>{{ metric.title }}</h2>
+          <p>{{ metric.value }}</p>
         </div>
       </section>
-    </div>
-  </template>
-  <script>
-  export default {
-    name: "Dashboard",
-    data() {
-      return {
-        activeTab: "overview",
-      };
-    },
-    methods: {
-     logout() {
-        localStorage.removeItem('authenticated');
-        this.$router.push('/login');
-      },
-    },
-  };
-  </script>
-  
-  <style scoped>
-  .dashboard-container {
-    padding: 2em;
-    text-align: center;
-    font-family: Arial, sans-serif;
-    color: #333;
+    </main>
+  </div>
+</template>
+
+<style scoped>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #f4f6f9;
+  color: #333;
+  padding-top: 70px;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  background: #2d3e50;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  overflow-x: auto;
+}
+a:hover{
+  cursor: pointer;
+}
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #3498db;
+}
+
+main {
+  padding: 2rem 3rem;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #34495e;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+  font-weight: 300;
+}
+
+.metrics {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.card {
+  padding: 1.8rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+
+.card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.temperature-card {
+  border-left: 5px solid #e74c3c;
+}
+
+.humidity-card {
+  border-left: 5px solid #16a085;
+}
+
+.moisture-card {
+  border-left: 5px solid #f39c12;
+}
+
+.light-card {
+  border-left: 5px solid #3498db;
+}
+
+@media (max-width: 1024px) {
+  .metrics {
+    grid-template-columns: repeat(2, 1fr);
   }
-  
-  .logo {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 0.5em;
+
+  .navbar {
+    padding: 1.2rem 1.5rem;
   }
-  .dashboard-header h1 {
-    margin-top: 0;
-    color: #4CAF50;
+
+  .nav-links li a {
+    font-size: 1rem;
   }
-  .dashboard-nav {
+}
+
+@media (max-width: 768px) {
+  .metrics {
+    grid-template-columns: 1fr;
+  }
+  .navbar li{
+    margin-left: 20px;
+  }
+  header h1 {
+    font-size: 2rem;
+  }
+  header h1 {
+    margin-top: 30px;
+  }
+  header p {
+    font-size: 1rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  .card h2 {
+    font-size: 1.3rem;
+  }
+
+  .card p {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.2rem;
+  }
+
+  .navbar li{
+    margin-left: 20px;
+  }
+  .nav-links {
     display: flex;
-    justify-content: center;
-    margin: 1em 0;
-    gap: 1em;
+    flex-direction: row;
+    gap: 10px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+    white-space: nowrap;
   }
-  
-  .dashboard-nav button {
-    padding: 0.5em 1em;
-    border: none;
-    border-radius: 5px;
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
-    font-size: 1em;
-    transition: background-color 0.3s ease;
+
+  header h1 {
+    margin-top: 30px;
   }
-  
-  .dashboard-nav button:hover {
-    background-color: #45a049;
+
+  .nav-links li {
+    flex-shrink: 0;
   }
-  
-  .dashboard-nav .active {
-    background-color: #388E3C;
+
+  .logo {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
   }
-  .dashboard-content {
-    margin-top: 1.5em;
-    text-align: left;
-    padding: 1em 2em;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    background-color: #f9f9f9;
+
+  .metrics {
+    margin-top: 20px;
   }
-  h2 {
-    color: #4CAF50;
+
+  .card {
+    padding: 1rem;
   }
-  
-  p {
-    font-size: 1.1em;
-    line-height: 1.6;
+
+  .card-icon {
+    font-size: 2rem;
   }
-  </style>
-  
+
+  .card h2 {
+    font-size: 1.2rem;
+  }
+
+  .card p {
+    font-size: 1.5rem;
+  }
+}
+</style>

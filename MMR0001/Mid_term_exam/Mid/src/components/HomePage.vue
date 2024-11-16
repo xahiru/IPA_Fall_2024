@@ -1,9 +1,20 @@
 <script setup>
+import { useRouter } from 'vue-router';
+const router = useRouter();
+
+
+const afterLogin = () => {
+  const user = localStorage.getItem("user");
+  if (user) {
+    router.push({ name: 'Dashboard' });
+  }
+};
 
 </script>
 
 <template>
   <div id="body">
+    
     <div class="home">
       <header class="header">
         <h1 class="title">Greenhouse Farming System</h1>
@@ -18,16 +29,18 @@
           <li>Data analytics for optimal crop growth</li>
         </ul>
       </section>
+      
       <div class="buttons">
-        <router-link to="/login" class="button login-button">Login</router-link>
-        <router-link to="/signup-page" class="button signup-page-button">Signup</router-link>
+          <router-link to="/login" @click="afterLogin" class="button login-button">Login</router-link>
+          <router-link to="/signup" @click="afterLogin" class="button signup-button">Signup</router-link>
       </div>
     </div>
-  
+    
     
     
   </div>
 </template>
+
 <style scoped>
 #body{
   box-sizing: border-box;
@@ -40,7 +53,7 @@
 
 body {
   font-family: 'Roboto', sans-serif;
-  background: linear-gradient(135deg, #143324, #31631a);
+  background: linear-gradient(135deg, #88d8b0, #56ab2f);
   color: #333;
   display: flex;
   align-items: center;
