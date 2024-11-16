@@ -1,8 +1,8 @@
 <template>
-  <v-list>
+    <v-list>
     <v-list-item
       prepend-avatar="https://randomuser.me/api/portraits/men/78.jpg"
-      title="John Doe"
+      title="Jane Frances"
       subtitle="Greenhouse Admin"
     ></v-list-item>
 
@@ -18,16 +18,6 @@
         rounded="lg"
       ></v-list-item>
     </v-list>
-
-    <v-divider class="mt-auto"></v-divider>
-    
-    <v-list density="compact" nav>
-      <v-list-item
-        prepend-icon="mdi-logout"
-        title="Logout"
-        @click="handleLogout"
-      ></v-list-item>
-    </v-list>
   </v-list>
 </template>
 
@@ -35,9 +25,14 @@
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
+
+
 const menuItems = [
+{ title: 'Home', icon: 'mdi-home', path: '/' },
   { title: 'Dashboard', icon: 'mdi-view-dashboard', path: '/dashboard' },
-  { title: 'Settings', icon: 'mdi-cog', path: '/settings' }
+  { title: 'Settings', icon: 'mdi-cog', path: '/settings' },
+  { title: 'Login', icon: 'mdi-login', path: '/login' },
+  { title: 'Register', icon: 'mdi-account-plus', path: '/register' }
 ]
 
 const handleLogout = () => {
