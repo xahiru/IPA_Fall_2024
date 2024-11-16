@@ -59,15 +59,13 @@ p {
     text-align: center;
     color: black;
 }
+
 .auth-buttons{
-    padding: 0.5rem 1.5rem;
-    color: white;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 1rem;
-    transition: background-color 0.3s;
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
+    align-items: center;
+    width: 100%;
 }
 
 button {
@@ -80,6 +78,9 @@ button {
     color: rgb(251, 248, 255);
     background-color: rgb(117, 212, 141);
     border-radius: 5px;
+    width: 100%;
+    max-width: 200px;
+    height: 50px;
 }
 
 button:hover {
@@ -97,14 +98,8 @@ button:hover {
         font-size: 1rem;
     }
 
-    .auth-buttons {
-        flex-direction: column;
-        gap: 1rem;
-        width: 100%;
-    }
     button {
         width: 100%;
-        padding: 1rem;
         font-size: 1.2rem;
     }
 }
@@ -117,9 +112,6 @@ button:hover {
        font-size: 0.9rem; 
     }
 
-    .auth-buttons {
-        gap: 0.8rem;
-    }
     button {
         font-size: 1rem;
     }
