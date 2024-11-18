@@ -69,7 +69,7 @@ import axios from 'axios';
           password: this.password,
         };
 
-        const response = await axios.post('http://localhost:3000/users', newUser);
+        const response = await axios.post('http://localhost:3001/users', newUser);
         if (response.status === 201) {
           this.$router.push('/login');
         }

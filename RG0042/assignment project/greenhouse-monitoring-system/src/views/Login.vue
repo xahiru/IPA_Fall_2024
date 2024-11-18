@@ -34,7 +34,7 @@ export default {
   methods: {
     async login() {
       try {
-        const response = await axios.get('http://localhost:3000/users', {
+        const response = await axios.get('http://localhost:3001/users', {
           params: { username: this.username, password: this.password }
         });
 
