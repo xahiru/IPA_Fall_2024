@@ -14,24 +14,46 @@
         </form>
   
           <p class="signup-prompt">Don't have an account? <a href="/signup" class="signup-link">Sign up here</a></p>
+          <P v-if="errorMeassage" class="error-meassage">{{ errorMeassage }}</P>
       </div>
     </div>  
 </template>
     
     
 <script>
-    export default {
-      data() {
-        return { username: '', password: '' };
-      },
-      methods: {
-        login() {
-          // Mock login, store user in localStorage
-          localStorage.setItem('auth', true);
-          this.$router.push('/dashboard');
-        },
-      },
+import axios from "axios";
+
+export default {
+  data() {
+    return {
+      username: "",
+      password: "",
+      errorMessage: "",
     };
+  },
+  methods: {
+    async login() {
+      try {
+        const response = await axios.get('http://localhost:3000/users', {
+          params: { username: this.username, password: this.password }
+        });
+
+        if (response.data.length === 1) {
+          const user = response.data[0];
+          localStorage.setItem('auth', true);
+          localStorage.setItem('user', JSON.stringify(user));
+          this.$router.push('/dashboard');
+        } else {
+        
+          this.errorMessage = 'Invalid username or password';
+        }
+      } catch (error) {
+        console.error('Login failed:', error);
+        this.errorMessage = 'Something went wrong. Please try again.';
+      }
+    }
+  }
+};
 </script>
     
   

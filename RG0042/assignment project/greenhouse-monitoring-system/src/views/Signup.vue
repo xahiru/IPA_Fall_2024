@@ -45,9 +45,9 @@
         </p>
       </div>
     </div>  
-    </template>
+</template>
     
-    <script>
+<script>
     export default {
       data() {
         return {
@@ -78,9 +78,9 @@
         },
       },
     };
-    </script>
+</script>
     
-    <style scoped>
+<style scoped>
     .signup-page {
       background-image: url("src/assets/signup-background.jpg");
       background-size: cover;
