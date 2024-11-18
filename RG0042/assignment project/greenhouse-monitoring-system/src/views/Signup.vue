@@ -48,36 +48,38 @@
 </template>
     
 <script>
-    export default {
-      data() {
-        return {
-          username: '',
-          email: '',
-          password: '',
+import axios from 'axios';
+
+  export default {
+    data() {
+      return {
+        username: '',
+        email: '',
+        password: '',
+        errorMessage: '',
+      };
+    },
+    methods: {
+      async register() {
+      try {
+        // Send POST request to create a new user in the mock API
+        const newUser = {
+          username: this.username,
+          email: this.email,
+          password: this.password,
         };
-      },
-      methods: {
-        register() {
-          // Basic registration logic (for demonstration purposes)
-          if (this.username && this.email && this.password) {
-            const userData = {
-              username: this.username,
-              email: this.email,
-              password: this.password,
-            };
-    
-            // Store user data in localStorage (as a basic simulation of registration)
-            localStorage.setItem('user', JSON.stringify(userData));
-            localStorage.setItem('auth', true); // Mark the user as authenticated
-    
-            // Redirect to dashboard after registration
-            this.$router.push('/dashboard');
-          } else {
-            alert('Please fill in all fields');
-          }
-        },
-      },
-    };
+
+        const response = await axios.post('http://localhost:3000/users', newUser);
+        if (response.status === 201) {
+          this.$router.push('/login');
+        }
+      } catch (error) {
+        console.error('Registration failed:', error);
+        alert('Something went wrong. Please try again.');
+      }
+    }
+  }
+};
 </script>
     
 <style scoped>
