@@ -74,13 +74,13 @@ export default {
   padding: 2rem;
   border-radius: 12px;
   width: 100%;
-  max-width: 400px;
+  max-width: 325px;
   text-align: center;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-  font-size: 6vw; /* Scales with screen size */
+  font-size: 6vw;
   margin-bottom: 20px;
   color: white;
 }
