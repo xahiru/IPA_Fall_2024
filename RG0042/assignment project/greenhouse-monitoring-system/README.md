@@ -59,7 +59,7 @@
 10.installed json server globally
    npm install -g json-server
 
-11 installed Cors
+11. installed Cors
    npm install cors
    then create server.js file & add code
 
@@ -68,3 +68,12 @@
 
     if you change port of you server then you mention you port end of the commande
     for example: json-server --watch db.json --port 3001
+
+13.Created components Folder to add File
+    A.DashboardContent.vue
+    B.Navbar.vue
+    {we add this 2 file before complete No: 10, 11, 12}
+
+    C.DataCard.vue
+    D.SettingsPanel
+    
