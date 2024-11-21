@@ -13,7 +13,14 @@
 <script>
 export default {
     name: "navbar",
-}
+
+    methods: {
+        logout() {
+        localStorage.removeItem('isAuthenticated');
+        this.$router.push('/login');    
+    },
+  }
+};
 </script>
 
 <style scoped>
@@ -22,7 +29,8 @@ export default {
     justify-content: space-between;
     align-content: center;
     padding: 1rem;
-    background-color: white;
+    background-color: #3b82f6;
+    color: white;
 }
 
 .logs {
