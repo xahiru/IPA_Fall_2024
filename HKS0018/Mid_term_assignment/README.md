@@ -11,5 +11,7 @@
 9.Home page is accessible with out any authentication But to access the Dashboard You need login or signup.
 10. "this.$router.push({ name: });" is used for navigate from one page to another. 
 11. Add more components for settings panel and DataDisplay.
+12. Install JSON Server "npm install -g json-server"
+13.
 
 
