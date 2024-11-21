@@ -16,3 +16,46 @@
     npx tailwindcss init
   C.Axios
     npm install axios
+
+4.Created Views Folder to add File 
+  A. Home.vue
+  B. Login.vue
+  C. Signup.Vue
+  D. Dashboard.vue
+
+  {We Add This file Step-by-step and write the code, script & style}
+
+5.Create router.js File
+    A.Write Basic Structure 
+      import { createRouter, createWebHistory } from 'vue-router';
+
+      const routes = [
+
+      ];
+
+      const router = createRouter({ history: createWebHistory(), routes });
+      export default router;
+
+    B.import and create route for Views components.
+
+6.create main.js file to import App.vue, router & tailwind.css
+
+7.In App.vue We just link router-view
+
+8.We want to install some necessary Files
+ A.tailwind.config.js
+ B.vite.config.js
+ C.postcss.config.js
+
+ Here is the commend to install this files:
+   npm install -D tailwindcss postcss autoprefixer
+   npx tailwindcss init
+   npm install vite-plugin-vue-devtools --save-dev
+
+9.In assets file:
+   add some background images & basic css
+   inside tailwind.config.js file we have theme section there we link our background images.
+  
+10.create components to add files
+ A. DashboardContaint.vue
+ B. Navebar.vue
