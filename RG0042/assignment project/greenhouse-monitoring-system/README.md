@@ -56,6 +56,15 @@
    add some background images & basic css
    inside tailwind.config.js file we have theme section there we link our background images.
   
-10.create components to add files
- A. DashboardContaint.vue
- B. Navebar.vue
+10.installed json server globally
+   npm install -g json-server
+
+11 installed Cors
+   npm install cors
+   then create server.js file & add code
+
+12.create a database file by the name of db.json, run the database server
+    json-server --watch db.json
+
+    if you change port of you server then you mention you port end of the commande
+    for example: json-server --watch db.json --port 3001
