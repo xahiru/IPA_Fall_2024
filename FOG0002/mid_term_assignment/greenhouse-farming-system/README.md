@@ -74,11 +74,13 @@
 24. create a components for the overview
 25. complete the logout functionality
 26. delete the static code from template, use v-for to display dashboard page cards informations
-27. created a components for setting page
-28. created another database file for greenhouse data
-29. fetch the data from dashboard 
-30. create a component for charts
-31. install vue-chartjs
+27. created another database file for greenhouse data
+28. fetch the data from dashboard 
+29. created a components for setting page
+30. remove the navbar from all the pages and make a component for navbar
+31. 
+30. create a component for charts(not used yet)
+31. install vue-chartjs (not used yet)
     1. npm install chart.js vue-chartjs
 32. install zoom plugin
     1. npm install chartjs-plugin-zoom

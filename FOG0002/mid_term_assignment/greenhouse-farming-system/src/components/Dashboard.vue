@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
+import Navbar from './Navbar.vue';
 
 const router = useRouter();
 const metrics = ref([]);
@@ -11,11 +12,6 @@ onMounted(() => {
         router.push({ name: 'Login' });
     }
 });
-
-const logout = async () => {
-    localStorage.removeItem("user");
-    window.location.href = '/login';
-};
 
 const fetchData = async () => {
   try {
@@ -32,16 +28,7 @@ onMounted(fetchData);
 
 <template>
   <div id="dashboard">
-    <nav class="navbar">
-      <div class="logo">Greenhouse</div>
-      <ul class="nav-links">
-        <li><router-link to="/">Home</router-link></li>
-        <li><router-link to="/over-view">Overview</router-link></li>
-        <li><router-link to="/settings">Settings</router-link></li>
-        <li><router-link to="/historical-data-chart">Logs</router-link></li>
-        <li> <a @click="logout">Logout</a> </li>
-      </ul>
-    </nav>
+    <Navbar />
 
     <main>
       <header>
@@ -76,48 +63,6 @@ body {
   background: #f4f6f9;
   color: #333;
   padding-top: 70px;
-}
-
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.2rem 2rem;
-  background: #2d3e50;
-  color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  z-index: 100;
-  overflow-x: auto;
-}
-a:hover{
-  cursor: pointer;
-}
-.logo {
-  font-size: 1.8rem;
-  font-weight: bold;
-  letter-spacing: 1px;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 30px;
-}
-
-.nav-links li a {
-  text-decoration: none;
-  color: white;
-  font-size: 1.1rem;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.nav-links li a:hover {
-  color: #3498db;
 }
 
 main {

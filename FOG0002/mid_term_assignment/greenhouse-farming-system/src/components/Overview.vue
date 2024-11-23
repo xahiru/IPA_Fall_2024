@@ -1,6 +1,7 @@
 <script setup>
   import { ref } from 'vue';
-  
+  import Navbar from './Navbar.vue';
+
   const temperature = ref(24); 
   const humidity = ref(65); 
   const moisture = ref(45); 
@@ -9,15 +10,7 @@
   
   <template>
     <div id="overview">
-      <nav class="navbar">
-        <div class="logo">Greenhouse</div>
-        <ul class="nav-links">
-            <li><router-link to="/">Home</router-link></li>
-            <li><router-link to="/dashboard">Dashboard</router-link></li>
-            <li><router-link to="/settings">Settings</router-link></li>
-            <li> <a @click="logout">Logout</a> </li>
-        </ul>
-      </nav>
+      <Navbar />
   
       <main>
         <header>
@@ -63,45 +56,6 @@
     padding-top: 70px;
   }
   
-  .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.2rem 2rem;
-    background: #2d3e50;
-    color: white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    z-index: 100;
-    overflow-x: auto;
-  }
-  
-  .logo {
-    font-size: 1.8rem;
-    font-weight: bold;
-    letter-spacing: 1px;
-  }
-  
-  .nav-links {
-    list-style: none;
-    display: flex;
-    gap: 30px;
-  }
-  
-  .nav-links li a {
-    text-decoration: none;
-    color: white;
-    font-size: 1.1rem;
-    font-weight: 500;
-    transition: color 0.3s ease;
-  }
-  
-  .nav-links li a:hover {
-    color: #3498db;
-  }
   
   main {
     padding: 2rem 3rem;
