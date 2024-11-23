@@ -76,4 +76,5 @@
 
     C.DataCard.vue
     D.SettingsPanel
+    link with dashboard & router.
     

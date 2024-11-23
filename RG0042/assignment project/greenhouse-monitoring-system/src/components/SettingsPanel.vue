@@ -1,72 +1,72 @@
 <template>
-    <div class="settings-panel">
-      <h2>Settings Panel</h2>
-      <form @submit.prevent="saveSettings">
+  <div class="settings-panel">
+    <h2>Settings Panel</h2>
+    <form @submit.prevent="saveSettings">
+      <div class="setting">
+        <label for="temperature">Temperature Threshold (°C):</label>
+        <input
+          id="temperature"
+          type="number"
+          v-model="localThresholds.temperature"
+        />
+      </div>
 
-        <div class="setting">
-          <label for="temperature-threshold">Temperature Alert Threshold (°C):</label>
-          <input
-            id="temperature-threshold"
-            type="number"
-            v-model="thresholds.temperature"
-          />
-        </div>
+      <div class="setting">
+        <label for="humidity">Humidity Threshold (%):</label>
+        <input
+          id="humidity"
+          type="number"
+          v-model="localThresholds.humidity"
+        />
+      </div>
+      <div class="setting">
+        <label for="soil-moisture">Soil Moisture Threshold (%):</label>
+        <input
+          id="soil-moisture"
+          type="number"
+          v-model="localThresholds.soilMoisture"
+        />
+      </div>
 
-        <div class="setting">
-          <label for="humidity-threshold">Humidity Alert Threshold (%):</label>
-          <input
-            id="humidity-threshold"
-            type="number"
-            v-model="thresholds.humidity"
-          />
-        </div>
+      <!-- Light Level Threshold -->
+      <div class="setting">
+        <label for="light-level">Light Level Threshold (lux):</label>
+        <input
+          id="light-level"
+          type="number"
+          v-model="localThresholds.lightLevel"
+        />
+      </div>
 
-        <div class="setting">
-          <label for="soil-moisture-threshold">Soil Moisture Alert Threshold (%):</label>
-          <input
-            id="soil-moisture-threshold"
-            type="number"
-            v-model="thresholds.soilMoisture"
-          />
-        </div>
+      <button type="submit">Save Settings</button>
+    </form>
+  </div>
+</template>
 
-        <div class="setting">
-          <label for="light-level-threshold">Light Level Alert Threshold (lux):</label>
-          <input
-            id="light-level-threshold"
-            type="number"
-            v-model="thresholds.lightLevel"
-          />
-        </div>
-  
-        <button type="submit">Save Settings</button>
-      </form>
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    name: "SettingsPanel",
-    data() {
-      return {
-        thresholds: {
-          temperature: 28,
-          humidity: 65,
-          soilMoisture: 40,
-          lightLevel: 300,
-        },
-      };
+<script>
+export default {
+  name: "SettingsPanel",
+  props: {
+    thresholds: {
+      type: Object,
+      required: true,
     },
-    methods: {
+  },
+  data() {
+    return {
+      localThresholds: { ...this.thresholds }, // Local copy for editing
+    };
+  },
+  methods: {
       saveSettings() {
         alert("Settings saved!");
         console.log("Updated thresholds:", this.thresholds);
       },
     },
   };
-  </script>
-  
-  <style scoped>
+</script>
+
+<style scoped>
   .settings-panel {
     padding: 1.5rem;
     background-color: #f9f9f9;
