@@ -78,7 +78,17 @@
 28. fetch the data from dashboard 
 29. created a components for setting page
 30. remove the navbar from all the pages and make a component for navbar
-31. 
+31. create the setting page structure
+32. write the setting page functionalities
+
+
+
+
+
+
+
+
+
 30. create a component for charts(not used yet)
 31. install vue-chartjs (not used yet)
     1. npm install chart.js vue-chartjs

@@ -13,7 +13,5 @@
       "password": "123"
     }
   ],
-  "alertSettings":[
-    
-  ]
+  "alertSettings": []
 }

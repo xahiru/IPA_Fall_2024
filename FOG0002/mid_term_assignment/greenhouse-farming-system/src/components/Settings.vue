@@ -1,5 +1,96 @@
 <script setup>
+import { reactive, onMounted, watch, onUnmounted } from 'vue';
 import Navbar from './Navbar.vue';
+
+const settings = reactive({
+    temperatureThreshold: 30,
+    humidityThreshold: 60,
+    lightThreshold: 200,
+    moistureThreshold: 50,
+    alertsEnabled: {
+        temperature: true,
+        humidity: true,
+        light: true,
+        moisture: true,
+    },
+    activeAlert: null,
+    simulationFrequency: 5000, 
+});
+
+
+const saveSettings = () => {
+    localStorage.setItem('alertSettings', JSON.stringify(settings));
+    alert("Settings saved successfully!");
+};
+
+
+onMounted(() => {
+    const savedSettings = localStorage.getItem('alertSettings');
+    if (savedSettings) {
+        Object.assign(settings, JSON.parse(savedSettings));
+    }
+});
+
+
+const simulateData = () => {
+    const simulatedMetrics = [
+        { type: 'temperature', value: Math.random() * 50 }, 
+        { type: 'humidity', value: Math.random() * 100 },
+        { type: 'light', value: Math.random() * 300 },
+        { type: 'moisture', value: Math.random() * 100 },
+    ];
+
+    simulatedMetrics.forEach((metric) => {
+        const { type, value } = metric;
+
+        
+        if (type === 'temperature') {
+            console.log(`Temperature: ${value}, Threshold: ${settings.temperatureThreshold}`);
+        }
+
+        
+        if (settings.alertsEnabled[type] && value > settings[`${type}Threshold`]) {
+            settings.activeAlert = `⚠️ ${type.toUpperCase()} exceeded! Value: ${value.toFixed(
+                1
+            )}, Threshold: ${settings[`${type}Threshold`]}`;
+        }
+    });
+
+    
+    if (!simulatedMetrics.some(
+        (metric) => settings.alertsEnabled[metric.type] && metric.value > settings[`${metric.type}Threshold`]
+    )) {
+        settings.activeAlert = null;
+    }
+};
+
+
+let simulationInterval = null;
+const startSimulation = () => {
+    stopSimulation(); 
+    simulationInterval = setInterval(simulateData, settings.simulationFrequency);
+};
+
+const stopSimulation = () => {
+    if (simulationInterval) {
+        clearInterval(simulationInterval);
+        simulationInterval = null;
+    }
+};
+
+
+onMounted(startSimulation);
+
+
+onUnmounted(stopSimulation);
+
+
+watch(
+    () => settings.simulationFrequency,
+    () => {
+        startSimulation();
+    }
+);
 </script>
 
 <template>
@@ -8,13 +99,14 @@ import Navbar from './Navbar.vue';
     <h1 class="title">Settings Panel</h1>
     <p class="subtitle">Set thresholds and control alerts dynamically.</p>
 
-    <form class="settings-form">
+    <form class="settings-form" @submit.prevent="saveSettings">
+
       
       <div class="form-group">
         <label for="temperature">Temperature Threshold (°C):</label>
-        <input type="number" id="temperature" class="input-field" />
+        <input type="number" id="temperature" v-model="settings.temperatureThreshold" min="0" class="input-field" />
         <div class="toggle">
-          <input type="checkbox" id="temperature-alert"/>
+          <input type="checkbox" id="temperature-alert" v-model="settings.alertsEnabled.temperature" />
           <label for="temperature-alert">Enable Temperature Alerts</label>
         </div>
       </div>
@@ -22,9 +114,9 @@ import Navbar from './Navbar.vue';
       
       <div class="form-group">
         <label for="humidity">Humidity Threshold (%):</label>
-        <input type="number" id="humidity" class="input-field" />
+        <input type="number" id="humidity" v-model="settings.humidityThreshold" min="0" class="input-field" />
         <div class="toggle">
-          <input type="checkbox" id="humidity-alert"/>
+          <input type="checkbox" id="humidity-alert" v-model="settings.alertsEnabled.humidity" />
           <label for="humidity-alert">Enable Humidity Alerts</label>
         </div>
       </div>
@@ -32,9 +124,9 @@ import Navbar from './Navbar.vue';
       
       <div class="form-group">
         <label for="light">Light Threshold (lux):</label>
-        <input type="number" id="light" class="input-field" />
+        <input type="number" id="light" v-model="settings.lightThreshold" min="0" class="input-field" />
         <div class="toggle">
-          <input type="checkbox" id="light-alert"/>
+          <input type="checkbox" id="light-alert" v-model="settings.alertsEnabled.light" />
           <label for="light-alert">Enable Light Alerts</label>
         </div>
       </div>
@@ -42,21 +134,31 @@ import Navbar from './Navbar.vue';
       
       <div class="form-group">
         <label for="moisture">Moisture Threshold (%):</label>
-        <input type="number" id="moisture" class="input-field" />
+        <input type="number" id="moisture" v-model="settings.moistureThreshold" min="0" class="input-field" />
         <div class="toggle">
-          <input type="checkbox"/>
+          <input type="checkbox" id="moisture-alert" v-model="settings.alertsEnabled.moisture" />
           <label for="moisture-alert">Enable Moisture Alerts</label>
         </div>
+      </div>
+
+      
+      <div class="form-group">
+        <label for="frequency">Simulation Frequency (ms):</label>
+        <input type="number" id="frequency" v-model="settings.simulationFrequency" min="1000" class="input-field" />
       </div>
 
       <button type="submit" class="button save-button">Save Settings</button>
     </form>
 
-
+    
+    <div v-if="settings.activeAlert" class="active-alert">
+      {{ settings.activeAlert }}
+    </div>
   </div>
 </template>
 
 <style scoped>
+
 #settings {
   font-family: 'Roboto', sans-serif;
   max-width: 600px;

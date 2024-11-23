@@ -1,5 +1,6 @@
 <script setup>
 import { useRouter } from 'vue-router';
+import Navbar from './Navbar.vue';
 const router = useRouter();
 
 
@@ -14,7 +15,8 @@ const afterLogin = () => {
 
 <template>
   <div id="body">
-    
+
+    <Navbar />
     <div class="home">
       <header class="header">
         <h1 class="title">Greenhouse Farming System</h1>
