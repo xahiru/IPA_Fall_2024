@@ -19,51 +19,37 @@
   
         <!-- Metrics Section -->
         <section class="metrics">
-          <!-- Looping through the cards data with v-for -->
           <div 
-            v-for="(card, index) in cards" 
-            :key="index" 
-            :class="['card', card.class]"
-          >
-            <div class="card-icon">
-              <i :class="card.icon"></i>
-            </div>
-            <h2>{{ card.title }}</h2>
-            <p>{{ card.value }}</p>
-          </div>
+          v-for="(data, index) in data" 
+          :key="index" 
+          class="card" 
+          :style="{ borderLeft: `5px solid ${data.color}` }"
+        >
+          <h2>{{ data.title }}</h2>
+          <p>{{ data.value }}</p>
+        </div>
         </section>
       </main>
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
-const cards = ref([
-  {
-    title: 'Temperature',
-    value: '24°C',
-    icon: 'fas fa-thermometer-half',
-    class: 'temperature-card'
-  },
-  {
-    title: 'Humidity',
-    value: '65%',
-    icon: 'fas fa-tint',
-    class: 'humidity-card'
-  },
-  {
-    title: 'Soil Moisture',
-    value: '45%',
-    icon: 'fas fa-water',
-    class: 'moisture-card'
-  },
-  {
-    title: 'Light Level',
-    value: '300 lux',
-    icon: 'fas fa-sun',
-    class: 'light-card'
+import { ref,onMounted } from 'vue';
+import { useRoute } from 'vue-router';
+
+const router= useRoute();
+const data = ref([]);
+
+const getData = async () => {
+  try {
+    const result = await fetch('../../Database/data.json'); 
+    data.value = await result.json();
+  } catch (error) {
+    console.error('Errors :', error);
   }
-]);
+};
+
+onMounted(getData);
 
 const logout = async () => {
     localStorage.removeItem("user");
