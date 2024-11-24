@@ -4,14 +4,6 @@
 
 <template>
   <main id="agri-dashboard">
-    <nav class="navbar">
-        <div class="logo">Greenhouse</div>
-        <ul class="nav-links">
-          <li><router-link to="/overview">Overview</router-link></li>
-          <li><router-link to="/settings">Settings</router-link></li>
-          <li><a @click="logout">Logout</a></li>
-        </ul>
-      </nav>
     <section class="intro-section">
       <div class="branding">
         <h1 class="app-title">EcoGrow Home Page </h1>

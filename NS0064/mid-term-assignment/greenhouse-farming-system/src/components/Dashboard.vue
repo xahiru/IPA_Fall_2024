@@ -4,6 +4,7 @@
       <nav class="navbar">
         <div class="logo">Greenhouse</div>
         <ul class="nav-links">
+          <li><router-link to="/">Home</router-link></li>
           <li><router-link to="/dashboard">Dashboard</router-link></li>
           <li><router-link to="/overview">Overview</router-link></li>
           <li><router-link to="/settings">Settings</router-link></li>
@@ -106,12 +107,13 @@ a:hover{
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 1.5rem;
+  gap: 30px;
 }
 
 .nav-links a {
   color: #ffffff;
   text-decoration: none;
+  font-size: 1.1rem;
   font-weight: 500;
 }
 
