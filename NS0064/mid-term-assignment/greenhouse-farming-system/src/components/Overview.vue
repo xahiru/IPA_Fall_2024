@@ -22,8 +22,9 @@ onMounted(getData);
       <div class="logo">Greenhouse</div>
       <ul class="nav-links">
         <li><router-link to="/dashboard">Dashboard</router-link></li>
+        <li><router-link to="/overview">Overview</router-link></li>
         <li><router-link to="/settings">Settings</router-link></li>
-        <li><router-link to="/logs">Logout</router-link></li>
+        <li><a @click="logout">Logout</a></li>
       </ul>
     </nav>
 
