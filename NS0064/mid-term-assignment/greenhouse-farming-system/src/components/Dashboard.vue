@@ -67,8 +67,9 @@ const logout = async () => {
 
 body {
   font-family: 'Roboto', sans-serif;
-  background: #f5f5f7;
+  background: #f4f6f9;
   color: #333;
+  padding-top: 70px;
 }
 a:hover{
   cursor: pointer;
@@ -80,23 +81,25 @@ a:hover{
 }
 
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  background-color: #003366;
-  color: #ffffff;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  background: #2d3e50;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   z-index: 100;
+  overflow-x: auto;
 }
 
 .logo {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: bold;
+  letter-spacing: 1px;
 }
 
 .nav-links {
@@ -124,7 +127,7 @@ main {
 header h1 {
   font-size: 2.2rem;
   font-weight: bold;
-  color: #003366;
+  color: #34495e;
 }
 
 header p {

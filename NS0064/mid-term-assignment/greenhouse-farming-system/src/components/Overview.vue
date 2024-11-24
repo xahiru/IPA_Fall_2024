@@ -98,8 +98,10 @@ body {
   overflow-x: auto;
 }
 
-header h1{
-    margin-top: 20px;
+header h1 {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #003366;
 }
 .logo {
   font-size: 1.8rem;
@@ -126,7 +128,9 @@ header h1{
 }
 
 main {
-  padding: 2rem 3rem;
+  padding: 2rem;
+  margin-top: 80px;
+  flex: 1;
 }
 
 header h1 {
