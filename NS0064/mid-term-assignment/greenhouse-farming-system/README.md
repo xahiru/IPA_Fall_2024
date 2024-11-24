@@ -20,4 +20,5 @@ Workflow
 19. used v-for to show cards data
 20. add router guards for dashboard authentication
 21. create overview page, and complete the structures and style
-22.
+22. complete the logout functionality
+23. 
