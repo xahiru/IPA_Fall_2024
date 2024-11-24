@@ -1,12 +1,19 @@
 <script setup>
-  import { ref } from 'vue';
+  import { ref, onMounted } from 'vue';
 
-  const metrics = ref([
-    { label: 'Temperature', value: 24, class: 'temperature-card' },
-    { label: 'Humidity', value: 65, class: 'humidity-card' },
-    { label: 'Soil Moisture', value: 45, class: 'moisture-card' },
-    { label: 'Light Level', value: 300, class: 'light-card' }
-  ]);
+  const data = ref([]);
+
+const getData = async () => {
+  try {
+    const result = await fetch('../../Database/data.json'); 
+    data.value = await result.json();
+  } catch (error) {
+    console.error('Errors :', error);
+  }
+};
+
+onMounted(getData);
+
 </script>
 
 <template>
@@ -27,9 +34,13 @@
       </header>
 
       <section class="overview-metrics">
-        <div v-for="(metric, index) in metrics" :key="index" :class="['overview-card', metric.class]">
-          <h2>{{ metric.label }}</h2>
-          <p>{{ metric.value }}</p>
+        <div 
+          v-for="(data, index) in data" 
+          :key="index" 
+          class="card" 
+        >
+          <h2>{{ data.title }}</h2>
+          <p>{{ data.value }}</p>
         </div>
       </section>
 
