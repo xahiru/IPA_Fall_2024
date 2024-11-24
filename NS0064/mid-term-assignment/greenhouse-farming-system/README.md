@@ -21,4 +21,7 @@ Workflow
 20. add router guards for dashboard authentication
 21. create overview page, and complete the structures and style
 22. complete the logout functionality
-23. 
+23. create a component for setting page
+24. fetch the data shown in the dashboard form database
+25. fetch the data for overview page also
+26. 
