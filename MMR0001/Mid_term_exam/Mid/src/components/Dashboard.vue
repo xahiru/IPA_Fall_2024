@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
-
+import Navbar from './Navbar.vue';
 
 const router = useRouter();
 const metrics = ref([]);

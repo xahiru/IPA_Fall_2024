@@ -1,7 +1,7 @@
 
 <script setup>
   import { ref } from 'vue';
-  
+  import Navbar from './Navbar.vue';
   
   const temperature = ref(24); 
   const humidity = ref(65); 

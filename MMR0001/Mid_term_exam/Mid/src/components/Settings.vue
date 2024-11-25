@@ -1,6 +1,6 @@
 <script setup>
 import { reactive, onMounted, watch, onUnmounted } from 'vue';
-
+import Navbar from './Navbar.vue';
 const settings = reactive({
     temperatureThreshold: 30,
     humidityThreshold: 60,
@@ -95,7 +95,7 @@ watch(
 <template>
   <div id="settings">
     <Navbar />
-    <h1 class="title">Settings Panel</h1>
+    <h1 class="title">Settings</h1>
     <p class="subtitle">Set thresholds and control alerts dynamically.</p>
 
     <form class="settings-form" @submit.prevent="saveSettings">
