@@ -24,11 +24,6 @@ const afterLogin = () => {
     
       <section class="info-section">
         <p>Welcome to our Greenhouse Farming System, designed to help you monitor, control, and optimize your greenhouse environment</p>
-        <ul class="features-list">
-          <li>Real-time temperature and humidity monitoring</li>
-          <li>Automated irrigation and lighting controls</li>
-          <li>Data analytics for optimal crop growth</li>
-        </ul>
       </section>
       
       <div class="buttons">
@@ -43,110 +38,103 @@ const afterLogin = () => {
 </template>
 
 <style scoped>
-#body{
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+#body {
+  font-family: 'Arial', sans-serif;
+  background-color: #21153a; 
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-body {
-  font-family: 'Roboto', sans-serif;
-  background: linear-gradient(135deg, #88d8b0, #56ab2f);
-  color: #333;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   height: 100vh;
   margin: 0;
 }
 
+
 .home {
   text-align: center;
-  background: #ffffff;
-  padding: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
   border-radius: 15px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  width: 80%;
   max-width: 500px;
-  width: 100%;
 }
 
-.header {
-  margin-bottom: 30px;
-}
-
-.title {
+.header .title {
   font-size: 2.5rem;
-  color: #2c3e50;
   margin-bottom: 10px;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 }
 
-.subtitle {
+.header .subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: #f0f0f0;
+}
+
+.info-section p {
   font-size: 1rem;
-  color: #7f8c8d;
-}
-
-.info-section {
-  font-size: 0.95rem;
-  color: #4d4d4d;
+  margin-bottom: 20px;
   line-height: 1.5;
-  margin: 20px 0;
-}
-
-.features-list {
-  list-style-type: none;
-  padding: 0;
-  margin: 15px 0;
-}
-
-.features-list li {
-  background: #e0f7e0;
-  padding: 8px;
-  border-radius: 5px;
-  margin-bottom: 8px;
+  color: #e0e0e0;
 }
 
 .buttons {
   display: flex;
-  gap: 20px;
-  justify-content: center;
-  margin-top: 25px;
+  justify-content: space-evenly;
+  gap: 10px;
 }
 
 .button {
-  padding: 12px 28px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: white;
+  display: inline-block;
+  padding: 10px 20px;
   border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
   cursor: pointer;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-}
-
-.button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s, transform 0.2s;
 }
 
 .login-button {
-  background-color: #3498db;
-  text-decoration: none;
+  background-color: #2b580c;
+  color: white;
 }
 
 .signup-button {
-  background-color: #2ecc71;
-  text-decoration: none;
+  background-color: #88cc88;
+  color: white;
+}
+
+.button:hover {
+  transform: scale(1.05);
+}
+
+.button:active {
+  transform: scale(0.98);
 }
 
 .login-button:hover {
-  background-color: #2980b9;
+  background-color: #102edb;
 }
 
 .signup-button:hover {
-  background-color: #27ae60;
+  background-color: #1a2996;
 }
 
+@media (max-width: 600px) {
+  .header .title {
+    font-size: 2rem;
+  }
+
+  .header .subtitle {
+    font-size: 1rem;
+  }
+
+  .button {
+    font-size: 0.9rem;
+    padding: 8px 15px;
+  }
+}
 </style>

@@ -38,117 +38,97 @@ const logout = async () => {
 </template>
 
 <style scoped>
+
 .navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1.2rem 2rem;
-  background: #2d3e50;
+  background-color: #2b580c; 
+  padding: 10px 20px;
   color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  z-index: 100;
-}
-a:hover{
-    cursor: pointer;
-}
-.navbar-content {
-  width: 100%;
-  max-width: 1200px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: relative;
+  z-index: 1000;
+}
+
+.navbar-content {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .logo {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  letter-spacing: 1px;
 }
 
 .nav-links {
-  list-style: none;
   display: flex;
-  gap: 30px;
-  transition: all 0.3s ease-in-out;
+  list-style: none;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
 }
 
-.nav-links li a {
+.nav-links li {
+  display: inline-block;
+}
+
+.nav-links a {
   text-decoration: none;
   color: white;
-  font-size: 1.1rem;
-  font-weight: 500;
-  transition: color 0.3s ease;
+  font-size: 1rem;
+  transition: color 0.3s;
 }
 
-.nav-links li a:hover {
-  color: #3498db;
+.nav-links a:hover {
+  color: #a3d9a5; 
 }
 
 .phone {
   display: none;
   flex-direction: column;
-  gap: 5px;
+  justify-content: space-around;
+  height: 24px;
+  width: 30px;
   background: none;
   border: none;
   cursor: pointer;
 }
 
 .phone .bar {
-  width: 25px;
+  width: 100%;
   height: 3px;
-  background: white;
+  background-color: white;
   border-radius: 2px;
+  transition: 0.3s ease-in-out;
 }
 
 @media (max-width: 768px) {
-  .hamburger {
+  .phone {
     display: flex;
   }
 
   .nav-links {
+    display: none;
     position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
+    top: 60px;
+    right: 0;
+    background-color: #2b580c;
     flex-direction: column;
-    gap: 15px;
-    background: #2d3e50;
-    text-align: center;
-    transform: translateY(-200%);
-    opacity: 0;
-    pointer-events: none;
+    gap: 10px;
+    padding: 20px;
+    border-radius: 0 0 10px 10px;
+    width: 100%;
   }
 
   .nav-links.show {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: all;
+    display: flex;
   }
 
-  .nav-links li a {
-    font-size: 1rem;
-  }
-
-  .logo {
-    font-size: 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .logo {
-    font-size: 1.2rem;
-  }
-
-  .nav-links li a {
-    font-size: 0.9rem;
-  }
-
-  .phone .bar {
-    width: 20px;
+  .nav-links li {
+    text-align: center;
+    width: 100%;
   }
 }
 </style>

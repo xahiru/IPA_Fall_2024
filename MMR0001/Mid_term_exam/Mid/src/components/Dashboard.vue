@@ -96,212 +96,118 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
 body {
-  font-family: 'Roboto', sans-serif;
-  background: #f4f6f9;
-  color: #333;
-  padding-top: 70px;
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f4f7f6; 
+  color: #333; 
 }
 
 .navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.2rem 2rem;
-  background: #2d3e50;
+  background-color: #2b580c; 
   color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  z-index: 100;
-  overflow-x: auto;
+  padding: 10px 20px;
 }
-a:hover{
-  cursor: pointer;
-}
-.logo {
-  font-size: 1.8rem;
+
+.navbar .logo {
+  font-size: 1.5rem;
   font-weight: bold;
-  letter-spacing: 1px;
 }
 
 .nav-links {
   list-style: none;
   display: flex;
-  gap: 30px;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
 }
 
-.nav-links li a {
-  text-decoration: none;
+.nav-links li {
+  font-size: 1rem;
+}
+
+.nav-links a {
   color: white;
-  font-size: 1.1rem;
-  font-weight: 500;
-  transition: color 0.3s ease;
+  text-decoration: none;
+  transition: color 0.3s;
 }
 
-.nav-links li a:hover {
-  color: #3498db;
+.nav-links a:hover {
+  color: #a3d9a5; 
 }
 
 main {
-  padding: 2rem 3rem;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 header h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #34495e;
+  font-size: 2rem;
   margin-bottom: 10px;
 }
 
 header p {
-  font-size: 1.1rem;
-  color: #7f8c8d;
-  font-weight: 300;
+  font-size: 1.2rem;
+  color: #666;
 }
 
 .metrics {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 30px;
-  margin-top: 30px;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
 }
 
 .card {
-  padding: 1.8rem;
+  background-color: white;
   border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
   text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
 }
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-}
-
 
 .card h2 {
   font-size: 1.5rem;
   margin-bottom: 10px;
+  color: #2b580c;
 }
 
 .card p {
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 1.2rem;
+  color: #555;
 }
 
-.temperature-card {
-  border-left: 5px solid #e74c3c;
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background-color: var(--color, #2b580c); /* Default color */
+  border-radius: 10px 0 0 10px;
 }
 
-.humidity-card {
-  border-left: 5px solid #16a085;
-}
-
-.moisture-card {
-  border-left: 5px solid #f39c12;
-}
-
-.light-card {
-  border-left: 5px solid #3498db;
-}
-
-@media (max-width: 1024px) {
-  .metrics {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .navbar {
-    padding: 1.2rem 1.5rem;
-  }
-
-  .nav-links li a {
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .metrics {
-    grid-template-columns: 1fr;
-  }
-  .navbar li{
-    margin-left: 20px;
-  }
-  header h1 {
-    font-size: 2rem;
-  }
-  header h1 {
-    margin-top: 30px;
-  }
-  header p {
-    font-size: 1rem;
-  }
-
-  .card {
-    padding: 1.5rem;
-  }
-
-  .card h2 {
-    font-size: 1.3rem;
-  }
-
-  .card p {
-    font-size: 1.8rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1.2rem;
-  }
-
-  .navbar li{
-    margin-left: 20px;
-  }
-  .nav-links {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    max-width: 100%;
-    white-space: nowrap;
-  }
-
-  header h1 {
-    margin-top: 30px;
+@media (max-width: 600px) {
+  .navbar .logo {
+    font-size: 1.2rem;
   }
 
   .nav-links li {
-    flex-shrink: 0;
+    font-size: 0.9rem;
   }
 
-  .logo {
-    font-size: 1.6rem;
-    margin-bottom: 10px;
+  header h1 {
+    font-size: 1.5rem;
   }
 
-  .metrics {
-    margin-top: 20px;
-  }
-
-  .card {
-    padding: 1rem;
-  }
-
-  .card-icon {
-    font-size: 2rem;
+  header p {
+    font-size: 1rem;
   }
 
   .card h2 {
@@ -309,7 +215,7 @@ header p {
   }
 
   .card p {
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
 }
 </style>

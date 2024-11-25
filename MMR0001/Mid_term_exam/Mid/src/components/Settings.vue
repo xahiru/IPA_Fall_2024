@@ -158,88 +158,154 @@ watch(
 
 <style scoped>
 
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: #f7fafc; 
+  color: #333; 
+}
+
 #settings {
-  font-family: 'Roboto', sans-serif;
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
+.navbar {
+  background-color: #2b580c; 
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
 
-.title {
+.navbar .logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar ul li a {
+  text-decoration: none;
+  color: white;
+  transition: color 0.3s;
+}
+
+.navbar ul li a:hover {
+  color: #a3d9a5; 
+}
+
+h1.title {
   font-size: 2rem;
-  color: #34495e;
-  margin-bottom: 0.5rem;
+  margin-bottom: 10px;
   text-align: center;
+  color: #2b580c; 
 }
 
-.subtitle {
-  font-size: 1rem;
-  color: #7f8c8d;
-  margin-bottom: 2rem;
+p.subtitle {
+  font-size: 1.2rem;
   text-align: center;
+  color: #555;
+  margin-bottom: 20px;
 }
-
 
 .settings-form {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .form-group {
-  display: flex;
-  flex-direction: column;
+  margin-bottom: 20px;
 }
 
 label {
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-  color: #2c3e50;
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
 }
 
 .input-field {
+  width: 100%;
   padding: 10px;
   font-size: 1rem;
   border: 1px solid #ccc;
   border-radius: 5px;
-  outline: none;
 }
 
 .input-field:focus {
-  border-color: #3498db;
-  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+  outline: none;
+  border-color: #2b580c; 
 }
 
-
-.active-alert {
-  margin-top: 1.5rem;
-  padding: 1rem;
-  font-size: 1.2rem;
-  color: #ffffff;
-  background-color: #e74c3c;
-  border-radius: 5px;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
 }
 
+.toggle input[type='checkbox'] {
+  width: 20px;
+  height: 20px;
+}
 
-.button {
-  padding: 12px;
-  font-size: 1rem;
-  font-weight: 600;
+.save-button {
+  width: 100%;
+  padding: 10px 15px;
+  background-color: #2b580c;
   color: white;
-  background-color: #3498db;
+  font-size: 1.2rem;
+  font-weight: bold;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s;
 }
 
-.button:hover {
-  background-color: #2980b9;
+.save-button:hover {
+  background-color: #367c15; 
+}
+
+.active-alert {
+  margin-top: 20px;
+  padding: 10px 15px;
+  background-color: #ffe5e5; 
+  color: #b22222; 
+  border-left: 5px solid #b22222; 
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+@media (max-width: 600px) {
+  .settings-form {
+    padding: 15px;
+  }
+
+  h1.title {
+    font-size: 1.5rem;
+  }
+
+  p.subtitle {
+    font-size: 1rem;
+  }
+
+  .input-field, .save-button {
+    font-size: 1rem;
+  }
+
+  .active-alert {
+    font-size: 0.9rem;
+  }
 }
 </style>
