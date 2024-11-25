@@ -11,15 +11,12 @@
   <script>
   import Navbar from "@/components/Navbar.vue";
   import DashboardContent from "@/components/DashboardContent.vue";
-  import DataCard from "@/components/DataCard.vue";
-  import SettingsPanel from "@/components/SettingsPanel.vue";
+
   export default {
     name: "Dashboard",
     components: {
       Navbar,
       DashboardContent,
-      DataCard,
-      SettingsPanel,
     },
   };
   </script>
