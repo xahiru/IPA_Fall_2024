@@ -1,7 +1,7 @@
 <script setup>
     import { ref } from 'vue';
     import { login } from '../components/api';
-    import { useRoute } from 'vue-router';
+    
 
     const email = ref('');
     const password = ref('');

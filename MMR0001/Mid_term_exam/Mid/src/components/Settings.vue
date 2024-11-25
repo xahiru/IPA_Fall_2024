@@ -1,266 +1,245 @@
 <script setup>
-import { ref, onMounted, watch } from 'vue';
-import { useRouter } from 'vue-router';
+import { reactive, onMounted, watch, onUnmounted } from 'vue';
 
-const router = useRouter();
+const settings = reactive({
+    temperatureThreshold: 30,
+    humidityThreshold: 60,
+    lightThreshold: 200,
+    moistureThreshold: 50,
+    alertsEnabled: {
+        temperature: true,
+        humidity: true,
+        light: true,
+        moisture: true,
+    },
+    activeAlert: null,
+    simulationFrequency: 5000, 
+});
 
-const temperatureThreshold = ref(25);
-const humidityThreshold = ref(50);
-const soilMoistureThreshold = ref(40);
-const lightLevelThreshold = ref(500);
 
-const loadSettingsFromFile = async () => {
-    try {
-        const response = await fetch('/data.json');
-        const data = await response.json();
-        temperatureThreshold.value = data.temperatureThreshold;
-        humidityThreshold.value = data.humidityThreshold;
-        soilMoistureThreshold.value = data.soilMoistureThreshold;
-        lightLevelThreshold.value = data.lightLevelThreshold;
-    } catch (error) {
-        console.error('Error loading settings from JSON:', error);
+const saveSettings = () => {
+    localStorage.setItem('alertSettings', JSON.stringify(settings));
+    alert("Settings saved successfully!");
+};
+
+
+onMounted(() => {
+    const savedSettings = localStorage.getItem('alertSettings');
+    if (savedSettings) {
+        Object.assign(settings, JSON.parse(savedSettings));
+    }
+});
+
+
+const simulateData = () => {
+    const simulatedMetrics = [
+        { type: 'temperature', value: Math.random() * 50 }, 
+        { type: 'humidity', value: Math.random() * 100 },
+        { type: 'light', value: Math.random() * 300 },
+        { type: 'moisture', value: Math.random() * 100 },
+    ];
+
+    simulatedMetrics.forEach((metric) => {
+        const { type, value } = metric;
+
+        
+        if (type === 'temperature') {
+            console.log(`Temperature: ${value}, Threshold: ${settings.temperatureThreshold}`);
+        }
+
+        
+        if (settings.alertsEnabled[type] && value > settings[`${type}Threshold`]) {
+            settings.activeAlert = `⚠️ ${type.toUpperCase()} exceeded! Value: ${value.toFixed(
+                1
+            )}, Threshold: ${settings[`${type}Threshold`]}`;
+        }
+    });
+
+    
+    if (!simulatedMetrics.some(
+        (metric) => settings.alertsEnabled[metric.type] && metric.value > settings[`${metric.type}Threshold`]
+    )) {
+        settings.activeAlert = null;
     }
 };
 
-const saveSettings = () => {
-    const settings = {
-        temperatureThreshold: temperatureThreshold.value,
-        humidityThreshold: humidityThreshold.value,
-        soilMoistureThreshold: soilMoistureThreshold.value,
-        lightLevelThreshold: lightLevelThreshold.value,
-    };
-    localStorage.setItem('alertSettings', JSON.stringify(settings));
+
+let simulationInterval = null;
+const startSimulation = () => {
+    stopSimulation(); 
+    simulationInterval = setInterval(simulateData, settings.simulationFrequency);
 };
+
+const stopSimulation = () => {
+    if (simulationInterval) {
+        clearInterval(simulationInterval);
+        simulationInterval = null;
+    }
+};
+
+
+onMounted(startSimulation);
+
+
+onUnmounted(stopSimulation);
+
 
 watch(
-    [temperatureThreshold, humidityThreshold, soilMoistureThreshold, lightLevelThreshold],
-    saveSettings
+    () => settings.simulationFrequency,
+    () => {
+        startSimulation();
+    }
 );
-
-onMounted(() => {
-    loadSettingsFromFile();
-});
-
-const logout = async () => {
-    localStorage.removeItem("user");
-    router.push({ name: 'Login' });
-};
 </script>
 
 <template>
   <div id="settings">
-    <nav class="navbar">
-      <div class="logo">Greenhouse Settings</div>
-      <ul class="nav-links">
-        <li><router-link to="/dashboard">Home</router-link></li>
-        <li><router-link to="/over-view">Overview</router-link></li>
-        <li><router-link to="/settings">Settings</router-link></li>
-        <li><router-link to="/historical-data-chart">Logs</router-link></li>
-        <li><a @click="logout">Logout</a></li>
-      </ul>
-    </nav>
+    <Navbar />
+    <h1 class="title">Settings Panel</h1>
+    <p class="subtitle">Set thresholds and control alerts dynamically.</p>
 
-    <main>
-      <header>
-        <h1>Settings</h1>
-        <p>Adjust alert thresholds for greenhouse metrics</p>
-      </header>
+    <form class="settings-form" @submit.prevent="saveSettings">
 
-      <section class="settings-form">
-        <form @submit.prevent="saveSettings">
-          <div class="form-item">
-            <label for="temperatureThreshold">Temperature Threshold (°C):</label>
-            <input type="number" v-model="temperatureThreshold" id="temperatureThreshold" min="0" max="50" />
-          </div>
+      
+      <div class="form-group">
+        <label for="temperature">Temperature Threshold (°C):</label>
+        <input type="number" id="temperature" v-model="settings.temperatureThreshold" min="0" class="input-field" />
+        <div class="toggle">
+          <input type="checkbox" id="temperature-alert" v-model="settings.alertsEnabled.temperature" />
+          <label for="temperature-alert">Enable Temperature Alerts</label>
+        </div>
+      </div>
 
-          <div class="form-item">
-            <label for="humidityThreshold">Humidity Threshold (%):</label>
-            <input type="number" v-model="humidityThreshold" id="humidityThreshold" min="0" max="100" />
-          </div>
+      
+      <div class="form-group">
+        <label for="humidity">Humidity Threshold (%):</label>
+        <input type="number" id="humidity" v-model="settings.humidityThreshold" min="0" class="input-field" />
+        <div class="toggle">
+          <input type="checkbox" id="humidity-alert" v-model="settings.alertsEnabled.humidity" />
+          <label for="humidity-alert">Enable Humidity Alerts</label>
+        </div>
+      </div>
 
-          <div class="form-item">
-            <label for="soilMoistureThreshold">Soil Moisture Threshold (%):</label>
-            <input type="number" v-model="soilMoistureThreshold" id="soilMoistureThreshold" min="0" max="100" />
-          </div>
+      
+      <div class="form-group">
+        <label for="light">Light Threshold (lux):</label>
+        <input type="number" id="light" v-model="settings.lightThreshold" min="0" class="input-field" />
+        <div class="toggle">
+          <input type="checkbox" id="light-alert" v-model="settings.alertsEnabled.light" />
+          <label for="light-alert">Enable Light Alerts</label>
+        </div>
+      </div>
 
-          <div class="form-item">
-            <label for="lightLevelThreshold">Light Level Threshold (lux):</label>
-            <input type="number" v-model="lightLevelThreshold" id="lightLevelThreshold" min="0" max="2000" />
-          </div>
+      
+      <div class="form-group">
+        <label for="moisture">Moisture Threshold (%):</label>
+        <input type="number" id="moisture" v-model="settings.moistureThreshold" min="0" class="input-field" />
+        <div class="toggle">
+          <input type="checkbox" id="moisture-alert" v-model="settings.alertsEnabled.moisture" />
+          <label for="moisture-alert">Enable Moisture Alerts</label>
+        </div>
+      </div>
 
-          <button type="button" @click="saveSettings" class="save-btn">Save Settings</button>
-        </form>
-      </section>
-    </main>
+      
+      <div class="form-group">
+        <label for="frequency">Simulation Frequency (ms):</label>
+        <input type="number" id="frequency" v-model="settings.simulationFrequency" min="1000" class="input-field" />
+      </div>
+
+      <button type="submit" class="button save-button">Save Settings</button>
+    </form>
+
+    
+    <div v-if="settings.activeAlert" class="active-alert">
+      {{ settings.activeAlert }}
+    </div>
   </div>
 </template>
 
 <style scoped>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+
+#settings {
+  font-family: 'Roboto', sans-serif;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
-body {
-  font-family: 'Arial', sans-serif;
-  background: #f4f7fa;
-  color: #333;
-  padding-top: 70px;
+
+.title {
+  font-size: 2rem;
+  color: #34495e;
+  margin-bottom: 0.5rem;
+  text-align: center;
 }
 
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1.2rem 2rem;
-  background: #ffffff;
-  color: #333;
-  border-bottom: 1px solid #e0e0e0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  z-index: 100;
-}
-
-a:hover {
-  cursor: pointer;
-}
-
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
-
-.nav-links li a {
-  text-decoration: none;
-  color: #2c3e50;
+.subtitle {
   font-size: 1rem;
-  transition: color 0.3s ease;
+  color: #7f8c8d;
+  margin-bottom: 2rem;
+  text-align: center;
 }
 
-.nav-links li a:hover {
-  color: #8e44ad;
-}
-
-main {
-  padding: 2rem 3rem;
-}
-
-header h1 {
-  font-size: 2.2rem;
-  font-weight: 700;
-  color: #2c3e50;
-  margin-bottom: 5px;
-}
-
-header p {
-  font-size: 1rem;
-  color: #d7d7d7;
-  font-weight: 300;
-}
 
 .settings-form {
-  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
-.form-item {
-  margin-bottom: 1rem;
+.form-group {
+  display: flex;
+  flex-direction: column;
 }
 
 label {
-  display: block;
   font-size: 1rem;
-  color: #34495e;
-  margin-bottom: 5px;
+  margin-bottom: 0.5rem;
+  color: #2c3e50;
 }
 
-input[type="number"] {
-  width: 100%;
-  padding: 8px;
+.input-field {
+  padding: 10px;
   font-size: 1rem;
-  border: 1px solid #ddd;
-  border-radius: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
   outline: none;
-  transition: border 0.3s ease;
 }
 
-input[type="number"]:focus {
-  border-color: #392085;
+.input-field:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
 }
 
-.save-btn {
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
+
+.active-alert {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  font-size: 1.2rem;
   color: #ffffff;
-  background-color: #227b6c;
+  background-color: #e74c3c;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.button {
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  background-color: #3498db;
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.save-btn:hover {
-  background-color: #382589;
-}
-
-@media (max-width: 768px) {
-  .settings-form {
-    grid-template-columns: 1fr;
-  }
-
-  main {
-    padding: 1.5rem;
-  }
-
-  .navbar {
-    padding: 1.2rem 1.5rem;
-  }
-}
-
-@media (max-width: 500px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .nav-links {
-    gap: 10px;
-    overflow-x: auto;
-    max-width: 100%;
-  }
-
-  header h1 {
-    font-size: 1.8rem;
-  }
-
-  header p {
-    font-size: 0.9rem;
-  }
-
-  .settings-form {
-    margin-top: 20px;
-  }
-
-  .form-item {
-    padding: 1rem;
-  }
-
-  .form-item label {
-    font-size: 0.9rem;
-  }
-
-  .save-btn {
-    font-size: 0.9rem;
-  }
+.button:hover {
+  background-color: #2980b9;
 }
 </style>

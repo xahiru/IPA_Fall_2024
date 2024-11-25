@@ -2,6 +2,7 @@
 <script setup>
   import { ref } from 'vue';
   
+  
   const temperature = ref(24); 
   const humidity = ref(65); 
   const moisture = ref(45); 
