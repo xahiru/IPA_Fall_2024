@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My CV</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Make the body at least the height of the viewport */
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        main {
+            flex-grow: 1; /* This will allow the main content to expand */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centers content horizontally */
+            justify-content: center; /* Centers content vertically */
+            text-align: center; /* Centers the text inside the content */
+        }
+
+        img.avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%; /* Makes the image circular */
+            margin-top: 15px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="#personal">Personal Information</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="skills.html">Skills</a></li>
+        </ul>
+    </nav>
+
+    <main id="content">
+        <h1>My CV</h1>
+        <!-- Avatar image after the H1 tag -->
+        <img src="images/avatar.jpg" alt="Avatar" class="avatar">
+        
+        <h2>Personal Information</h2>
+        <p>Name: John Doe</p>
+        <p>Address: 123 Main St, Springfield, IL 62701</p>
+        <p>Phone: 217-555-1234</p>
+        <p>Email:
+            <a href="mailto:me@mail.com">me</a>
+        </p>
+        <p>
+            <a href="index_preline.html">Single Page Preline Sample</a>
+        </p>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 John Doe</p>
+    </footer>
+
+</body>
+</html>

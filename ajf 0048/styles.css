@@ -1,0 +1,129 @@
+body {
+    background-color: rgb(17, 16, 16);
+    font-weight: 300;
+    font-size: xx-large;
+    font-family: cursive, Geneva, Tahoma, sans-serif;
+    color: beige;
+    margin: 0;
+    background-image:linear-gradient(rgba(0, 0, 1, 0.37),#357bb573);
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-position:center;
+    background-size:cover;
+}
+main{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+h1{
+    color: beige;
+    font-style: italic;
+    font-size: larger;
+}
+h2{
+    color: beige;
+    font-size: larger;
+    font-style: italic;
+}
+h3{
+    color: beige;
+    font-size: larger;
+    font-style: italic;
+}
+h4{
+    color: beige;
+    font-size: larger;
+    font-style: italic;
+}
+.navbar ul{
+    list-style-type: none;
+    background-color: rgba(0, 0, 1, 0.37);
+    padding: 1%;
+    margin-left: 100px;
+    margin-right: 800px;
+    overflow: hidden;
+    text-align: center;
+}
+.navbar a{
+    color: antiquewhite;
+    text-decoration: none;
+    padding: 15px;
+    display: inline-block;
+    text-align: center;
+}
+.navbar a:hover{
+    background-color: rgba(0, 110, 255, 0.555);
+}
+.navbar li{
+    float: left;
+    text-align: center;
+}
+.hero{
+    width: 90%;
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+form{
+    width: 90%;
+    max-width: 600px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+.input.group{
+    margin-bottom: 30px;
+    position: relative;
+}
+input, textarea{
+    width: 500px;
+    height: 50px;
+    padding:10px;
+    outline:none;
+    border: 4px ridge #fff;
+    color: #fff;
+    background: transparent;
+    font-size: 15px;
+    margin-top: 5px;
+}
+label{
+    height: 0;
+    position: absolute;
+    padding: 10px;
+    color: #fff;
+    cursor: pointer;
+    transform: translateY(-50%);
+}
+.button{
+    padding: 10px 0;
+    color: #fff;
+    outline: none;
+    background:transparent;
+    border: 1px solid #fff;
+    width: 100%;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(0, 0, 1, 0.37);
+    transition-duration: 0.3s;
+
+}
+
+.hover-button:hover{
+    background-color: rgba(0, 0, 1, 0.37);
+    box-shadow: 0 0 5px deepskyblue,
+    0 0 25px deepskyblue,
+    0 0 50px deepskyblue
+    0 0 100px deepskyblue;
+}
+.error {
+    color: red;
+    font-size: 12px;
+}
+
+.success {
+    color: greenyellow;
+        
+  }
