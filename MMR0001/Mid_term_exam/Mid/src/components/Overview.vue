@@ -1,7 +1,6 @@
 
 <script setup>
   import { ref } from 'vue';
-  import Navbar from './Navbar.vue';
   
   const temperature = ref(24); 
   const humidity = ref(65); 
@@ -54,116 +53,123 @@
   <style scoped>
 
 body {
-  margin: 0;
-  font-family: 'Arial', sans-serif;
-  background-color: #f4f7f6; 
-  color: #333; 
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-top: 20px;
+    color: #2e7d32; 
+}
+
+p {
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 20px;
 }
 
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #2b580c; 
-  color: white;
-  padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2e7d32;
+    padding: 10px 20px;
+    color: white;
 }
 
 .navbar .logo {
-  font-size: 1.5rem;
-  font-weight: bold;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 15px;
-  margin: 0;
-  padding: 0;
+.navbar .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
 }
 
-.nav-links li {
-  font-size: 1rem;
+.navbar .nav-links li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
-.nav-links a {
-  color: white;
-  text-decoration: none;
-  transition: color 0.3s;
+.navbar .nav-links li a:hover {
+    background-color: #1b5e20;
 }
 
-.nav-links a:hover {
-  color: #a3d9a5; 
-}
-
-main {
-  padding: 20px;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-header h1 {
-  font-size: 2rem;
-  margin-bottom: 10px;
+header {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px 10px;
 }
 
 header p {
-  font-size: 1.2rem;
-  color: #666;
-  margin-bottom: 20px;
-  line-height: 1.5;
+    font-size: 1rem;
+    color: #555;
 }
 
 .articles {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 0 15px;
 }
 
-article {
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  text-align: left;
-  position: relative;
+.articles article {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-article h2 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-  color: #2b580c; 
-}
-
-article p {
-  font-size: 1rem;
-  color: #555;
-  line-height: 1.6;
-}
-
-@media (max-width: 600px) {
-  .navbar .logo {
-    font-size: 1.2rem;
-  }
-
-  .nav-links li {
-    font-size: 0.9rem;
-  }
-
-  header h1 {
+.articles article h2 {
+    color: #2e7d32;
+    margin-bottom: 10px;
     font-size: 1.5rem;
-  }
-
-  header p {
-    font-size: 1rem;
-  }
-
-  article h2 {
-    font-size: 1.2rem;
-  }
-
-  article p {
-    font-size: 0.9rem;
-  }
 }
+
+.articles article p {
+    margin-bottom: 0;
+    font-size: 1rem;
+    color: #555;
+}
+
+button,
+a {
+    background-color: #2e7d32;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+button:hover,
+a:hover {
+    background-color: #1b5e20;
+}
+
+@media (max-width: 768px) {
+    .navbar .nav-links {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .articles article {
+        padding: 15px;
+    }
+}
+
 </style>
