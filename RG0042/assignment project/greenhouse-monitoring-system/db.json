@@ -6,5 +6,15 @@
       "email": "rabbymolla2299@gmail.com",
       "password": "1234567890"
     }
+  ],
+
+  "sensorData": [
+    {
+      "id": 1,
+    "temperature": 25,
+    "humidity": 65,
+    "soilMoisture": 45,
+    "lightLevel": 300
+    }
   ]
 }

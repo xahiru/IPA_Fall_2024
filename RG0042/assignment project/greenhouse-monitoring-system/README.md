@@ -9,12 +9,12 @@
   npm install vite-plugin-vue-devtools --save-dev
 
 3.Install this dependence in future
-  A.Router
+   Router
     npm install vue-router@4
-  B.Tailwindcss
+   Tailwindcss
     npm install -D tailwindcss postcss autoprefixer
     npx tailwindcss init
-  C.Axios
+   Axios
     npm install axios
 
 4.Created Views Folder to add File 
@@ -48,6 +48,7 @@
  C.postcss.config.js
 
  Here is the commend to install this files:
+
    npm install -D tailwindcss postcss autoprefixer
    npx tailwindcss init
    npm install vite-plugin-vue-devtools --save-dev
@@ -57,6 +58,7 @@
    inside tailwind.config.js file we have theme section there we link our background images.
   
 10.installed json server globally
+
    npm install -g json-server
 
 11. installed Cors
