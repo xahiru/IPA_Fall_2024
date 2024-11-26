@@ -18,7 +18,7 @@ export default {
   name: "Navbar",
   data() {
     return {
-      menuOpen: false, // State to control mobile menu visibility
+      menuOpen: false,
     };
   },
   methods: {
@@ -26,8 +26,8 @@ export default {
       this.menuOpen = !this.menuOpen;
     },
     logout() {
-      localStorage.removeItem('isAuthenticated'); // Remove the auth flag
-      this.$router.push('/login'); // Redirect to login page
+      localStorage.removeItem('isAuthenticated');
+      this.$router.push('/login');
     },
   },
 };
@@ -120,7 +120,6 @@ export default {
     background-color: #3b82f6;
     width: 100%;
     display: none;
-    padding: 1rem;
     gap: 1rem;
   }
 
