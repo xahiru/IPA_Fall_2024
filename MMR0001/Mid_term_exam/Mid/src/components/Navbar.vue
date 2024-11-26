@@ -26,11 +26,9 @@ const logout = async () => {
         <span class="bar"></span>
       </button>
       <ul :class="['nav-links', { 'show': isMenuOpen }]">
-        <li><router-link to="/" @click="isMenuOpen = false">Home</router-link></li>
+        <li><router-link to="/dashboard" @click="isMenuOpen = false">Home</router-link></li>
         <li><router-link to="/dashboard" @click="isMenuOpen = false">Dashboard</router-link></li>
         <li><router-link to="/over-view" @click="isMenuOpen = false">Overview</router-link></li>
-        <li><router-link to="/settings" @click="isMenuOpen = false">Settings</router-link></li>
-        <li><router-link to="/historical-data-chart" @click="isMenuOpen = false">Logs</router-link></li>
         <li><a @click="logout">Logout</a></li>
       </ul>
     </div>

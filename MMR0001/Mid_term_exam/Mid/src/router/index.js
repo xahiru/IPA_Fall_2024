@@ -43,7 +43,7 @@ import Settings from '../components/Settings.vue';
 		meta: { requiresAuth: true }
 	  },
 	
-	  
+	
 	];
 
 	const router = createRouter({

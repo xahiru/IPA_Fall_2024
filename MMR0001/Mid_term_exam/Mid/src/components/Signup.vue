@@ -28,7 +28,7 @@ const signup_page = async () => {
         <div class="login-page">
             <header class="header">
               <h1 class="title">Greenhouse Farming System</h1>
-              <p class="subtitle">Login to access your dashboard</p>
+              <p class="subtitle">Signup to create an account</p>
             </header>
           
             <form class="login-form" @submit.prevent="signup_page">

@@ -122,7 +122,7 @@
 .signup-prompt {
   margin-top: 10px;
   
-  color: #162406;
+  color: #f0f0f0;
 }
 
 .signup-link a {
