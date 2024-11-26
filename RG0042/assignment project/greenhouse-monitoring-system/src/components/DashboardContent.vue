@@ -1,5 +1,5 @@
 <template>
-  <div class="content-container">
+  <div>
     <div class="header">
       <h2>📊 Dashboard Overview</h2>
       <p class="subtitle">Monitor environmental metrics in real-time</p>
@@ -65,9 +65,9 @@ export default {
   data() {
     return {
       thresholds: {
-        temperature: 28,
-        humidity: 65,
-        soilMoisture: 40,
+        temperature: 23,
+        humidity: 60,
+        soilMoisture: 45,
         lightLevel: 300,
       },
     };
@@ -77,50 +77,37 @@ export default {
 
 <style scoped>
 .header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+}
+
+.header h2 {
+  font-size: 2rem;
+  color: #2c3e50;
+  font-weight: bold;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #7f8c8d;
 }
 
 .cards-container {
-  width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-between;
   gap: 2rem;
+  margin-top: 2rem;
 }
 
 .row {
   display: flex;
-  justify-content: center;
   gap: 2rem;
-}
-
-.row > div {
-  flex: 1;
-  height: 200px;
-  max-width: 350px;
-}
-
-.row > div {
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.row > div:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 @media (max-width: 768px) {
-  .header h2 {
-    font-size: 1.6rem;
-  }
-
   .cards-container {
     gap: 1.5rem;
   }
@@ -128,21 +115,6 @@ export default {
   .row {
     flex-direction: column;
     gap: 1.5rem;
-  }
-
-  .row > div {
-    max-width: 100%;
-    height: auto;
-  }
-}
-
-@media (max-width: 480px) {
-  .header h2 {
-    font-size: 1.4rem;
-  }
-
-  .content-container {
-    padding: 1rem;
   }
 }
 </style>
