@@ -92,15 +92,16 @@ import axios from 'axios';
     text-align: center;
     align-items: center;
     justify-content: center;
+    padding: 2rem;
   }
   .signup-container {
-    background-color: #ffffff2d;
+    background-color: #ffffff46;
     border: 1px solid #e5e7eb;
     border-radius: 8px;
     padding: 2rem;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     width: 100%;
-    max-width: 300px;
+    max-width: 325px;
   }
   p {
     color: white;
@@ -116,7 +117,7 @@ import axios from 'axios';
   }
   
   .btn-primary {
-    background-color: #0666ff;
+    background-color: #3b82f6;
     color: white;
     padding: 0.75rem;
     font-weight: bold;
@@ -127,6 +128,30 @@ import axios from 'axios';
   }
   
   .btn-primary:hover {
-    background-color: #0051ff;
+    background-color: #2563eb;
   }
+
+  @media (max-width: 640px) {
+  .signup-container {
+    padding: 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .input-field {
+    padding: 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .btn-primary {
+    padding: 0.65rem;
+    font-size: 0.875rem;
+  }
+
+  p {
+    font-size: 0.8rem;
+  }
+}
 </style>
