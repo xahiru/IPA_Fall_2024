@@ -1,37 +1,55 @@
 <template>
-  <div class="content">
-    <h2>Dashboard Overview</h2>
-    <div class="grid-container">
-      <DataCard
-        label="Temperature"
-        unit="°C"
-        :initialValue="23"
-        :min="10"
-        :max="15"
-        :warningThreshold="28"
-      />
-      <DataCard
-        label="Humidity"
-        unit="%"
-        :initialValue="65"
-        :min="60"
-        :max="80"
-        autoUpdate="true"
-      />
-      <DataCard
-        label="Soil Moisture"
-        unit="%"
-        :initialValue="45"
-        :min="40"
-        :max="60"
-      />
-      <DataCard
-        label="Light Level"
-        unit="lux"
-        :initialValue="300"
-        :min="100"
-        :max="250"
-      />
+  <div class="content-container">
+    <div class="header">
+      <h2>📊 Dashboard Overview</h2>
+      <p class="subtitle">Monitor environmental metrics in real-time</p>
+    </div>
+
+    <div class="cards-container">
+      <div class="row large-cards">
+        <DataCard
+          label="Temperature"
+          unit="°C"
+          :initialValue="23"
+          :min="20"
+          :max="30"
+          :warningThreshold="thresholds.temperature"
+          description="Real-time monitoring of room temperature."
+          icon="🌡️"
+        />
+        <DataCard
+          label="Humidity"
+          unit="%"
+          :initialValue="60"
+          :min="50"
+          :max="70"
+          :warningThreshold="thresholds.humidity"
+          description="Keeps track of air humidity for ideal conditions."
+          icon="💧"
+        />
+      </div>
+      <div class="row small-cards">
+        <DataCard
+          label="Soil Moisture"
+          unit="%"
+          :initialValue="45"
+          :min="40"
+          :max="50"
+          :warningThreshold="thresholds.soilMoisture"
+          description="Ensures soil has adequate water levels."
+          icon="🌱"
+        />
+        <DataCard
+          label="Light Level"
+          unit="lux"
+          :initialValue="300"
+          :min="200"
+          :max="350"
+          :warningThreshold="thresholds.lightLevel"
+          description="Measures light intensity for plant growth."
+          icon="💡"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -44,78 +62,86 @@ export default {
   components: {
     DataCard,
   },
+  data() {
+    return {
+      thresholds: {
+        temperature: 28,
+        humidity: 65,
+        soilMoisture: 40,
+        lightLevel: 300,
+      },
+    };
+  },
 };
 </script>
 
 <style scoped>
-.content {
-  padding: 2rem;
-  background-color: #f9f9f9;
-  min-height: 100vh; /* Ensure it covers the entire viewport height */
-  font-family: 'Roboto', sans-serif;
-  color: #333;
-}
-
-.content h2 {
-  font-size: 2rem;
-  color: #2c3e50;
-  margin-bottom: 1.5rem;
-  text-align: center;
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-  justify-content: center;
-  align-items: stretch;
-}
-
-.card {
-  background: linear-gradient(145deg, #ffffff, #e6e6e6);
-  box-shadow: 4px 4px 8px #d1d1d1, -4px -4px 8px #ffffff;
-  border-radius: 12px;
-  padding: 1.5rem;
-  text-align: center;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.header {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
-.card:hover {
+.cards-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.row > div {
+  flex: 1;
+  height: 200px;
+  max-width: 350px;
+}
+
+.row > div {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.row > div:hover {
   transform: translateY(-5px);
-  box-shadow: 6px 6px 12px #c0c0c0, -6px -6px 12px #ffffff;
-}
-
-.card span {
-  display: block;
-  font-size: 1.2rem;
-  font-weight: 500;
-  margin-top: 0.5rem;
-  color: #555;
-}
-
-.card strong {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #2c3e50;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 768px) {
-  .content {
-    padding: 1.5rem;
+  .header h2 {
+    font-size: 1.6rem;
   }
 
-  .grid-container {
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
+  .cards-container {
+    gap: 1.5rem;
   }
 
-  .card {
+  .row {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .row > div {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .header h2 {
+    font-size: 1.4rem;
+  }
+
+  .content-container {
     padding: 1rem;
   }
 }
