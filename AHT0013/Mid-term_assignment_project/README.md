@@ -27,7 +27,17 @@ Greenhouse Farming System Project Setup (Linux)
     data.json
 11. create a api folder in scr
     api.js (to handle the functionalities)
-12. 
+12. created a component for Logs.vue (update router)
+    write the structure and style for Logs
+    create logs.json
+13. install Chartjs & Vue Chartjs.
+    npm install chart.js vue-chartjs*
+    create a component folder for chaerts
+    create a SimpleLineChart.vue
+    create mockData.js
+    update Dashboard add chart
+14.  
+
 
 
 

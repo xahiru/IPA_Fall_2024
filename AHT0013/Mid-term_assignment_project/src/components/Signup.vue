@@ -54,7 +54,7 @@ const signup_page = async () => {
   
 body {
   font-family: 'Roboto', sans-serif;
-  background: linear-gradient(135deg, #18a0e9, #0d2495);
+  background:#195b88;
   color: #333;
   display: flex;
   align-items: center;

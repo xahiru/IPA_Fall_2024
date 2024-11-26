@@ -82,12 +82,12 @@ watch(
 <template>
   <div id="settings">
     <nav class="navbar">
-      <div class="logo">Greenhouse Dashboard</div>
+      <div class="logo">Greenhouse</div>
       <ul class="nav-links">
         <li><router-link to="/dashboard">Home</router-link></li>
         <li><router-link to="/over-view">Overview</router-link></li>
         <li><router-link to="/settings">Settings</router-link></li>
-        <li><router-link to="/historical-data-chart">Logs</router-link></li>
+        <li><router-link to="/logs">Logs</router-link></li>
         <li><a @click="logout">Logout</a></li>
       </ul>
     </nav>
@@ -145,33 +145,27 @@ watch(
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Arial', sans-serif;
-  background: #f4f7fa;
-  color: #333;
-  padding-top: 70px;
-}
-
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
+  height: 10%;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.2rem 2rem;
-  background: #ffffff;
+  background: rgb(255, 255, 255);
   color: #333;
-  border-bottom: 1px solid #e0e0e0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid #00000072;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.05);
   z-index: 100;
 }
 
 .logo {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
-  color: #2c3e50;
+  color: #000000;
 }
 
 .nav-links {
@@ -188,7 +182,7 @@ body {
 }
 
 .nav-links li a:hover {
-  color: #8e44ad;
+  color: #1d7f0b;
 }
 
 main {

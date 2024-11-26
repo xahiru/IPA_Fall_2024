@@ -1,72 +1,182 @@
-<script setup>
-import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-
-const router = useRouter();
-const metrics = ref([]);
-
-onMounted(() => {
-    const user = localStorage.getItem("user");
-    if (!user) {
-        router.push({ name: 'Login' });
-    }
-});
-
-const logout = async () => {
-    localStorage.removeItem("user");
-    router.push({ name: 'Login' });
-};
-
-const fetchData = async () => {
-  try {
-    const response = await fetch('../../DB/data.json'); 
-    metrics.value = await response.json();
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
-};
-
-onMounted(fetchData);
-</script>
-
 <template>
-  <div id="dashboard">
+  <div>
     <nav class="navbar">
-      <div class="logo">Greenhouse Dashboard</div>
+      <div class="logo">Greenhouse</div>
       <ul class="nav-links">
         <li><router-link to="/dashboard">Home</router-link></li>
         <li><router-link to="/over-view">Overview</router-link></li>
         <li><router-link to="/settings">Settings</router-link></li>
-        <li><router-link to="/historical-data-chart">Logs</router-link></li>
+        <li><router-link to="/logs">Logs</router-link></li>
         <li><a @click="logout">Logout</a></li>
       </ul>
     </nav>
 
-    <main>
+    <div class="dashboard">
       <header>
         <h1>Dashboard</h1>
         <p>Real-time Monitoring of Greenhouse Conditions</p>
       </header>
-
-      <section class="metrics">
-        <div 
-          v-for="(metric, index) in metrics" 
-          :key="index" 
-          class="card"
-        >
-          <div class="card-icon" :style="{ backgroundColor: metric.color + '20' }">
-            <span :style="{ color: metric.color }">📈</span>
+      <div>
+        <div class="metrics-grid">
+          <div class="metric-card">
+            <h3>🌡️ Temperature</h3>
+            <div class="metric-value">{{ sensorData.temperature }}°C</div>
+            <div class="status" :class="getStatusClass(sensorData.temperature, 'temperature', 18, 28)">
+              {{ getStatus(sensorData.temperature, 'temperature', 18, 28) }}
+            </div>
           </div>
-          <div class="card-content">
-            <h2>{{ metric.title }}</h2>
-            <p class="metric-value">{{ metric.value }}</p>
-            <p class="metric-label">Current Value</p>
+
+          <div class="metric-card">
+            <h3>💧 Humidity</h3>
+            <div class="metric-value">{{ sensorData.humidity }}%</div>
+            <div class="status" :class="getStatusClass(sensorData.humidity, 'humidity', 40, 80)">
+              {{ getStatus(sensorData.humidity, 'humidity', 40, 80) }}
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <h3>🌱 Soil Moisture</h3>
+            <div class="metric-value">{{ sensorData.soilMoisture }}%</div>
+            <div class="status" :class="getStatusClass(sensorData.soilMoisture, 'soil', 60, 90)">
+              {{ getStatus(sensorData.soilMoisture, 'soil', 60, 90) }}
+            </div>
+          </div>
+
+          <div class="metric-card">
+            <h3>☀️ Light Level</h3>
+            <div class="metric-value">{{ sensorData.lightLevel }} lux</div>
+            <div class="status" :class="getStatusClass(sensorData.lightLevel, 'light', 600, 1000)">
+              {{ getStatus(sensorData.lightLevel, 'light', 600, 1000) }}
+            </div>
           </div>
         </div>
-      </section>
-    </main>
+
+        <div class="charts-section">
+          <div class="chart-card">
+            <h3>Temperature History</h3>
+            <SimpleLineChart 
+              label="Temperature (°C)" 
+              :data="temperatureHistory"
+            />
+          </div>
+          <div class="chart-card">
+            <h3>Humidity History</h3>
+            <SimpleLineChart 
+              label="Humidity (%)" 
+              :data="humidityHistory"
+            />
+          </div>
+        </div>
+
+        <div class="update-info">
+          Last Updated: {{ lastUpdated }}
+        </div>
+      </div>
+    </div>
   </div>
 </template>
+
+
+<script>
+import { generateMockData } from '../../DB/mockData'
+import SimpleLineChart from './charts/SimpleLineChart.vue'
+
+export default {
+  name: 'DashboardView',
+  components: {
+    SimpleLineChart
+  },
+  data() {
+    return {
+      sensorData: {
+        temperature: 0,
+        humidity: 0,
+        soilMoisture: 0,
+        lightLevel: 0
+      },
+      temperatureHistory: [],
+      humidityHistory: [],
+      loading: true,
+      lastUpdated: '',
+      updateInterval: null
+    }
+  },
+  methods: {
+    getStatus(value, type, defaultMin, defaultMax) {
+      const saved = localStorage.getItem('alertSettings')
+      const settings = saved ? JSON.parse(saved) : {
+        temp: { min: defaultMin, max: defaultMax },
+        humidity: { min: 40, max: 80 }
+      }
+
+      let min, max;
+      if (type === 'temperature') {
+        min = settings.temp.min;
+        max = settings.temp.max;
+      } else if (type === 'humidity') {
+        min = settings.humidity.min;
+        max = settings.humidity.max;
+      } else {
+        min = defaultMin;
+        max = defaultMax;
+      }
+
+      if (value < min) return 'Low'
+      if (value > max) return 'High'
+      return 'Normal'
+    },
+    getStatusClass(value, type, defaultMin, defaultMax) {
+      const status = this.getStatus(value, type, defaultMin, defaultMax)
+      return `status-${status.toLowerCase()}`
+    },
+    async fetchData() {
+      try {
+        await new Promise(resolve => setTimeout(resolve, 500))
+        const data = generateMockData()
+        this.sensorData = data
+
+        this.temperatureHistory.push(data.temperature)
+        this.humidityHistory.push(data.humidity)
+
+        if (this.temperatureHistory.length > 5) {
+          this.temperatureHistory.shift()
+          this.humidityHistory.shift()
+        }
+
+        const now = new Date()
+        this.lastUpdated = now.toLocaleTimeString()
+        this.loading = false
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
+    },
+    logout() {
+      localStorage.clear()
+      this.$router.push('/login')
+    }
+  },
+  mounted() {
+    const saved = localStorage.getItem('alertSettings')
+    if (saved) {
+      console.log('Loaded saved settings:', JSON.parse(saved))
+    }
+
+    for (let i = 0; i < 5; i++) {
+      const data = generateMockData()
+      this.temperatureHistory.push(data.temperature)
+      this.humidityHistory.push(data.humidity)
+    }
+
+    this.fetchData()
+    this.updateInterval = setInterval(this.fetchData, 5000)
+  },
+  beforeUnmount() {
+    if (this.updateInterval) {
+      clearInterval(this.updateInterval)
+    }
+  }
+}
+</script>
 
 <style scoped>
 * {
@@ -75,37 +185,27 @@ onMounted(fetchData);
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Arial', sans-serif;
-  background: #f4f7fa;
-  color: #333;
-  padding-top: 70px;
-}
-
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
+  height: 10%;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.2rem 2rem;
-  background: #ffffff;
+  background: rgb(255, 255, 255);
   color: #333;
-  border-bottom: 1px solid #e0e0e0;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid #00000072;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.05);
   z-index: 100;
 }
 
-a:hover {
-  cursor: pointer;
-}
-
 .logo {
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-weight: bold;
-  color: #2c3e50;
+  color: #000000;
 }
 
 .nav-links {
@@ -122,9 +222,15 @@ a:hover {
 }
 
 .nav-links li a:hover {
-  color: #8e44ad;
+  color: #1d7f0b;
 }
 
+.metrics-grid {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 30px;
+}
 main {
   padding: 2rem 3rem;
 }
@@ -132,8 +238,8 @@ main {
 header h1 {
   font-size: 2.2rem;
   font-weight: 700;
-  color: #2c3e50;
-  margin-bottom: 5px;
+  color: #ffffff;
+  margin-top: 270px;
 }
 
 header p {
@@ -142,104 +248,77 @@ header p {
   font-weight: 300;
 }
 
-.metrics {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  margin-top: 30px;
-}
-
-.card {
-  display: flex;
-  align-items: center;
-  padding: 1.5rem;
+.metric-card {
+  display:block;
+  background-color: rgba(255, 255, 255, 0.26);
+  padding: 1rem;
+  height: 100px;
+  width: 300px;
   border-radius: 16px;
-  background: linear-gradient(135deg, #ffffff, #f7f9fc);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  text-align:center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-}
-
-.card-icon {
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  margin-right: 1.2rem;
-}
-
-.card-content h2 {
-  font-size: 1.2rem;
-  color: #34495e;
-  margin-bottom: 6px;
-}
-
 .metric-value {
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-right: auto;
   color: #2c3e50;
 }
 
-.metric-label {
-  font-size: 0.85rem;
-  color: #95a5a6;
-  margin-top: 6px;
+.status {
+  display: inline-block;
+  padding: 1px 10px;
+  border-radius: 4px;
+  font-size: 0.9em;
 }
 
-@media (max-width: 100px) {
-  .metrics {
-    grid-template-columns: 1fr;
-  }
-
-  main {
-    padding: 1.5rem;
-  }
-
-  .navbar {
-    padding: 1.2rem 1.5rem;
-  }
+.status-normal {
+  background-color: #28a745;
+  color: white;
 }
 
-@media (max-width: 100px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+.status-high {
+  background-color: #dc3545;
+  color: white;
+}
 
-  .nav-links {
-    gap: 10px;
-    overflow-x: auto;
-    max-width: 100%;
-  }
+.status-low {
+  background-color: #ffc107;
+  color: black;
+}
 
-  header h1 {
-    font-size: 1.8rem;
-  }
+.charts-section {
+  margin-top: 50px;
+  display: flex;
+  grid-template-columns: 1fr;
+  gap: 25px;
+}
 
-  header p {
-    font-size: 0.9rem;
-  }
+.chart-card {
+  background-color: rgba(255, 255, 255, 0.94);
+  color: #28a745;
+  height: 370px;
+  width: 300px;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 
-  .metrics {
-    margin-top: 20px;
-  }
+.update-info {
+  text-align:center;
+  margin-top: 5px;
+  color: #d4d4d4;
+  font-size: 0.7em;
+}
 
-  .card {
-    padding: 1rem;
-  }
+@media (min-width: 1024px) {
+  .charts-section {}
+}
 
-  .card-content h2 {
-    font-size: 1rem;
-  }
-
-  .metric-value {
-    font-size: 1.5rem;
+@media (max-width: 678px) {
+  .metrics-grid {
   }
 }
 </style>
