@@ -1,213 +1,259 @@
 <template>
-  <v-container fluid>
-    <!-- Control Panel -->
+  <v-container fluid class="dashboard-container">
+    <AlertSystem ref="alertSystem" />
+    
     <v-row>
-      <v-col cols="12">
-        <v-card class="mb-6">
-          <v-card-text>
-            <v-switch
-              v-model="autoRefresh"
-              label="Auto Refresh Data"
-              color="primary"
-               density="compact"
-            ></v-switch>
-            <v-select
-              v-model="refreshInterval"
-              :items="refreshOptions"
-              label="Refresh Interval"
-              :disabled="!autoRefresh"
-            ></v-select>
-          </v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-
-    <!-- Status Alert -->
-    <v-row>
-      <v-col cols="12">
-        <v-alert
-          v-if="isSystemActive"
-          color="success"
-          icon="mdi-check-circle"
+      <v-col cols="12" class="d-flex align-center justify-space-between">
+        <h1 class="text-h4 mb-6">Greenhouse Dashboard</h1>
+        <v-btn
+          color="primary"
+          @click="refreshData"
+          :loading="isLoading"
+          class="refresh-btn"
         >
-          System is running normally
-        </v-alert>
+          <v-icon left>mdi-refresh</v-icon>
+          Refresh Data
+        </v-btn>
       </v-col>
     </v-row>
 
-    <!-- Metric Cards -->
+
     <v-row>
-      <v-col 
-        v-for="(metric, index) in metricsList" 
-        :key="index"
-        cols="12" 
-        sm="6" 
-        md="4"
-        lg="4"
-      >
-        <v-card 
-          :class="['metric-card', {'alert': isMetricInDanger(metric)}]"
-          @click="showMetricDetails(metric)"
-        >
-          <v-card-text class="d-flex flex-column align-center pa-4">
-            <v-icon 
-              size="$vuetify.display.smAndDown ? 36 : 48"  
-              :color="metric.color" 
-              class="mb-2"
-            >
-              {{ metric.icon }}
-            </v-icon>
-            <div class="$vuetify.display.smAndDown ? 'text-h5' : 'text-h4' mb-2" >
-              {{ metric.value }}
-            </div>
-            <div class="text-subtitle-1">{{ metric.label }}</div>
-          </v-card-text>
-        </v-card>
+      <v-col v-for="metric in metrics" :key="metric.id" cols="12" md="4">
+        <MetricCards 
+          v-bind="metric" 
+          @threshold-exceeded="handleMetricAlert"
+          class="slide-in" 
+        />
       </v-col>
     </v-row>
 
-    <v-row>
-    <v-col cols="12" lg="8">
-      <MetricsChart />
-    </v-col>
-  </v-row>
+    <v-row class="mt-6">
+      <v-col cols="12">
+        <MetricCharts class="elevation-chart" />
+      </v-col>
+    </v-row>
 
     <!-- Metric Details Dialog -->
-    <v-dialog v-model="showDialog" max-width="500">
-      <v-card v-if="selectedMetric">
-        <v-card-title>{{ selectedMetric.label }} Details</v-card-title>
+    <v-dialog v-model="showDetailsDialog" max-width="600">
+      <v-card>
+        <v-card-title>{{ selectedMetric?.title }} Details</v-card-title>
         <v-card-text>
           <v-list>
             <v-list-item>
               <v-list-item-title>Current Value</v-list-item-title>
-              <v-list-item-subtitle>{{ selectedMetric.value }}</v-list-item-subtitle>
+              <v-list-item-subtitle>{{ selectedMetric?.value }}</v-list-item-subtitle>
             </v-list-item>
             <v-list-item>
-              <v-list-item-title>Status</v-list-item-title>
-              <v-list-item-subtitle>
-                <v-chip
-                  :color="isMetricInDanger(selectedMetric) ? 'error' : 'success'"
-                  small
-                >
-                  {{ isMetricInDanger(selectedMetric) ? 'Alert' : 'Normal' }}
-                </v-chip>
-              </v-list-item-subtitle>
+              <v-list-item-title>Trend</v-list-item-title>
+              <v-list-item-subtitle>{{ selectedMetric?.trend }}%</v-list-item-subtitle>
             </v-list-item>
           </v-list>
         </v-card-text>
       </v-card>
     </v-dialog>
 
-     <!-- Chart Section - Full width on mobile, responsive on larger screens -->
-     <v-row>
-      <v-col cols="12" lg="8">
-        <MetricCharts />
-      </v-col>
-    </v-row>
+
   </v-container>
 </template>
 
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue'
-import MetricCharts from '../MetricCharts.vue';
-import api from '../../services/api';
+import { ref } from 'vue'
+import AlertSystem from '../AlertSystem.vue';
+import MetricCards from '../MetricCards.vue'
+import MetricCharts from '../MetricCharts.vue'
+import { onMounted, onUnmounted } from 'vue'
+import { WebSocketService } from '../../services/websocket';
 
-const metrics = ref({})
-const isSystemActive = ref(true)
-const autoRefresh = ref(true)
-const refreshInterval = ref(5000)
-const showDialog = ref(false)
+const alertSystem = ref(null)
+const isLoading = ref(false)
+const showDetailsDialog = ref(false)
 const selectedMetric = ref(null)
-let intervalId
-
-const refreshOptions = [
-  { title: '5 seconds', value: 5000 },
-  { title: '10 seconds', value: 10000 },
-  { title: '30 seconds', value: 30000 }
-]
-
-const metricsList = computed(() => [
+const metrics = ref([
   {
-    label: 'Temperature',
-    value: `${metrics.value.temperature?.toFixed(1)}°C`,
+    id: 1,
+    title: 'Temperature',
+    value: '24°C',
     icon: 'mdi-thermometer',
-    color: 'error'
+    iconColor: '#FC466B',
+    trend: '+2.3',
+    thresholds: { warning: 28, critical: 32 }
   },
   {
-    label: 'Humidity',
-    value: `${metrics.value.humidity?.toFixed(1)}%`,
+    id: 2,
+    title: 'Humidity',
+    value: '65%',
     icon: 'mdi-water',
-    color: 'blue'
+    iconColor: '#00C9FF',
+    trend: '-1.5',
+    thresholds: { warning: 75, critical: 85 }
   },
   {
-    label: 'Soil Moisture',
-    value: `${metrics.value.soilMoisture?.toFixed(1)}%`,
-    icon: 'mdi-water-percent',
-    color: 'brown'
-  },
-  {
-    label: 'Light Level',
-    value: `${metrics.value.lightLevel?.toFixed(0)} lux`,
-    icon: 'mdi-white-balance-sunny',
-    color: 'orange'
-  },
-  {
-    label: 'CO2 Level',
-    value: `${metrics.value.co2Level?.toFixed(0)} ppm`,
+    id: 3,
+    title: 'CO2 Levels',
+    value: '450ppm',
     icon: 'mdi-molecule-co2',
-    color: 'grey-darken-1'
+    iconColor: '#92FE9D',
+    trend: '+0.8',
+    thresholds: { warning: 800, critical: 1000 }
   },
   {
-    label: 'Nutrient Level',
-    value: `${metrics.value.nutrientLevel?.toFixed(1)}%`,
-    icon: 'mdi-leaf',
-    color: 'green'
-  }
+    id: 4,
+    title: 'Soil Moisture',
+    value: '75%',
+    icon: 'mdi-water-percent',
+    iconColor: '#8B4513',
+    trend: '-2.1',
+    thresholds: { warning: 30, critical: 20 }
+  },
+  {
+    id: 5,
+    title: 'Air Quality',
+    value: '95/100',
+    icon: 'mdi-air-filter',
+    iconColor: '#98FB98',
+    trend: '+1.7',
+    thresholds: { warning: 60, critical: 40 }
+  },
+  {
+    id: 6,
+    title: 'Light Intensity',
+    value: '850 lux',
+    icon: 'mdi-white-balance-sunny',
+    iconColor: '#FFD700',
+    trend: '+4.2',
+    thresholds: { warning: 1000, critical: 1200 }
+  },
 ])
 
-const fetchMetrics = async () => {
-  const data = await api.getMetrics()
-  metrics.value = data
+const handleMetricAlert = (metric) => {
+  alertSystem.value?.addAlert({
+    type: metric.severity,
+    title: `${metric.title} Alert`,
+    message: metric.message,
+    actions: [
+      {
+        label: 'Adjust Settings',
+        color: 'primary',
+        handler: () => adjustMetricSettings(metric),
+        dismissOnAction: true
+      },
+      {
+        label: 'View Details',
+        color: 'secondary',
+        handler: () => showMetricDetails(metric)
+      }
+    ]
+  })
+}
+
+const refreshData = async () => {
+  isLoading.value = true
+  setTimeout(() => {
+    metrics.value = metrics.value.map(metric => ({
+      ...metric,
+      value: updateValue(metric.value),
+      trend: updateTrend()
+    }))
+    isLoading.value = false
+  }, 1000)
+}
+
+const updateValue = (currentValue) => {
+  const num = parseFloat(currentValue)
+  const variation = (Math.random() - 0.5) * 2
+  return `${(num + variation).toFixed(1)}${currentValue.replace(/[\d.]/g, '')}`
+}
+
+const updateTrend = () => {
+  return (Math.random() * 5 - 2.5).toFixed(1)
+}
+
+const adjustMetricSettings = (metric) => {
+  console.log(`Adjusting settings for ${metric.title}`)
 }
 
 const showMetricDetails = (metric) => {
   selectedMetric.value = metric
-  showDialog.value = true
+  showDetailsDialog.value = true
 }
-
-const isMetricInDanger = (metric) => {
-  if (!metric) return false
-  const thresholds = {
-    Temperature: 30,
-    Humidity: 80,
-    'Soil Moisture': 20
-  }
-  return thresholds[metric.label] && parseFloat(metric.value) > thresholds[metric.label]
-}
+const wsService = new WebSocketService()
 
 onMounted(() => {
-  fetchMetrics()
-  intervalId = setInterval(fetchMetrics, refreshInterval.value)
+  wsService.connect()
+  
+  metrics.value.forEach(metric => {
+    wsService.subscribe(metric.title.toLowerCase(), (value) => {
+      updateMetricValue(metric.id, value)
+    })
+  })
 })
 
-onUnmounted(() => {
-  if (intervalId) clearInterval(intervalId)
-})
+const updateMetricValue = (id, newValue) => {
+  const metric = metrics.value.find(m => m.id === id)
+  if (metric) {
+    const oldValue = parseFloat(metric.value)
+    metric.value = `${newValue}${metric.value.replace(/[\d.]/g, '')}`
+    metric.trend = ((newValue - oldValue) / oldValue * 100).toFixed(1)
+    checkThresholds(metric)
+  }
+
+}
+
+const checkThresholds = (metric) => {
+  const value = parseFloat(metric.value)
+  if (value >= metric.thresholds.critical) {
+    handleMetricAlert({
+      ...metric,
+      severity: 'error',
+      message: `${metric.title} has reached critical level: ${metric.value}`
+    })
+  } else if (value >= metric.thresholds.warning) {
+    handleMetricAlert({
+      ...metric,
+      severity: 'warning',
+      message: `${metric.title} is approaching warning level: ${metric.value}`
+    })
+  }
+}
 </script>
 
 <style scoped>
-.metric-card {
-  transition: all 0.3s ease;
-  cursor: pointer;
+.dashboard-container {
+  padding: 24px;
 }
 
-.metric-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+.elevation-chart {
+  animation: slideUp 0.6s ease-out;
 }
 
-.alert {
-  border: 2px solid red;
+.slide-in {
+  animation: slideIn 0.6s ease-out;
+}
+
+.refresh-btn {
+  transition: transform 0.3s ease;
+}
+
+.refresh-btn:hover {
+  transform: scale(1.05);
+}
+
+@keyframes slideUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(30px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.text-h4 {
+  background: linear-gradient(45deg, #FC466B, #3F5EFB);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
 }
 </style>

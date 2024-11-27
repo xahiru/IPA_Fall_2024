@@ -1,8 +1,8 @@
 <template>
-    <v-container fluid class="fill-height bg-grey-lighten-4">
-      <v-row align="center" justify="center">
+     <v-container fluid class="register-container">
+      <v-row justify="center" align="center" style="height: 100vh;">
         <v-col cols="12" sm="8" md="6" lg="4">
-          <v-card class="elevation-12">
+          <v-card class="register-card">
             <v-card-title class="text-h4 text-center pt-6">
               <v-icon size="36" color="primary" class="mr-2">mdi-account-plus</v-icon>
               Register
@@ -16,6 +16,7 @@
                   prepend-inner-icon="mdi-account"
                   required
                   :rules="nameRules"
+                   variant="outlined"
                   class="mb-4"
                 ></v-text-field>
   
@@ -27,6 +28,7 @@
                   required
                   :rules="emailRules"
                   class="mb-4"
+                  variant="outlined"
                 ></v-text-field>
   
                 <v-text-field
@@ -39,6 +41,7 @@
                   :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                   @click:append="showPassword = !showPassword"
                   class="mb-4"
+                  variant="outlined"
                 ></v-text-field>
   
                 <v-text-field
@@ -49,6 +52,7 @@
                   required
                   :rules="[...passwordRules, passwordMatch]"
                   class="mb-6"
+                  variant="outlined"
                 ></v-text-field>
   
                 <v-btn
@@ -57,17 +61,20 @@
                   block
                   size="large"
                   :loading="loading"
+                  class="mt-6 register-btn"
                 >
                   Register
                 </v-btn>
               </v-form>
             </v-card-text>
   
+            <div class="text-center mt-4">
             <v-card-text class="text-center pb-6">
               <router-link to="/login" class="text-decoration-none">
                 Already have an account? Login here
               </router-link>
             </v-card-text>
+          </div>
           </v-card>
         </v-col>
       </v-row>
@@ -117,3 +124,39 @@
     }, 1000)
   }
   </script>
+
+<style scoped>
+.register-background {
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+}
+
+.register-container {
+  background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.2));
+  backdrop-filter: blur(10px);
+}
+
+.register-card {
+  background: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 20px;
+}
+
+.gradient-text {
+  background: linear-gradient(45deg, #FC466B, #3F5EFB);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: bold;
+}
+
+.register-btn {
+  transition: transform 0.3s ease;
+}
+
+.register-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+</style>
