@@ -15,11 +15,11 @@ const afterLogin = () => {
     <div class="home-content">
       <header class="header">
         <h1 class="title">Greenhouse Farming System</h1>
-        <p class="subtitle">Empowering sustainable agriculture with technology</p>
+        <p class="subtitle"> sustainable agriculture with technology</p>
       </header>
 
       <section class="info-section">
-        <p>Welcome to the Greenhouse Farming System, your ultimate tool for optimizing and managing your greenhouse. Explore the features:</p>
+        <p>Welcome to the Greenhouse Farming System,  Explore the features:</p>
       </section>
 
       <div class="buttons">
