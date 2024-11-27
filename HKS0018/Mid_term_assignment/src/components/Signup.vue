@@ -1,179 +1,141 @@
 <template>
-  <div class="signup-container">
-    <div class="signup-card">
-      <h1>Sign Up</h1>
-      <form @submit.prevent="handleSignUp">
-        <div class="form-group">
-          <label for="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            v-model="username"
-            placeholder="Enter your username"
-            required
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            v-model="email"
-            placeholder="Enter your email"
-            required
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            v-model="password"
-            placeholder="Enter your password"
-            required
-          />
-        </div>
-
-        <div class="form-group">
-          <label for="confirmPassword">Confirm Password:</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            v-model="confirmPassword"
-            placeholder="Confirm your password"
-            required
-          />
-        </div>
-
-        <button type="submit">Sign Up</button>
-      </form>
-    </div>
+  <div class="signup-page">
+    <h1 class="title">Signup Form</h1>
+    <form @submit.prevent="signupPage" class="signup-form">
+      <input 
+        v-model="username" 
+        type="text" 
+        placeholder="Username" 
+        required 
+        class="input-field" 
+      />
+      <input 
+        v-model="email" 
+        type="email" 
+        placeholder="Email" 
+        required 
+        class="input-field" 
+      />
+      <input 
+        v-model="password" 
+        type="password" 
+        placeholder="Password" 
+        required 
+        class="input-field" 
+      />
+      <button type="submit" class="button">Signup</button>
+    </form>
+    <p class="prompt">
+      Already have an account? 
+      <router-link to="/login" class="link">Login</router-link>
+    </p>
   </div>
 </template>
 
-<script>
-export default {
-  name: "SignUp",
-  data() {
-    return {
-      username: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    };
-  },
-  methods: {
-    handleSignUp() {
-      if (this.username && this.email && this.password && this.confirmPassword) {
-        if (this.password === this.confirmPassword) {
-          alert(`Signing up with Username: ${this.username}, Email: ${this.email}`);
+<script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { signup } from '../api/api';
 
-          this.username = "";
-          this.email = "";
-          this.password = "";
-          this.confirmPassword = "";
+const username = ref('');
+const email = ref('');
+const password = ref('');
+const router = useRouter();
 
-          this.$router.push({ name: 'Login' });
-        } else {
-          alert("Passwords do not match.");
-        }
-      } else {
-        alert("Please fill in all fields.");
-      }
-    },
-  },
+const signupPage = async () => {
+  try {
+    const response = await signup(username.value, email.value, password.value);
+    if (response.success) {
+      router.push({ name: 'Dashboard' });
+    } else {
+      alert('Signup failed: ' + (response.error || 'Unknown error'));
+    }
+  } catch (error) {
+    alert('An error occurred during signup.');
+  }
 };
 </script>
 
 <style scoped>
-.signup-container {
+.signup-page {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  height: 100vh;
-  background-color: #f4f7fa;
-  font-family: 'Roboto', sans-serif;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  background: #0d1117; 
+  color: #c9d1d9;
+  border-radius: 10px;
 }
 
-.signup-card {
-  background-color: #fff;
-  padding: 40px;
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
   width: 100%;
   max-width: 400px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
 }
 
-h1 {
-  font-size: 2rem;
-  color: #42b983;
-  margin-bottom: 20px;
-  font-weight: 600;
-}
-
-.form-group {
-  margin-bottom: 20px;
-  text-align: left;
-}
-
-label {
-  font-size: 1rem;
-  color: #333;
-  font-weight: 500;
-  display: block;
-  margin-bottom: 8px;
-}
-
-input {
-  width: 100%;
+.input-field {
   padding: 12px;
   font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  transition: border-color 0.3s ease;
+  border: none;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
 }
 
-input:focus {
-  border-color: #42b983;
+.input-field::placeholder {
+  color: #b1b1b1;
+}
+
+.input-field:focus {
+  background: rgba(255, 255, 255, 0.3);
   outline: none;
 }
 
-button {
-  width: 100%;
-  padding: 14px;
-  background-color: #42b983;
-  color: white;
-  border: none;
-  border-radius: 6px;
-  font-weight: 600;
+.button {
+  padding: 12px;
   font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background-color: #238636;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-button:hover {
-  background-color: #369970;
-  transform: translateY(-3px);
+.button:hover {
+  background-color: #2ea043;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
-button:active {
-  transform: translateY(1px);
+.prompt {
+  margin-top: 20px;
+  color: #8b949e;
 }
 
-@media (max-width: 768px) {
-  .signup-card {
-    padding: 30px;
-  }
+.link {
+  color: #58a6ff;
+  text-decoration: underline;
+  cursor: pointer;
+}
 
-  h1 {
-    font-size: 1.75rem;
-  }
-
-  input, button {
-    padding: 10px;
-  }
+.link:hover {
+  color: #1f6feb;
 }
 </style>
