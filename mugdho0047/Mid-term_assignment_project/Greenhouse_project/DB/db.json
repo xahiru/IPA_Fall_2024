@@ -1,0 +1,17 @@
+{
+  "user": [
+    {
+      "id": "1d65",
+      "username": "mehedihasan",
+      "email": "mehedihasanynu@gmail.com",
+      "password": "12345"
+    },
+    {
+      "id": "68f3",
+      "username": "Mehedi Hasan Mugdho",
+      "email": "mehedihasanynu@gmail.com",
+      "password": "12345"
+    }
+  ],
+  "alertSettings": []
+}
