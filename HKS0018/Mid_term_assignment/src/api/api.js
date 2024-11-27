@@ -2,6 +2,8 @@ import axios from 'axios';
 
 const API_URL = "http://localhost:5173/user"; 
 
+
+//for signup funtionality
 export const signup = async (username, email, password) => {
   try {
     if (!username || !email || !password) {
@@ -25,6 +27,7 @@ export const signup = async (username, email, password) => {
   }
 };
 
+//for login functionality
 export const login = async (email, password) => {
   try {
     if (!email || !password) {
