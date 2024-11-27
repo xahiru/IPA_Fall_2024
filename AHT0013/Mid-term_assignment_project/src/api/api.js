@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const signup = async (username, email, password) => {
     try {
-        const result = await axios.post("http://localhost:3005/user", {
+        const result = await axios.post("http://localhost:3000/user", {
             username, email, password
         });
 
@@ -22,7 +22,7 @@ export const signup = async (username, email, password) => {
 
 export const login = async (email, password) => {
     try {
-        const result = await axios.get(`http://localhost:3005/user?email=${email}&password=${password}`);
+        const result = await axios.get(`http://localhost:3000/user?email=${email}&password=${password}`);
         
         if (result.data.length > 0) {
             localStorage.setItem("user", JSON.stringify(result.data[0]));

@@ -23,7 +23,7 @@ Greenhouse Farming System Project Setup (Linux)
    sudo npm install -g json-server*
 10. create a database folder
     db.json
-    json-server --watch db.json --port 3001*
+    json-server --watch db.json --port 3000*
     data.json
 11. create a api folder in scr
     api.js (to handle the functionalities)
