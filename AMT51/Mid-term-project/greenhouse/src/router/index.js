@@ -4,6 +4,7 @@ import Login from '../components/Login.vue';
 import Signup from '../components/Signup.vue';
 import Dashboard from '../components/Dashboard.vue';
 import Overview from '../components/Overview.vue';
+import Settings from '../components/Settings.vue';
 	const routes = [
 	  {
 	    path: '/',
@@ -30,6 +31,12 @@ import Overview from '../components/Overview.vue';
 	    path: '/over-view',
 	    name: 'Overview',
 	    component: Overview,
+		meta: { requiresAuth: true }
+	  },
+	  {
+	    path: '/settings',
+	    name: 'Settings',
+	    component: Settings,
 		meta: { requiresAuth: true }
 	  },
 	  
