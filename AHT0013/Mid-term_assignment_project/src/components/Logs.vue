@@ -123,8 +123,8 @@ main {
 header h1 {
   font-size: 2.2rem;
   font-weight: 700;
-  color: #2c3e50;
-  margin-bottom: 5px;
+  color: #ffffff;
+  margin-top: 350px;
 }
 
 header p {
@@ -137,7 +137,7 @@ header p {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
-  margin-top: 70px;
+  margin-top: 10px;
 }
 
 .log-card {
@@ -145,14 +145,14 @@ header p {
   align-items: center;
   padding: 1.5rem;
   border-radius: 16px;
-  background: linear-gradient(135deg, #ffffff, #f7f9fc);
+  background: linear-gradient(135deg, #ffffff3d, #ffffff67);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .log-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 15px 30px rgba(255, 255, 255, 0.15);
 }
 
 .log-card-icon {
@@ -167,28 +167,28 @@ header p {
 
 .log-card-content h2 {
   font-size: 1.2rem;
-  color: #34495e;
+  color: #ffffff;
   margin-bottom: 6px;
 }
 
 .log-time {
   font-size: 0.9rem;
-  color: #7f8c8d;
+  color: #ffffffcb;
 }
 
 .log-action, .log-user {
   font-size: 0.85rem;
-  color: #95a5a6;
+  color: #ffffff8d;
   margin-top: 6px;
 }
 
 @media (max-width: 768px) {
   .logs {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
   }
 
   main {
-    padding: 1.5rem;
+    padding: 1rem;
   }
 
   .navbar {

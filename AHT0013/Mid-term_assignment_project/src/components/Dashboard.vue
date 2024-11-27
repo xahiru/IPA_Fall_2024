@@ -256,7 +256,8 @@ header p {
   width: 300px;
   border-radius: 16px;
   text-align:center;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(4, 37, 1, 0.15);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -264,7 +265,7 @@ header p {
   font-size: 1.5em;
   font-weight: bold;
   margin-right: auto;
-  color: #2c3e50;
+  color: #121212;
 }
 
 .status {
@@ -314,11 +315,14 @@ header p {
 }
 
 @media (min-width: 1024px) {
-  .charts-section {}
-}
-
-@media (max-width: 678px) {
-  .metrics-grid {
+    .charts-section {
+      grid-template-columns: 1fr 1fr;
+    }
   }
+  
+  @media (max-width: 768px) {
+    .metrics-grid {
+      grid-template-columns: 1fr 1fr;
+    }
 }
 </style>

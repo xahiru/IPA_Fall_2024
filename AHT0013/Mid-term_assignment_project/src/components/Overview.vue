@@ -130,7 +130,7 @@ onMounted(fetchOverviewData);
 header h1 {
   font-size: 2.2rem;
   font-weight: 700;
-  color: #2c3e50;
+  color: #ffffff;
   margin-bottom: 5px;
 }
 
@@ -144,7 +144,7 @@ header p {
   font-size: 1rem;
   color: #2d2c2c;
   line-height: 1.6;
-  background-color: #fff;
+  background-color: #ffffffe0;
   padding: 1.5rem;
   border-radius: 8px;
   margin-top: 20px;
@@ -216,8 +216,8 @@ header p {
   }
 
   main {
-    padding: 1.5rem;
-  }
+  padding: 2rem 3rem;
+}
 
   .navbar {
     padding: 1.2rem 1.5rem;
@@ -225,6 +225,7 @@ header p {
 
   header h1 {
     font-size: 1.8rem;
+    margin-top: 50px;
   }
 
   header p,

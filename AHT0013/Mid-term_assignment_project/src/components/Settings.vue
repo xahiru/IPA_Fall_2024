@@ -1,86 +1,5 @@
-<script setup>
-import { reactive, onMounted, watch, onUnmounted } from 'vue';
-
-const settings = reactive({
-    temperatureThreshold: 30,
-    humidityThreshold: 60,
-    lightThreshold: 200,
-    moistureThreshold: 50,
-    alertsEnabled: {
-        temperature: true,
-        humidity: true,
-        light: true,
-        moisture: true,
-    },
-    activeAlert: null,
-    simulationFrequency: 5000,
-});
-
-const saveSettings = () => {
-    localStorage.setItem('alertSettings', JSON.stringify(settings));
-    alert("Settings saved successfully!");
-};
-
-onMounted(() => {
-    const savedSettings = localStorage.getItem('alertSettings');
-    if (savedSettings) {
-        Object.assign(settings, JSON.parse(savedSettings));
-    }
-});
-
-const simulateData = () => {
-    const simulatedMetrics = [
-        { type: 'temperature', value: Math.random() * 50 },
-        { type: 'humidity', value: Math.random() * 100 },
-        { type: 'light', value: Math.random() * 300 },
-        { type: 'moisture', value: Math.random() * 100 },
-    ];
-
-    simulatedMetrics.forEach((metric) => {
-        const { type, value } = metric;
-
-        if (settings.alertsEnabled[type] && value > settings[`${type}Threshold`]) {
-            settings.activeAlert = `⚠️ ${type.toUpperCase()} exceeded! Value: ${value.toFixed(
-                1
-            )}, Threshold: ${settings[`${type}Threshold`]}`;
-        }
-    });
-
-    if (
-        !simulatedMetrics.some(
-            (metric) => settings.alertsEnabled[metric.type] && metric.value > settings[`${metric.type}Threshold`]
-        )
-    ) {
-        settings.activeAlert = null;
-    }
-};
-
-let simulationInterval = null;
-const startSimulation = () => {
-    stopSimulation();
-    simulationInterval = setInterval(simulateData, settings.simulationFrequency);
-};
-
-const stopSimulation = () => {
-    if (simulationInterval) {
-        clearInterval(simulationInterval);
-        simulationInterval = null;
-    }
-};
-
-onMounted(startSimulation);
-onUnmounted(stopSimulation);
-
-watch(
-    () => settings.simulationFrequency,
-    () => {
-        startSimulation();
-    }
-);
-</script>
-
 <template>
-  <div id="settings">
+  <div>
     <nav class="navbar">
       <div class="logo">Greenhouse</div>
       <ul class="nav-links">
@@ -92,51 +11,99 @@ watch(
       </ul>
     </nav>
 
-    <main>
-      <header>
-
-      </header>
-
+    <div class="settings">
+      <h2>Alert Thresholds</h2>
       <form class="settings-form" @submit.prevent="saveSettings">
-        <div class="form-group" v-for="(threshold, key) in settings.alertsEnabled" :key="key">
-          <label :for="key">{{ key.charAt(0).toUpperCase() + key.slice(1) }}:</label>
-          <input
-            type="number"
-            :id="key"
-            v-model="settings[`${key}Threshold`]"
-            min="0"
-            class="input-field"
-          />
-          <div class="toggle">
-            <input
-              type="checkbox"
-              :id="`${key}-alert`"
-              v-model="settings.alertsEnabled[key]"
-            />
-            <label :for="`${key}-alert`">Enable {{ key.charAt(0).toUpperCase() + key.slice(1) }} Alerts</label>
+        <div class="form-group">
+          <label>Temperature Alert Range (°C)</label>
+          <div class="range-inputs">
+            <input 
+              type="number" 
+              v-model.number="settings.temp.min" 
+              placeholder="Min"
+              required
+            >
+            <span>to</span>
+            <input 
+              type="number" 
+              v-model.number="settings.temp.max" 
+              placeholder="Max"
+              required
+            >
+          </div>
+          <div class="current-value">
+            Current Range: {{ settings.temp.min }}°C - {{ settings.temp.max }}°C
           </div>
         </div>
-
+  
         <div class="form-group">
-          <label for="frequency">Simulation Frequency (ms):</label>
-          <input
-            type="number"
-            id="frequency"
-            v-model="settings.simulationFrequency"
-            min="1000"
-            class="input-field"
-          />
+          <label>Humidity Alert Range (%)</label>
+          <div class="range-inputs">
+            <input 
+              type="number" 
+              v-model.number="settings.humidity.min" 
+              placeholder="Min"
+              required
+            >
+            <span>to</span>
+            <input 
+              type="number" 
+              v-model.number="settings.humidity.max" 
+              placeholder="Max"
+              required
+            >
+          </div>
+          <div class="current-value">
+            Current Range: {{ settings.humidity.min }}% - {{ settings.humidity.max }}%
+          </div>
         </div>
-
-        <button type="submit" class="button save-button">Set thresholds and enable alerts for monitoring</button>
+  
+        <button type="submit">Save Settings</button>
       </form>
-
-      <div v-if="settings.activeAlert" class="active-alert">
-        {{ settings.activeAlert }}
-      </div>
-    </main>
+    </div>
   </div>
 </template>
+  
+<script>
+export default {
+  name: 'SettingsView',
+  data() {
+    return {
+      settings: {
+        temp: {
+          min: 18,
+          max: 28
+        },
+        humidity: {
+          min: 40,
+          max: 80
+        }
+      }
+    }
+  },
+  mounted() {
+    const saved = localStorage.getItem('alertSettings')
+    if (saved) {
+      this.settings = JSON.parse(saved)
+    }
+  },
+  methods: {
+    saveSettings() {
+      if (this.settings.temp.min >= this.settings.temp.max ||
+          this.settings.humidity.min >= this.settings.humidity.max) {
+        alert('Maximum value must be greater than minimum value')
+        return
+      }
+
+      localStorage.setItem('alertSettings', JSON.stringify(this.settings))
+      alert('Settings saved successfully!')
+    },
+    logout() {
+      alert('You have been logged out')
+    }
+  }
+}
+</script>
 
 <style scoped>
 * {
@@ -145,27 +112,37 @@ watch(
   box-sizing: border-box;
 }
 
+body {
+  font-family: 'Arial', sans-serif;
+  background: #f4f7fa;
+  color: #333;
+  padding-top: 70px;
+}
+
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
-  height: 10%;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.2rem 2rem;
-  background: rgb(255, 255, 255);
+  background: #ffffff;
   color: #333;
-  border-bottom: 1px solid #00000072;
-  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.05);
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
   z-index: 100;
 }
 
+a:hover {
+  cursor: pointer;
+}
+
 .logo {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  color: #000000;
+  color: #2c3e50;
 }
 
 .nav-links {
@@ -182,96 +159,64 @@ watch(
 }
 
 .nav-links li a:hover {
-  color: #1d7f0b;
+  color: #8e44ad;
 }
-
 main {
   padding: 2rem 3rem;
 }
 
-header h1 {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #2c3e50;
+.settings {
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
 }
-
-header p {
-  font-size: 1.2rem;
-  color: #000000;
+h2 {
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 20px;
 }
-
 .settings-form {
-  display: flex;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  flex-direction: column;
-  gap: 20px;
-  max-width: 1000px;
-  width: 100%;
-  margin: 0px auto;
-  margin-top: 70px;
+  background-color: #f8f9fada;
+  padding: 20px;
+  border-radius: 8px;
 }
-
 .form-group {
-  display: flex;
-  flex-direction: initial;
-  gap: 10px;
+  margin-bottom: 20px;
 }
-
 label {
-  font-size: 1rem;
-  color: #34495e;
+  display: block;
+  margin-bottom: 10px;
+  color: #2c3e50;
+  font-weight: bold;
 }
-
-.input-field {
-  padding: 0.4rem;
-  font-size: 1rem;
-  border: 1px solid #e0e0e0;
-  border-radius: 5px;
-  outline: none;
-  transition: border-color 0.3s ease;
-}
-
-.input-field:focus {
-  border-color: #8e44ad;
-}
-
-.toggle {
+.range-inputs {
   display: flex;
   align-items: center;
   gap: 10px;
+  margin-bottom: 5px;
 }
-
-.button {
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  font-weight: bold;
-  color: #ffffff;
-  background: #2ecc71;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s ease;
+input {
+  width: 100px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
 }
-
-.button:hover {
-  background: #27ae60;
-}
-
-.save-button {
-  align-self: center;
-}
-
-.active-alert {
+.current-value {
+  font-size: 0.9em;
+  color: #666;
   margin-top: 5px;
-  padding: 1rem;
-  font-size: 1.2rem;
-  color: #ffffff;
-  background: #ff0000;
-  border: 1px solid #ffffff;
-  border-radius: 10px;
+}
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+button:hover {
+  background-color: #45a049;
 }
 </style>

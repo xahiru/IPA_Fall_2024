@@ -36,9 +36,6 @@ Greenhouse Farming System Project Setup (Linux)
     create a SimpleLineChart.vue
     create mockData.js
     update Dashboard add chart
-14.  
 
 
-
-
-*Project Not Complete....
+*TUHIN MD ABUHAMZA - 20233120013
