@@ -1,0 +1,45 @@
+def initialize_list():
+    return []
+
+def insert_element (lst, element):
+    lst.append (element)
+
+def find_first_occurrence(lst, X):
+    if x in lst:
+        return lst.index(x)
+    return -1 
+def get_element_at_index(lst, index):
+if index < len(lst):
+return lst[index]
+return "Index out of range"
+# Delete an element from the list
+def delete_element (1st, element):
+if element in lst:
+lst.remove (element)
+else:
+print ("Element not found in the list")
+# Traverse and display elements in the list
+def traverse_list(lst):
+for element in lst:
+print (element)
+# Example usage
+if __name__=="__main__":
+# Initialize the list
+my_list = initialize_list ()
+# Insert elements
+insert_element (my_list, 10)
+insert_element (my_list, 20)
+insert_element (my_list, 30)
+# Traverse the list
+print( "List elements:")
+traverse_list (my_list)
+# Traverse the list
+print ("List elements:")
+traverse_list (my_list)
+# Find first occurrence of 20
+print (f"First occurrence of 20 is at index: {find_first_occurrence (my_list, 20)}")
+# Get element at index 1
+print (f"Element at index 1: {get_element_at_index (my_list, 1)}")
+# Delete element 20
+delete_element (my_list, 20) print ("List after deleting 20:")
+traverse_list(my_list)
