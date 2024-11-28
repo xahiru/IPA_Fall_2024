@@ -6,6 +6,7 @@ import Dashboard from '../components/Dashboard.vue';
 import Overview from '../components/Overview.vue';
 import Settings from '../components/Settings.vue';
 import HistoricalDataChart from '../components/HistoricalDataChart.vue';
+import ff from '../components/f.vue';
 	const routes = [
 	  {
 	    path: '/',
@@ -44,6 +45,12 @@ import HistoricalDataChart from '../components/HistoricalDataChart.vue';
 	    path: '/historical-data-chart',
 	    name: 'HistoricalDataChart',
 	    component: HistoricalDataChart,
+		meta: { requiresAuth: true }
+	  },
+	  {
+	    path: '/f',
+	    name: 'f',
+	    component: ff,
 		meta: { requiresAuth: true }
 	  },
 	  

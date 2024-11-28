@@ -145,20 +145,19 @@
   }
   
   @media (max-width: 1024px) {
+    main{
+    margin-top: 30%;
+  }
     .overview-metrics {
       grid-template-columns: repeat(2, 1fr);
     }
   
-    .navbar {
-      padding: 1.2rem 1.5rem;
-    }
-  
-    .nav-links li a {
-      font-size: 1rem;
-    }
   }
   
   @media (max-width: 768px) {
+    main{
+      margin-top: 30%;
+    }
     .overview-metrics {
       grid-template-columns: 1fr;
     }
@@ -192,29 +191,8 @@
   }
   
   @media (max-width: 480px) {
-    .navbar {
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 1.2rem;
-    }
-  
-    .nav-links {
-      display: flex;
-      flex-direction: row;
-      gap: 10px;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      max-width: 100%;
-      white-space: nowrap;
-    }
-  
-    .nav-links li {
-      flex-shrink: 0;
-    }
-  
-    .logo {
-      font-size: 1.6rem;
-      margin-bottom: 10px;
+    main{
+      margin-top: 800px;
     }
   
     .overview-metrics {

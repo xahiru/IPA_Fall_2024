@@ -1,8 +1,8 @@
 <script setup>
 import { useRouter } from 'vue-router';
 import Navbar from './Navbar.vue';
-const router = useRouter();
 
+const router = useRouter();
 
 const afterLogin = () => {
   const user = localStorage.getItem("user");
@@ -10,12 +10,10 @@ const afterLogin = () => {
     router.push({ name: 'Dashboard' });
   }
 };
-
 </script>
 
 <template>
   <div id="body">
-
     <Navbar />
     <div class="home">
       <header class="header">
@@ -33,35 +31,37 @@ const afterLogin = () => {
       </section>
       
       <div class="buttons">
-          <router-link to="/login" @click="afterLogin" class="button login-button">Login</router-link>
-          <router-link to="/signup" @click="afterLogin" class="button signup-button">Signup</router-link>
+        <router-link to="/login" @click="afterLogin" class="button login-button">Login</router-link>
+        <router-link to="/signup" @click="afterLogin" class="button signup-button">Signup</router-link>
       </div>
     </div>
-    
-    
-    
   </div>
 </template>
 
 <style scoped>
-#body{
-  box-sizing: border-box;
+/* Global Reset */
+* {
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  box-sizing: border-box;
 }
 
 body {
   font-family: 'Roboto', sans-serif;
   background: linear-gradient(135deg, #88d8b0, #56ab2f);
   color: #333;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  margin: 0;
+}
+
+#body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
 }
 
 .home {
@@ -85,12 +85,12 @@ body {
 }
 
 .subtitle {
-  font-size: 1rem;
+  font-size: 1.1rem;
   color: #7f8c8d;
 }
 
 .info-section {
-  font-size: 0.95rem;
+  font-size: 1rem;
   color: #4d4d4d;
   line-height: 1.5;
   margin: 20px 0;
@@ -150,4 +150,85 @@ body {
   background-color: #27ae60;
 }
 
+/* Responsive Styles */
+
+/* Large screens */
+@media (max-width: 1200px) {
+  .home {
+    padding: 30px;
+    margin-top: 200px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .buttons {
+    gap: 15px;
+  }
+
+  .button {
+    font-size: 0.95rem;
+  }
+}
+
+/* Medium Screens (Tablets) */
+@media (max-width: 768px) {
+  .home {
+    max-width: 90%; /* Makes the home section occupy 90% width on tablets */
+    padding: 30px;
+    margin-top: 200px;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 15px; /* Stack buttons vertically */
+  }
+
+  .button {
+    font-size: 1.1rem; /* Slightly increase button font size for better visibility */
+  }
+}
+
+/* Small Screens (Phones) */
+@media (max-width: 480px) {
+  .home {
+    padding: 20px;
+    max-width: 95%; /* Slightly larger home width */
+    margin-top: 200px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+  }
+
+  .info-section {
+    font-size: 0.95rem; /* Slightly smaller text for better readability */
+  }
+
+  .buttons {
+    gap: 10px;
+  }
+
+  .button {
+    padding: 10px 24px;
+    font-size: 0.95rem; /* Make button font smaller on smaller screens */
+  }
+}
 </style>

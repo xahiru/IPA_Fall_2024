@@ -94,8 +94,9 @@ watch(
 </script>
 
 <template>
-  <div id="settings">
+  <div>
     <Navbar />
+  <div id="settings">
     <h1 class="title">Settings Panel</h1>
     <p class="subtitle">Set thresholds and control alerts dynamically.</p>
 
@@ -154,6 +155,7 @@ watch(
     <div v-if="settings.activeAlert" class="active-alert">
       {{ settings.activeAlert }}
     </div>
+  </div>
   </div>
 </template>
 
@@ -242,5 +244,28 @@ label {
 
 .button:hover {
   background-color: #2980b9;
+}
+
+
+
+
+
+@media (max-width: 1024px) {
+  #settings{
+    margin-top: 30%;
+  }
+
+}
+
+@media (max-width: 768px) {
+  #settings{
+    margin-top: 30%;
+  }
+}
+
+@media (max-width: 480px) {
+  #settings{
+    margin-top: 30%;
+  }
 }
 </style>

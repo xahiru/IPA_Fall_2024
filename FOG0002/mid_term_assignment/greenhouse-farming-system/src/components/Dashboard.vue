@@ -130,6 +130,10 @@ header p {
 }
 
 @media (max-width: 1024px) {
+  main{
+    margin-top: 30%;
+  }
+  
   .metrics {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -144,6 +148,9 @@ header p {
 }
 
 @media (max-width: 768px) {
+  main{
+    margin-top: 30%;
+  }
   .metrics {
     grid-template-columns: 1fr;
   }
@@ -174,6 +181,10 @@ header p {
 }
 
 @media (max-width: 480px) {
+  main{
+    margin-top: 30%;
+  }
+
   .navbar {
     flex-direction: column;
     align-items: flex-start;

@@ -1,12 +1,36 @@
+<template>
+  <div id="dashboard">
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="logo">Greenhouse</div>
+      
+      <!-- Hamburger Icon for mobile -->
+      <div class="hamburger" @click="toggleMenu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+      
+      <!-- Navbar Links -->
+      <ul class="nav-links" :class="{'active': menuActive}">
+        <li><router-link to="/">Home</router-link></li>
+        <li><router-link to="/dashboard">Dashboard</router-link></li>
+        <li><router-link to="/over-view">Overview</router-link></li>
+        <li><router-link to="/settings">Settings</router-link></li>
+        <li><router-link to="/historical-data-chart">Charts</router-link></li>
+        <li><a @click="logout">Logout</a></li>
+      </ul>
+    </nav>
+  </div>
+</template>
+
 <script setup>
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
 
-const router = useRouter();
-const isMenuOpen = ref(false); // State to track menu visibility
+const menuActive = ref(false);
 
 const toggleMenu = () => {
-  isMenuOpen.value = !isMenuOpen.value;
+  menuActive.value = !menuActive.value;
 };
 
 const logout = async () => {
@@ -15,142 +39,96 @@ const logout = async () => {
 };
 </script>
 
-<template>
-  <nav class="navbar">
-    <div class="navbar-content">
-      <div class="logo">Greenhouse</div>
-      <!-- Hamburger menu for mobile -->
-      <button class="hamburger" @click="toggleMenu">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
-      <ul :class="['nav-links', { 'show': isMenuOpen }]">
-        <li><router-link to="/" @click="isMenuOpen = false">Home</router-link></li>
-        <li><router-link to="/dashboard" @click="isMenuOpen = false">Dashboard</router-link></li>
-        <li><router-link to="/over-view" @click="isMenuOpen = false">Overview</router-link></li>
-        <li><router-link to="/settings" @click="isMenuOpen = false">Settings</router-link></li>
-        <li><router-link to="/historical-data-chart" @click="isMenuOpen = false">Logs</router-link></li>
-        <li><a @click="logout">Logout</a></li>
-      </ul>
-    </div>
-  </nav>
-</template>
-
 <style scoped>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #f4f6f9;
+  color: #333;
+  padding-top: 70px;
+}
+
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   padding: 1.2rem 2rem;
   background: #2d3e50;
   color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   z-index: 100;
-}
-a:hover{
-    cursor: pointer;
-}
-.navbar-content {
-  width: 100%;
-  max-width: 1200px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  transition: all 0.3s ease; /* Add smooth transition */
 }
 
 .logo {
   font-size: 1.8rem;
   font-weight: bold;
-  letter-spacing: 1px;
 }
 
 .nav-links {
   list-style: none;
   display: flex;
   gap: 30px;
-  transition: all 0.3s ease-in-out;
 }
 
-.nav-links li a {
+.nav-links a {
+  color: #ffffff;
   text-decoration: none;
-  color: white;
   font-size: 1.1rem;
-  font-weight: 500;
-  transition: color 0.3s ease;
 }
 
-.nav-links li a:hover {
-  color: #3498db;
-}
-
-/* Hamburger menu styles */
 .hamburger {
   display: none;
   flex-direction: column;
   gap: 5px;
-  background: none;
-  border: none;
   cursor: pointer;
 }
 
 .hamburger .bar {
   width: 25px;
-  height: 3px;
-  background: white;
-  border-radius: 2px;
+  height: 4px;
+  background-color: white;
+  border-radius: 5px;
 }
 
-/* Responsive styles */
 @media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    gap: 1rem;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    background-color: #2d3e50;
+    padding: 1rem 0;
+    z-index: -1; /* Fix issue where links appear behind navbar */
+  }
+
+  .nav-links.active {
+    display: flex;
+    z-index: 9999; /* Ensure the links show above other elements */
+  }
+
   .hamburger {
     display: flex;
   }
 
-  .nav-links {
-    position: absolute;
-    top: 100%;
-    left: 0;
+  .nav-links li {
     width: 100%;
-    flex-direction: column;
-    gap: 15px;
-    background: #2d3e50;
-    text-align: center;
-    transform: translateY(-200%);
-    opacity: 0;
-    pointer-events: none;
   }
 
-  .nav-links.show {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: all;
-  }
-
-  .nav-links li a {
-    font-size: 1rem;
-  }
-
-  .logo {
-    font-size: 1.5rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .logo {
+  .nav-links a {
+    padding: 0.5rem 1rem;
     font-size: 1.2rem;
-  }
-
-  .nav-links li a {
-    font-size: 0.9rem;
-  }
-
-  .hamburger .bar {
-    width: 20px;
   }
 }
 </style>
