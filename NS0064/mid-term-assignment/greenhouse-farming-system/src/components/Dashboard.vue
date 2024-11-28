@@ -89,7 +89,9 @@ onMounted(getData);
     color: #333;
     padding-top: 70px;
   }
-  
+  a:hover{
+    cursor: pointer;
+  }
   .navbar {
     position: fixed;
     top: 0;

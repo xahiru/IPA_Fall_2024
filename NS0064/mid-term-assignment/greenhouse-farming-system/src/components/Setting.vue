@@ -218,6 +218,10 @@ const logout = async () => {
     transition: all 0.3s ease; /* Add smooth transition */
   }
   
+  a:hover{
+    cursor: pointer;
+}
+
   .logo {
     font-size: 1.8rem;
     font-weight: bold;

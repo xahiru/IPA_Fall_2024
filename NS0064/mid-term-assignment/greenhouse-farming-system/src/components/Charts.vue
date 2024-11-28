@@ -444,7 +444,9 @@ main {
   margin-bottom: 1rem;
   text-align: center;
 }
-
+a:hover{
+    cursor: pointer;
+}
 .input-field {
   padding: 10px;
   font-size: 1rem;
