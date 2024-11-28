@@ -6,3 +6,9 @@
 
 <script setup>
 </script>
+
+<style>
+body{
+  background-color: rgb(185, 180, 180);
+}
+</style>
