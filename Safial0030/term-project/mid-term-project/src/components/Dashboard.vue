@@ -6,6 +6,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 // eslint-disable-next-line vue/multi-word-component-names
 <template>
+  <div class="background-image">
   <div class="container dashboard-content">
     <h1 class="text-center mb-4">Dashboard</h1>
     <div class="row">
@@ -43,6 +44,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -86,5 +88,14 @@ export default {
 
 .card-title {
   font-weight: bold;
+}
+</style>
+<style scoped>
+.background-image {
+  background-image: url('/src/assets/dash.jpg');
+  background-size: cover;
+  background-position: right;
+  min-height: 87vh; /* Sets the minimum height to fill the viewport */
+  
 }
 </style>

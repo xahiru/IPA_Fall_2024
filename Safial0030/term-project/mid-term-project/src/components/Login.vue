@@ -1,11 +1,10 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 // eslint-disable-next-line vue/multi-word-component-names  
 <template>
-  <div class="container mt-5">
-    <h1 class="text-center mb-4">Welcome to Greenhouse Monitoring System</h1></div>
+  <div class="background-image">
   <div class="container d-flex align-items-center justify-content-center" style="height: 100vh;">
     <div class="card shadow-lg p-4" style="width: 400px;">
-      <h2 class="text-center mb-4">Login</h2>
+      <h2 class="text-center mb-4">Login To SGM</h2>
       <form @submit.prevent="login">
         <div class="mb-3">
           <label for="email" class="form-label">Email</label>
@@ -36,6 +35,10 @@
       </form>
     </div>
   </div>
+</div>
+
+
+
 </template>
 
 <script>
@@ -81,14 +84,16 @@ export default {
   text-decoration: underline; /* Underline on hover */
 }
 </style>
-<style scoped>
-.login-container {
-  background-image: url('@/assets/2.jpg.jpg'); /* Path to your image */
-  background-size: cover; /* Makes the background cover the entire container */
-  background-position: center; /* Centers the image */
+
+
+  <style scoped>
+.background-image {
+  background-image: url('/src/assets/L.jpg');
+  background-size: cover;
+  background-position: right;
   min-height: 100vh; /* Sets the minimum height to fill the viewport */
-  color: white; /* Change text color if necessary for contrast */
-  padding: 20px; /* Adds padding around the content */
+  min-height: 100vh;
+
 }
 
 .card {
