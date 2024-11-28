@@ -1,5 +1,16 @@
 #Mid_term_assignment
+Name: HAQUE KAZI SHIMANTO
+ID  : 20233120018
 
+#All the necessary Dependencies:
+1. Install node_modules : npm install
+2. Router : npm install vue-router@4
+3. Json server: npm install -g json-server
+4. Axios : npm install axios
+5. For chart : npm install chart.js vue-chartjs
+
+
+#step by step process:
 1. Create a vue app by using "npm create vue@latest" in VsCode terminal.
 2.Then install routing by using "npm install vue-router@4".
 3.In scr folder add another folder named router.
@@ -15,6 +26,10 @@
 13. Create Dashboard.vue, Overview.vue in components.
 14. Create folder db and create file mockData.js and data.json
 15. Install chart Dependencies "npm install chart.js vue-chartjs"
+16. Create settings.vue to control Temperature, Humidity, Soil Moisture, Light Level.
+17. Create navbar.vue and add it to other components.
+18. create logs.vue and logs.json in db folder write some demo data to show in logs.
+
 
 
 
