@@ -5,6 +5,7 @@ import Signup from '../components/Signup.vue';
 import Dashboard from '../components/Dashboard.vue';
 import Overview from '../components/Overview.vue';
 import Setting from '../components/Setting.vue';
+import Charts from '../components/Charts.vue';
 
 	const routes = [
 	  {
@@ -38,6 +39,12 @@ import Setting from '../components/Setting.vue';
 	    path: '/settings',
 	    name: 'Setting',
 	    component: Setting,
+		meta: { requiresAuth: true }
+	  },
+      {
+	    path: '/charts',
+	    name: 'Charts',
+	    component: Charts,
 		meta: { requiresAuth: true }
 	  }
 	  
