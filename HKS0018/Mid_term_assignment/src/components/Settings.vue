@@ -64,10 +64,7 @@
           this.settings = savedSettings;
         }
       },
-      logout() {
-        localStorage.clear();
-        this.$router.push('/login');
-      }
+
     },
     mounted() {
       this.loadSettings();
@@ -158,7 +155,7 @@ input {
 
 .save-button {
   padding: 0.7rem 2rem;
-  background-color: #00e676;
+  background-color: #11ba68;
   color: #fff;
   border: none;
   border-radius: 5px;

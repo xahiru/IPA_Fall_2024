@@ -106,10 +106,7 @@ export default {
       history.push(value);
       if (history.length > 12) history.shift();
     },
-    logout() {
-      localStorage.clear();
-      this.$router.push("/login");
-    }
+
   },
   mounted() {
     this.fetchData();

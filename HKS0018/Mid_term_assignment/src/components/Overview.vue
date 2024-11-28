@@ -65,10 +65,7 @@ export default {
       const status = this.getStatus(value, type, min, max);
       return `status-${status.toLowerCase()}`;
     },
-    logout() {
-      localStorage.clear();
-      this.$router.push('/login');
-    },
+
     async fetchMetrics() {
       try {
         const response = await fetch('../../db/data.json');

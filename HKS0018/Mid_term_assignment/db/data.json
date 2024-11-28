@@ -11,7 +11,7 @@
     {
       "name": "Humidity",
       "icon": "💧",
-      "value": 32,
+      "value": 45,
       "description": "Humidity control is essential for plant health. Track fluctuations in real-time.",
       "type": "humidity",
       "min": 40,
@@ -20,7 +20,7 @@
     {
       "name": "Soil Moisture",
       "icon": "🌱",
-      "value": 64,
+      "value": 94,
       "description": "Track soil moisture to ensure plants get the right amount of water for growth.",
       "type": "soil",
       "min": 60,
@@ -29,7 +29,7 @@
     {
       "name": "Light Level",
       "icon": "☀️",
-      "value": 650,
+      "value": 750,
       "description": "Monitor light levels to ensure plants receive the optimal light exposure for photosynthesis.",
       "type": "light",
       "min": 600,

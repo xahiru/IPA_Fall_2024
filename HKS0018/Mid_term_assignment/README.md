@@ -29,6 +29,11 @@ ID  : 20233120018
 16. Create settings.vue to control Temperature, Humidity, Soil Moisture, Light Level.
 17. Create navbar.vue and add it to other components.
 18. create logs.vue and logs.json in db folder write some demo data to show in logs.
+19. Add package-lock.json to gitnore to ignore it.
+20. Commit and push on github then do a pull request.
+
+Assignment complete.
+
 
 
 
