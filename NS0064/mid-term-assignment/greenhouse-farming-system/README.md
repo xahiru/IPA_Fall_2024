@@ -24,4 +24,7 @@ Workflow
 23. create a component for setting page
 24. fetch the data shown in the dashboard form database
 25. fetch the data for overview page also
-26. 
+26. make a component for setting page
+27. complete the setting functionality 
+28. create a page for charts 
+29. complete the charts
