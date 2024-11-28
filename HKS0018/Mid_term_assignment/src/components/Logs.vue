@@ -1,88 +1,89 @@
 <template>
-    <div class="logs">
-      <h2>Activity Logs</h2>
-      <p>View recent activities and alerts in your greenhouse system.</p>
-      
-      <div v-if="logs.length">
-        <table class="logs-table">
-          <thead>
-            <tr>
-              <th>Date</th>
-              <th>Time</th>
-              <th>Event</th>
-              <th>Details</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="log in logs" :key="log.id">
-              <td>{{ log.date }}</td>
-              <td>{{ log.time }}</td>
-              <td>{{ log.event }}</td>
-              <td>{{ log.details }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="logs-layout">
+      <Navbar />
+      <main class="logs-content">
+        <header>
+          <h1>System Logs</h1>
+          <p>View the latest system activity and alerts</p>
+        </header>
   
-      <p v-else>No logs available at the moment.</p>
+        <div class="logs-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Timestamp</th>
+                <th>Event</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="log in logs" :key="log.id">
+                <td>{{ log.timestamp }}</td>
+                <td>{{ log.event }}</td>
+                <td>{{ log.details }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
     </div>
   </template>
   
   <script>
-  export default {
-    data() {
-      return {
-        logs: []
-      };
-    },
-    mounted() {
-      this.fetchLogs();
-    },
-    methods: {
-      fetchLogs() {
-        // Mock data for logs
-        this.logs = [
-          { id: 1, date: '2024-11-12', time: '10:00', event: 'Temperature Alert', details: 'Temperature exceeded 30°C' },
-          { id: 2, date: '2024-11-12', time: '09:45', event: 'Humidity Change', details: 'Humidity dropped below 40%' },
-          { id: 3, date: '2024-11-12', time: '09:30', event: 'Soil Moisture Level', details: 'Moisture level fell to 15%' },
-          { id: 4, date: '2024-11-12', time: '09:00', event: 'Light Adjustment', details: 'Light intensity increased to 500 lux' }
-        ];
-      }
-    }
-  };
-  </script>
+import Navbar from '../components/Navbar.vue';
+import logs from '../../db/logs.json';
+
+export default {
+  components: { Navbar },
+  data() {
+    return {
+      logs
+    };
+  }
+};
+</script>
   
   <style scoped>
-  .logs {
-    padding: 2rem;
-    text-align: center;
+  .logs-layout {
+    display: flex;
+    flex-direction: column;
   }
   
-  .logs h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #333;
+  .logs-content {
+    margin-top: 80px;
+    padding: 2rem;
+  }
+  
+  header {
+    text-align: center;
+    margin-bottom: 2rem;
   }
   
   .logs-table {
+    overflow-x: auto;
+    margin: 0 auto;
+    max-width: 1000px;
+  }
+  
+  table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 1rem;
+    background-color: #2e2e48;
+    color: #fff;
   }
   
-  .logs-table th, .logs-table td {
-    padding: 0.75rem;
-    border: 1px solid #ddd;
+  th, td {
+    padding: 1rem;
     text-align: left;
+    border-bottom: 1px solid #444;
   }
   
-  .logs-table th {
-    background-color: #f4f4f4;
-    font-weight: bold;
+  th {
+    background-color: #1c1c2d;
   }
   
-  .logs-table tr:nth-child(even) {
-    background-color: #f9f9f9;
+  tbody tr:hover {
+    background-color: #383850;
   }
   </style>
   
