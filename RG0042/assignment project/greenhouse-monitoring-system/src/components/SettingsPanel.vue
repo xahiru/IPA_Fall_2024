@@ -111,6 +111,14 @@ export default {
   place-items: center;
   min-height: 100vh;
   background-color: #f4f5f7;
+  background-image: url("src/assets/setting-background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .settings-panel {

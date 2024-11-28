@@ -9,6 +9,7 @@ module.exports = {
       'home-bg': "url('@/assets/home-background.png')",
       'login-bg': "url('@/assets/login-background.jpg')",
       'signup-bg': "url('@/assets/signup-background.jpg')",
+      'setting-bg': "url('@/assets/setting-background.jpg)",
     }
   },
   plugins: [],
