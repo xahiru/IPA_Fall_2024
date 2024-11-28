@@ -31,19 +31,17 @@ const afterLogin = () => {
 </template>
 
 <style scoped>
-/* Standard Color Palette */
+
 :root {
-  --primary-color: #3498db; /* Blue */
-  --secondary-color: #2ecc71; /* Green */
-  --accent-color: #f39c12; /* Yellow */
-  --background-color: #ffffff; /* White */
-  --text-color: #333333; /* Dark text */
-  --light-text-color: #7f8c8d; /* Light gray */
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --accent-color: #f39c12;
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --light-text-color: #7f8c8d;
   --button-hover-color: rgba(0, 0, 0, 0.2);
   --shadow-color: #3eaa00e7;
 }
-
-/* Body and page layout */
 #home-page {
   display: flex;
   justify-content: center;
@@ -54,8 +52,6 @@ const afterLogin = () => {
   position: relative;
   overflow: hidden;
 }
-
-/* Container for content */
 .home-content {
   text-align: center;
   background: var(--background-color);
@@ -68,8 +64,6 @@ const afterLogin = () => {
   z-index: 1;
   margin: 0 20px;
 }
-
-/* Header section */
 .header {
   margin-bottom: 30px;
 }
@@ -86,16 +80,12 @@ const afterLogin = () => {
   color: var(--light-text-color);
   margin-top: 10px;
 }
-
-/* Information Section */
 .info-section {
   font-size: 1rem;
   color: var(--text-color);
   line-height: 1.6;
   margin: 20px 0;
 }
-
-/* Features list */
 .features-list {
   list-style-type: none;
   padding: 0;
@@ -114,8 +104,6 @@ const afterLogin = () => {
 .features-list li:nth-child(odd) {
   background: #d1f1e1;
 }
-
-/* Button Styling */
 .buttons {
   display: flex;
   gap: 25px;
@@ -155,8 +143,6 @@ const afterLogin = () => {
 .signup-button:hover {
     background: linear-gradient(90deg, #076322, #26a60d);
 }
-
-/* Responsive Design */
 @media (max-width: 768px) {
   .home-content {
     padding: 30px;

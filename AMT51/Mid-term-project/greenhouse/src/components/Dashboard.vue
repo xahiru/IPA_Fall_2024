@@ -35,10 +35,10 @@ onMounted(fetchData);
     <nav class="navbar">
       <div class="logo">Greenhouse</div>
       <ul class="nav-links">
-        <li><router-link to="/">Home</router-link></li>
+        <li><router-link to="/dashboard">Home</router-link></li>
         <li><router-link to="/over-view">Overview</router-link></li>
         <li><router-link to="/settings">Settings</router-link></li>
-        <li><router-link to="/historical-data-chart">Logs</router-link></li>
+        <li><router-link to="/logs">Logs</router-link></li>
         <li> <a @click="logout">Logout</a> </li>
       </ul>
     </nav>

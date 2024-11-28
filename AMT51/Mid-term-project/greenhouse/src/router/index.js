@@ -5,6 +5,7 @@ import Signup from '../components/Signup.vue';
 import Dashboard from '../components/Dashboard.vue';
 import Overview from '../components/Overview.vue';
 import Settings from '../components/Settings.vue';
+import Logs from '../components/Logs.vue';
 	const routes = [
 	  {
 	    path: '/',
@@ -37,6 +38,12 @@ import Settings from '../components/Settings.vue';
 	    path: '/settings',
 	    name: 'Settings',
 	    component: Settings,
+		meta: { requiresAuth: true }
+	  },
+	  {
+	    path: '/logs',
+	    name: 'Logss',
+	    component: Logs,
 		meta: { requiresAuth: true }
 	  },
 	  
