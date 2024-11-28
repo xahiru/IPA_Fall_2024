@@ -1,0 +1,80 @@
+[
+  {
+    "id": 1,
+    "timestamp": "2024-11-28T10:15:00Z",
+    "event": "System Start",
+    "details": "The system started successfully."
+  },
+  {
+    "id": 2,
+    "timestamp": "2024-11-28T10:20:00Z",
+    "event": "Temperature Alert",
+    "details": "Temperature exceeded safe threshold (30°C)."
+  },
+  {
+    "id": 3,
+    "timestamp": "2024-11-28T10:30:00Z",
+    "event": "Humidity Restored",
+    "details": "Humidity levels returned to normal."
+  },
+  {
+    "id": 4,
+    "timestamp": "2024-11-28T10:45:00Z",
+    "event": "Light Level Alert",
+    "details": "Light level dropped below 500 lux."
+  },
+  {
+    "id": 5,
+    "timestamp": "2024-11-28T11:00:00Z",
+    "event": "Soil Moisture Normal",
+    "details": "Soil moisture is within optimal range."
+  },
+  {
+    "id": 6,
+    "timestamp": "2024-11-28T11:10:00Z",
+    "event": "Manual Adjustment",
+    "details": "Fan speed adjusted manually by user."
+  },
+  {
+    "id": 7,
+    "timestamp": "2024-11-28T11:25:00Z",
+    "event": "Temperature Normalized",
+    "details": "Temperature returned to safe levels."
+  },
+  {
+    "id": 8,
+    "timestamp": "2024-11-28T11:40:00Z",
+    "event": "Water Pump Activated",
+    "details": "Water pump activated for irrigation."
+  },
+  {
+    "id": 9,
+    "timestamp": "2024-11-28T11:55:00Z",
+    "event": "Sensor Calibration",
+    "details": "Sensors recalibrated successfully."
+  },
+  {
+    "id": 10,
+    "timestamp": "2024-11-28T12:10:00Z",
+    "event": "System Check",
+    "details": "System diagnostics completed. No issues detected."
+  },
+  {
+    "id": 11,
+    "timestamp": "2024-11-28T12:25:00Z",
+    "event": "Humidity Alert",
+    "details": "Humidity levels dropped below the safe threshold (35%)."
+  },
+  {
+    "id": 12,
+    "timestamp": "2024-11-28T12:40:00Z",
+    "event": "Emergency Shutdown",
+    "details": "System shut down due to power outage."
+  },
+  {
+    "id": 13,
+    "timestamp": "2024-11-28T12:50:00Z",
+    "event": "System Restart",
+    "details": "System restarted after power restoration."
+  }
+]
