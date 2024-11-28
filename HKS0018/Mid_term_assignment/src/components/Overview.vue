@@ -1,15 +1,6 @@
 <template>
   <div class="overview-layout">
-    <nav class="navbar">
-      <div class="logo">Greenhouse Farming System</div>
-      <ul class="nav-links">
-        <li><router-link to="/dashboard" class="link">Home</router-link></li>
-        <li><router-link to="/over-view" class="link">Overview</router-link></li>
-        <li><router-link to="/settings" class="link">Settings</router-link></li>
-        <li><router-link to="/logs" class="link">Logs</router-link></li>
-        <li><a @click="logout" class="link">Logout</a></li>
-      </ul>
-    </nav>
+    <Navbar />
 
     <main class="overview">
       <header>
@@ -55,7 +46,9 @@
 </template>
 
 <script>
+import Navbar from '../components/Navbar.vue';
 export default {
+  components: { Navbar },
   data() {
     return {
       metrics: [],
@@ -112,19 +105,6 @@ body {
   height: 100vh;
 }
 
-.navbar {
-  background: #1e1e2f;
-  color: #e0e0e0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 2rem;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 10;
-}
 
 .logo {
   font-size: 1.5rem;
@@ -132,15 +112,6 @@ body {
   color: #00e676;
 }
 
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
-
-.nav-links li {
-  margin-bottom: 0;
-}
 
 .link {
   text-decoration: none;
