@@ -1,0 +1,72 @@
+[
+    {
+      "level": "info",
+      "message": "System started successfully",
+      "timestamp": "2024-11-26T08:00:00Z",
+      "user": "Admin",
+      "action": "System initialization"
+    },
+    {
+      "level": "error",
+      "message": "Failed to retrieve temperature data from sensor array",
+      "timestamp": "2024-11-26T08:15:45Z",
+      "user": "Admin",
+      "action": "Sensor data fetch"
+    },
+    {
+      "level": "warning",
+      "message": "Humidity levels approaching upper limit, monitoring required",
+      "timestamp": "2024-11-26T08:30:10Z",
+      "user": "Admin",
+      "action": "Monitoring humidity levels"
+    },
+    {
+      "level": "info",
+      "message": "Temperature data successfully updated from the sensor",
+      "timestamp": "2024-11-26T08:35:30Z",
+      "user": "Admin",
+      "action": "Data update"
+    },
+    {
+      "level": "error",
+      "message": "Database connection failed, unable to retrieve data",
+      "timestamp": "2024-11-26T08:40:20Z",
+      "user": "Admin",
+      "action": "Database connection"
+    },
+    {
+      "level": "success",
+      "message": "User User123 logged in successfully",
+      "timestamp": "2024-11-26T09:00:10Z",
+      "user": "User123",
+      "action": "Login"
+    },
+    {
+      "level": "info",
+      "message": "User settings have been successfully updated",
+      "timestamp": "2024-11-26T09:15:00Z",
+      "user": "User123",
+      "action": "Settings update"
+    },
+    {
+      "level": "warning",
+      "message": "Soil moisture in zone 3 is critically low",
+      "timestamp": "2024-11-26T09:45:50Z",
+      "user": "Admin",
+      "action": "Soil moisture check"
+    },
+    {
+      "level": "info",
+      "message": "System maintenance completed successfully as scheduled",
+      "timestamp": "2024-11-26T10:00:00Z",
+      "user": "Admin",
+      "action": "System maintenance"
+    },
+    {
+      "level": "error",
+      "message": "Failed to calibrate light sensor, please check connections",
+      "timestamp": "2024-11-26T10:10:30Z",
+      "user": "Admin",
+      "action": "Sensor calibration"
+    }
+  ]  
