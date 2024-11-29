@@ -1,17 +1,14 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+      <router-view></router-view>
   </div>
 </template>
 
-<script>
-export default {
-  name: "App",
-};
+<script setup>
 </script>
 
 <style>
 body{
-  background-color: greenyellow;
+  background-color: rgb(185, 180, 180);
 }
 </style>
