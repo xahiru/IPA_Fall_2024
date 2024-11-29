@@ -7,7 +7,7 @@
     <div class="nav-links" :class="{ 'show-menu': menuOpen }">
       <router-link to="/overview">Overview</router-link>
       <router-link to="/settingspanel">Settings</router-link>
-      <router-link to="charts">Charts</router-link>
+      <router-link to="/charts">Chart</router-link>
       <router-link to="/logs">Logs</router-link>
       <router-link to="/login" @click.prevent="logout">Logout</router-link>
     </div>

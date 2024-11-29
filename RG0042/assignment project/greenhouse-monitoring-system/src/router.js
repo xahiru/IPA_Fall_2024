@@ -4,6 +4,7 @@ import Login from "./views/Login.vue";
 import Signup from "./views/Signup.vue";
 import Dashboard from "./views/Dashboard.vue";
 import SettingsPanel from "./components/SettingsPanel.vue";
+import Charts from "./components/Charts.vue";
 import NotFound from "./views/NotFound.vue";
 
 const routes = [
@@ -12,7 +13,8 @@ const routes = [
     {path: '/signup', component: Signup},
     {path: '/dashboard', component: Dashboard, meta: {reqiresAuth: true} },
     {path: '/SettingsPanel', component: SettingsPanel, meta: {requiresAuth: true}},
-    { path: '/:pathMatch(.*)*', component: NotFound}
+    {path: '/charts', component: Charts, meta: { requiresAuth: true}},
+    {path: '/:pathMatch(.*)*', component: NotFound}
 ];
 
 const router = createRouter({
