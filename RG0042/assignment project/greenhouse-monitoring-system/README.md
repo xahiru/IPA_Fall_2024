@@ -88,6 +88,12 @@
 In Public folder: 
   create mockData.js file
 
+create component file:
+  Charts.vue
+
+    
+
+
 
 
    
