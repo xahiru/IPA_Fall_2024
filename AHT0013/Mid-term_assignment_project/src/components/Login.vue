@@ -1,4 +1,23 @@
 <script setup>
+    import { ref } from 'vue';
+    import { login } from '../api/api';
+
+    const email = ref('');
+    const password = ref('');
+
+    const login_page = async () => {
+    const response = await login(email.value, password.value);
+    if (response.success) {
+        window.location.href = '/dashboard'; 
+    } else {
+        alert("Login failed: " + (response.error || "Unknown error"));
+    }
+};
+
+
+
+
+
 </script>
 
 <template>
@@ -9,7 +28,7 @@
               <p class="subtitle">Login to access your dashboard</p>
             </header>
           
-            <form class="login-form">
+            <form class="login-form" @submit.prevent="login_page">
               <input type="email" id="email" class="input-field" placeholder="Enter your email" required>
           
               <input type="password" id="password" class="input-field" placeholder="Enter your password" required>
