@@ -1,4 +1,5 @@
 <template>
+  <Navbar/>
   <div class="settings-panel-wrapper">
     <div class="settings-panel">
       <h2>Configure Alert Settings</h2>
@@ -71,8 +72,12 @@
 </template>
 
 <script>
+import Navbar from './Navbar.vue';
 export default {
   name: "SettingsPanel",
+  components: {
+    Navbar,
+  },
   props: {
     thresholds: {
       type: Object,

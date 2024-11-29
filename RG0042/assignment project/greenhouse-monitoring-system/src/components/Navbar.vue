@@ -1,13 +1,13 @@
 <template>
   <nav class="navbar">
-    <router-link to="/" class="logo">Greenhouse Dashboard</router-link>
+    <router-link to="/dashboard" class="logo">Greenhouse Dashboard</router-link>
     <button class="menu-toggle" @click="toggleMenu">
       <span :class="menuOpen ? 'open' : ''"></span>
     </button>
     <div class="nav-links" :class="{ 'show-menu': menuOpen }">
       <router-link to="/overview">Overview</router-link>
       <router-link to="/settingspanel">Settings</router-link>
-      <router-link to="/charts">Chart</router-link>
+      <router-link to="/charts">Charts</router-link>
       <router-link to="/logs">Logs</router-link>
       <router-link to="/login" @click.prevent="logout">Logout</router-link>
     </div>
@@ -40,7 +40,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: #3b82f6;
+  background-color: #230f54;
   color: white;
   position: relative;
   width: auto;

@@ -88,8 +88,10 @@
 In Public folder: 
   create mockData.js file
 
-create component file:
+create component file & link with router
   Charts.vue
+create Linechart file & link to Charts
+  LineChart.vue
 
     
 
