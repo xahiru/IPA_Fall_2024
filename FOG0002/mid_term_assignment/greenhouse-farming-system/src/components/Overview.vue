@@ -190,6 +190,11 @@
     }
   }
   
+  @media (max-width: 600px) {
+    main{
+      margin-top: 800px;
+    }
+  }
   @media (max-width: 480px) {
     main{
       margin-top: 800px;
