@@ -1,0 +1,239 @@
+#include <iostream>
+int calculateSteps(int n) {
+    int count = 0;
+
+    int x = 2;
+    
+    while (x < n / 2) {
+        x *= 2;
+        count++;  // Increment the count each time x is doubled
+    }
+
+    return count;
+}
+
+int main() {
+    int n = 50;  // can change this to any number
+    std::cout << "Steps: " << calculateSteps(n) << std::endl;
+    return 0;
+}
+
+Question 2: 
+#include <iostream>
+void updateValues(int n, int delta) {
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= i; j += 10) {
+            for (int k = 1; k <= j; k += 10) {
+                int x = delta
+                std::cout << "x = " << x << std::endl;
+            }
+        }
+    }
+}
+
+int main() {
+    int n = 50;      // value for n
+    int delta = 5;   // value for delta
+    
+    updateValues(n, delta);
+    
+    return 0;
+}
+
+
+INDEX.HTML for HOMEWORK 2
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Welcome - Alex Johnson's CV</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="contact.html">Get in Touch</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Welcome to My CV Website!</h1>
+        <p>
+            Hey there! I'm Alex Johnson, a fictional persona created for this project. 
+            Feel free to look around and explore more about me. Thanks for stopping by!
+        </p>
+    </main>
+    <footer>
+        <p>&copy; 2024 Alex Johnson's CV Website. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+
+ABOUT.HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>About - Alex Johnson's CV</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="contact.html">Get in Touch</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>About Alex Johnson</h1>
+        <p><strong>Background:</strong> I grew up in Fictional City and have always been passionate about technology and innovation.</p>
+        <p><strong>Education:</strong> I earned my Computer Science degree from Imaginary University, where I focused on software development and problem-solving.</p>
+        <p><strong>Work Experience:</strong></p>
+        <ul>
+            <li>Software Developer at Fictitious Corp for 3 years, working on cutting-edge web applications.</li>
+            <li>Intern at DreamTech Ltd., where I contributed to exciting startup projects.</li>
+        </ul>
+        <p><strong>Skills:</strong> HTML, CSS, JavaScript, Python, and project management. I love building functional and visually appealing web solutions.</p>
+        <p><strong>Strengths:</strong> I'm a great problem-solver, work well in teams, and adapt quickly to new challenges.</p>
+        <p><strong>Accomplishments:</strong> One of my proudest achievements is creating a task management app that received over 1,000 downloads on an imaginary app store.</p>
+    </main>
+    <footer>
+        <p>&copy; 2024 Alex Johnson's CV Website. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+
+CONTACT.HTML
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Contact - Alex Johnson's CV</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Me</a></li>
+                <li><a href="contact.html">Get in Touch</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Get in Touch</h1>
+        <form action="#" method="post">
+            <label for="name">Your Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            
+            <label for="email">Your Email:</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+            
+            <label for="message">Your Message:</label>
+            <textarea id="message" name="message" placeholder="Write your message here" required></textarea>
+            
+            <button type="submit">Send</button>
+        </form>
+    </main>
+    <footer>
+        <p>&copy; 2024 Alex Johnson's CV Website. All rights reserved.</p>
+    </footer>
+</body>
+</html>
+
+STYLE.CSS
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+    background-color: #f9f9f9;
+    color: #222;
+}
+
+header {
+    background-color: #0073e6;
+    color: white;
+    padding: 15px 20px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    text-decoration: underline;
+}
+
+main {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    background-color: #0073e6;
+    color: white;
+    padding: 10px 0;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+form label {
+    margin: 10px 0 5px;
+}
+
+form input, form textarea {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+form button {
+    padding: 10px;
+    background-color: #0073e6;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+form button:hover {
+    background-color: #005bb5;
+}
+
+
