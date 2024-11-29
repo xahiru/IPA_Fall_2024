@@ -44,49 +44,13 @@ const login_page = async () => {
 
 <style>
 #bdy {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100vh;
     position: relative;
-    font-family: 'Roboto', sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.abstract-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #ff8a00, #e52e71, #8921aa);
-    z-index: -1;
-    overflow: hidden;
-}
-
-.abstract-background::before,
-.abstract-background::after {
-    content: '';
-    position: absolute;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    pointer-events: none;
-}
-
-.abstract-background::before {
-    width: 400px;
-    height: 400px;
-    top: -50px;
-    left: -100px;
-}
-
-.abstract-background::after {
-    width: 300px;
-    height: 300px;
-    bottom: -50px;
-    right: -100px;
+  background-color: #f4f7fc;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .login-container {
@@ -155,7 +119,7 @@ const login_page = async () => {
 }
 
 .signup-link {
-    color: #e52e71;
+    color: #106cc8;
     font-weight: bold;
     text-decoration: none;
 }
