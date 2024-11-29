@@ -1,0 +1,26 @@
+[
+    {
+      "title": "Temperature",
+      "value": "24°C",
+      "icon": "fas fa-thermometer-half",
+      "color": "#e74c3c"
+    },
+    {
+      "title": "Humidity",
+      "value": "65%",
+      "icon": "fas fa-tint",
+      "color": "#16a085"
+    },
+    {
+      "title": "Soil Moisture",
+      "value": "45%",
+      "icon": "fas fa-water",
+      "color": "#f39c12"
+    },
+    {
+      "title": "Light Level",
+      "value": "300 lux",
+      "icon": "fas fa-sun",
+      "color": "#3498db"
+    }
+  ]
