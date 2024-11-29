@@ -93,6 +93,9 @@ create component file & link with router
 create Linechart file & link to Charts
   LineChart.vue
 
+13.Create logs file:
+  create logs.vue [link with router]
+  create logs.json
     
 
 
