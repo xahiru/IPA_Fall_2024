@@ -1,5 +1,6 @@
 <template>
     <div id="logs" class="logs-container">
+      <Navbar />
       <h1 class="logs-title">System Logs</h1>
       <table class="logs-table">
         <thead>
@@ -24,13 +25,13 @@
         </tbody>
       </table>
     </div>
-</template>
+  </template>
   
 <script setup>
   import { ref, onMounted } from 'vue';
+  import Navbar from '../components/Navbar.vue'; // Import Navbar component
   
   const logs = ref([]);
-  
   
   const fetchLogs = async () => {
     try {
@@ -105,4 +106,4 @@
   .log-level.success {
     background-color: #2ecc71;
   }
-</style>
+</style>  

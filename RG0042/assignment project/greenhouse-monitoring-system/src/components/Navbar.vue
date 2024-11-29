@@ -40,7 +40,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: #230f54;
+  background-color: #142e49;
   color: white;
   position: relative;
   width: auto;
