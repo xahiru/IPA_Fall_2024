@@ -1,0 +1,39 @@
+[
+    {
+      "name": "Temperature",
+      "icon": "🌡️",
+      "value": 15,
+      "description": "Monitor the greenhouse temperature to maintain optimal conditions for plant growth.",
+      "type": "temperature",
+      "min": 18,
+      "max": 28
+    },
+    {
+      "name": "Humidity",
+      "icon": "💧",
+      "value": 45,
+      "description": "Humidity control is essential for plant health. Track fluctuations in real-time.",
+      "type": "humidity",
+      "min": 40,
+      "max": 80
+    },
+    {
+      "name": "Soil Moisture",
+      "icon": "🌱",
+      "value": 94,
+      "description": "Track soil moisture to ensure plants get the right amount of water for growth.",
+      "type": "soil",
+      "min": 60,
+      "max": 90
+    },
+    {
+      "name": "Light Level",
+      "icon": "☀️",
+      "value": 750,
+      "description": "Monitor light levels to ensure plants receive the optimal light exposure for photosynthesis.",
+      "type": "light",
+      "min": 600,
+      "max": 1000
+    }
+  ]
+  

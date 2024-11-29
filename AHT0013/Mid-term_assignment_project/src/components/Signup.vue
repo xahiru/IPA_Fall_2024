@@ -1,30 +1,49 @@
 <script setup>
+import { ref } from 'vue';
+import { signup } from '../api/api';
+import { useRouter } from 'vue-router';
+
+const username = ref('');
+const email = ref('');
+const password = ref('');
+const router = useRouter();
+
+const signup_page = async () => {
+    console.log("Attempting to sign up with:", username.value, email.value, password.value);
+
+    const response = await signup(username.value, email.value, password.value);
+    console.log("Response from signup:", response);
+    if (response.success) {
+        router.push({ name: 'Dashboard' });
+    } else {
+        alert("Signup failed: " + (response.error || "Unknown error"));
+    }
+};
+
+
 </script>
 
 <template>
-  <div id="bdy">
-    <div class="signup-page">
-      <header class="header">
-        <h1 class="title">Greenhouse Farming System</h1>
-        <p class="subtitle">Create an account to access your dashboard</p>
-      </header>
-
-      <form class="signup-form">
-        <input type="text" id="username" class="input-field" placeholder="Enter your username" required>
-
-        <input type="email" id="email" class="input-field" placeholder="Enter your email" required>
-
-        <input type="password" id="password" class="input-field" placeholder="Enter your password" required>
-
-        <input type="password" id="confirm-password" class="input-field" placeholder="Confirm your password" required>
-
-        <button type="submit" class="button signup-button">Sign Up</button>
-
-        <p class="login-prompt">Already have an account? <a href="/login" class="login-link">Login here</a></p>
-      </form>
+    <div id="bdy">
+        <div class="login-page">
+            <header class="header">
+              <h1 class="title">Greenhouse Farming System</h1>
+              <p class="subtitle">Login to access your dashboard</p>
+            </header>
+          
+            <form class="login-form" @submit.prevent="signup_page">
+                <input type="name" id="name" class="input-field" v-model="username" placeholder="Enter your name" required>
+                <input type="email" id="email" class="input-field" v-model="email" placeholder="Enter your email" required>
+                <input type="password" id="password" class="input-field" v-model="password" placeholder="Enter your password" required>
+                <button type="submit" class="button login-button">Signup</button>
+              
+              <p class="signup-prompt signup-link" > Already have an account?<router-link to="/login"> Login here</router-link></p>
+             </form>
+          </div>
+          
     </div>
-  </div>
 </template>
+
 
 <style>
 #bdy {
@@ -32,10 +51,10 @@
   margin: 0;
   padding: 0;
 }
-
+  
 body {
   font-family: 'Roboto', sans-serif;
-  background: linear-gradient(135deg, #18a0e9, #0d2495);
+  background:#195b88;
   color: #333;
   display: flex;
   align-items: center;
@@ -44,7 +63,7 @@ body {
   margin: 0;
   color: #ffffff;
 }
-
+  
 .signup-page {
   text-align: center;
   max-width: 400px;
@@ -68,7 +87,7 @@ body {
   margin-top: 10px;
   text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
 }
-
+  
 .signup-form {
   display: flex;
   flex-direction: column;
@@ -78,7 +97,7 @@ body {
   border-radius: 10px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
-
+  
 .input-field {
   padding: 10px 15px;
   font-size: 1rem;
@@ -91,7 +110,7 @@ body {
 .input-field:focus {
   background: #ffffff;
 }
-
+  
 .button {
   padding: 12px 20px;
   font-size: 1rem;
@@ -107,7 +126,7 @@ body {
 .button:hover {
   background-color: #2980b9;
 }
-
+  
 .login-prompt {
   margin-top: 20px;
   font-size: 0.9rem;
