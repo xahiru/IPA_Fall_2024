@@ -6,6 +6,7 @@ import Dashboard from "./views/Dashboard.vue";
 import SettingsPanel from "./components/SettingsPanel.vue";
 import Charts from "./components/Charts.vue";
 import NotFound from "./views/NotFound.vue";
+import Logs from "./views/Logs.vue";
 
 const routes = [
     {path: '/', component: Home},
@@ -14,6 +15,7 @@ const routes = [
     {path: '/dashboard', component: Dashboard, meta: {reqiresAuth: true} },
     {path: '/SettingsPanel', component: SettingsPanel, meta: {requiresAuth: true}},
     {path: '/charts', component: Charts, meta: { requiresAuth: true}},
+    {path: '/logs', component: Logs, meta: { reqiresAuth: true}},
     {path: '/:pathMatch(.*)*', component: NotFound}
 ];
 
