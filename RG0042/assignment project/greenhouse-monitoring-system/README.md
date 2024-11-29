@@ -79,4 +79,16 @@
     C.DataCard.vue
     D.SettingsPanel
     link with dashboard & router.
+
+11. create NotFunde page & link to router and Navbar
+
+12.Interactive Graphs we  Use a charting library Chart.js 
+  npm install chart.js vue-chartjs
+
+In Public folder: 
+  create mockData.js file
+
+
+
+   
     
