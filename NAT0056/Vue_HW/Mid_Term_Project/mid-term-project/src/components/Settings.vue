@@ -1,8 +1,18 @@
 <template>
   <div class="settings-panel">
     <h2>Greenhouse Alert Thresholds</h2>
+    <nav class="navbar">
+      <div class="logo">Greenhouse</div>
+      <ul class="nav-links">
+        <li><router-link to="/dashboard">Home</router-link></li>
+        <li><router-link to="/over-view">Overview</router-link></li>
+        <li><router-link to="/settings">Settings</router-link></li>
+        <li><router-link to="/logs">Logs</router-link></li>
+        <li> <a @click="logout">Logout</a> </li>
+      </ul>
+    </nav>
 
-    <!-- Temperature Alert Threshold -->
+
     <div class="setting-option">
       <label for="temperature-threshold">Temperature Alert Threshold (°C)</label>
       <div class="input-group">
@@ -21,7 +31,6 @@
       <p v-if="temperatureThreshold < -50 || temperatureThreshold > 100" class="error-text">Temperature must be between -50°C and 100°C.</p>
     </div>
 
-    <!-- Humidity Alert Threshold -->
     <div class="setting-option">
       <label for="humidity-threshold">Humidity Alert Threshold (%)</label>
       <div class="input-group">
@@ -40,7 +49,6 @@
       <p v-if="humidityThreshold < 0 || humidityThreshold > 100" class="error-text">Humidity must be between 0% and 100%.</p>
     </div>
 
-    <!-- CO2 Level Alert Threshold -->
     <div class="setting-option">
       <label for="co2-threshold">CO2 Alert Threshold (ppm)</label>
       <div class="input-group">
@@ -59,12 +67,10 @@
       <p v-if="co2Threshold < 300 || co2Threshold > 2000" class="error-text">CO2 level must be between 300ppm and 2000ppm.</p>
     </div>
 
-    <!-- Save Button -->
     <div class="setting-option">
       <button @click="saveSettings" :disabled="isSaveDisabled" class="button">Save Settings</button>
     </div>
 
-    <!-- Display Alert Settings (optional) -->
     <div class="alert-display">
       <h3>Current Alert Settings:</h3>
       <p><strong>Temperature Threshold:</strong> {{ temperatureThreshold }} °C</p>
@@ -121,28 +127,72 @@ export default {
 </script>
 
 <style scoped>
-/* Full Page Gradient Background */
+
 body {
-  background: linear-gradient(#1f7439, #132c5f, #371156); /* Light gradient from top left to bottom right */
+  background: linear-gradient(#1f7439, #132c5f, #371156);
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
-  height: 90vh; /* Ensure full viewport height */
+  height: 100vh; /* Full viewport height */
+  display: flex;
+  flex-direction: column; /* Layout flow from top to bottom */
+  overflow-x: hidden; /* Prevent horizontal overflow */
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; /* Ensure the navbar spans the full width */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  background: #030d5863;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  overflow-x: hidden; /* Prevent any overflow issues */
+  box-sizing: border-box; /* Include padding and borders in width calculation */
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #3498db;
 }
 
 .settings-panel {
   padding: 30px;
-  background-color: linear-gradient(#3c453fd6, #d5c389d5, #5316869a);
-  border-radius: 12px;
+  background-color: #ffffff;
+  border-radius: 30px;
   box-shadow: 0 4px 12px rgba(104, 21, 21, 0.795);
-  width: 100%;
   max-width: 400px;
-  margin: 20px auto;
+  margin: 120px auto; /* Adjust the margin to give space for the navbar */
+  height: auto; /* Let the content determine the height */
 }
 
 h2 {
   text-align: center;
-  color: #412e2e;
+  color: #c62b2b;
   margin-bottom: 20px;
 }
 
@@ -160,7 +210,7 @@ label {
 .input-group {
   display: flex;
   align-items: center;
-  border: 1px solid #ddd;
+  border: 1px solid #a21212;
   border-radius: 5px;
   padding: 5px;
 }
@@ -174,13 +224,13 @@ input {
 }
 
 input.error-input {
-  border: 1px solid rgb(139, 49, 49);
+  border: 1px solid rgb(70, 57, 57);
 }
 
 span {
   margin-left: 10px;
   font-size: 16px;
-  color: #723d3d;
+  color: #ffffff;
 }
 
 button {
@@ -206,9 +256,9 @@ button:disabled {
 }
 
 .info-text {
-  font-size: 14px;
-  color: #666;
-  background-color: #f1f1f1;
+  font-size: 16px;
+  color: #0b112b;
+  background-color: #f3e75f45;
   padding: 8px;
   border-radius: 5px;
 }
@@ -225,7 +275,7 @@ button:disabled {
 .alert-display {
   margin-top: 30px;
   padding: 10px;
-  background-color: #96c3c9;
+  background-color: #8ab0b5;
   border-radius: 8px;
 }
 </style>
