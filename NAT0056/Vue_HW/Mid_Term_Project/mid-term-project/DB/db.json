@@ -1,22 +1,16 @@
 {
-    "user": [
-      {
-        "id": "cdad",
-        "username": "Atif ",
-        "email": "atifaslam762003@gmail.com",
-        "password": "atif@123"
-      },
-      {
-        "id": "542d",
-        "username": "Atif ",
-        "email": "fahadbcd17@gmail.com",
-        "password": "123"
-      },
-      {
-        "id": "b037",
-        "username": "Tuhin Ali",
-        "email": "alimdtuhin2015@gmail.com",
-        "password": "12345"
-      }
-    ]
-  }
+  "user": [
+    {
+      "id": "8688",
+      "username": "Nuhash",
+      "email": "nuhashtamim4@gmail.com",
+      "password": "222222"
+    },
+    {
+      "id": "68f7",
+      "username": "juhh",
+      "email": "nuhashtamim3@gmail.com",
+      "password": "222222"
+    }
+  ]
+}

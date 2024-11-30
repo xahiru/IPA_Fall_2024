@@ -72,7 +72,7 @@ const login_page = async () => {
 
 .welcome-message h3 {
     font-size: 1.5rem;
-    color: #a5d07c;
+    color: rgba(29, 9, 243, 0.336);
     font-weight: 600;
     margin-bottom: 10px;
     text-shadow: 0 2px 8px rgba(167, 57, 177, 0.293);
@@ -108,24 +108,14 @@ const login_page = async () => {
     border-radius: 8px;
     outline: none;
     background: rgba(255, 255, 255, 0.9);
-    transition: border-color 0.3s;
-}
-
-.input-field {
-    padding: 12px 15px;
-    font-size: 1rem;
-    border: 1px solid #f5f5eb;
-    border-radius: 8px;
-    outline: none;
-    background: rgba(255, 255, 255, 0.9);
-    color: #333333; /* Text color inside the input fields */
+    color: #333333;
     transition: border-color 0.3s, color 0.3s;
 }
 
 .input-field:focus {
     border-color: #6c63ff;
     background: #ffffff;
-    color: #333333; /* Ensure text color remains the same when focused */
+    color: #333333;
 }
 
 

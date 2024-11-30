@@ -27,7 +27,6 @@ const fetchData = async () => {
 };
 
 onMounted(fetchData);
-
 </script>
 
 <template>
@@ -45,8 +44,8 @@ onMounted(fetchData);
 
     <main>
       <header>
-        <h1>Dashboard</h1>
-        <p>Real-time Monitoring of Greenhouse Conditions</p>
+        <h1>Greenhouse</h1>
+        <h3>Real-time Monitoring of Greenhouse Conditions</h3>
       </header>
 
       <section class="metrics">
@@ -73,9 +72,9 @@ onMounted(fetchData);
 
 body {
   font-family: 'Roboto', sans-serif;
-  background: #f4f6f9;
-  color: #333;
-  padding-top: 70px;
+  background: linear-gradient(135deg, #070532d3, #1769e4);
+  color: #9e1f1f;
+  padding-top: 68px;
 }
 
 .navbar {
@@ -117,24 +116,18 @@ a:hover{
 }
 
 .nav-links li a:hover {
-  color: #3498db;
+  color: #3498db; 
 }
 
 main {
   padding: 2rem 3rem;
 }
 
-header h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #34495e;
-  margin-bottom: 10px;
-}
-
-header p {
+header h3 {
   font-size: 1.1rem;
-  color: #7f8c8d;
+  color: #051752;
   font-weight: 300;
+  padding-top: 10px;
 }
 
 .metrics {
@@ -147,7 +140,7 @@ header p {
 .card {
   padding: 1.8rem;
   border-radius: 10px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 15px rgba(51, 20, 20, 0.1);
   text-align: center;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -157,19 +150,18 @@ header p {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
-
 .card h2 {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   margin-bottom: 10px;
 }
 
 .card p {
-  font-size: 2rem;
+  font-size: 1.9rem;
   font-weight: 600;
 }
 
 .temperature-card {
-  border-left: 5px solid #e74c3c;
+  border-left: 5px solid #247c22;
 }
 
 .humidity-card {

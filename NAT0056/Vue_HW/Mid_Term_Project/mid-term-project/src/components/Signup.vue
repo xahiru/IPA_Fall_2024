@@ -39,19 +39,6 @@ const signup_page = async () => {
                 <label for="password">Password</label>
                 <input type="password" id="password" class="input-field" v-model="password" placeholder="Create a password" required>
           
-                <label for="gender">Gender</label>
-                <div class="gender-options">
-                    <label>
-                        <input type="radio" v-model="gender" value="Male" required /> Male
-                    </label>
-                    <label>
-                        <input type="radio" v-model="gender" value="Female" required /> Female
-                    </label>
-                    <label>
-                        <input type="radio" v-model="gender" value="Other" /> Other
-                    </label>
-                </div>
-          
                 <button type="submit" class="button login-button">Sign Up</button>
               
                 <p class="signup-prompt">Already have an account? 
@@ -118,16 +105,18 @@ body {
 .input-field {
     padding: 12px 15px;
     font-size: 1rem;
+    border: 1px solid #f5f5eb;
     border-radius: 8px;
     outline: none;
-    border: 1px solid #d1cfe2;
-    background: rgba(255, 255, 255, 0.85);
-    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.9);
+    color: #333333;
+    transition: border-color 0.3s, color 0.3s;
 }
 
 .input-field:focus {
-    background: #ffffff;
     border-color: #6c63ff;
+    background: #ffffff;
+    color: #333333;
 }
 
 .button {
