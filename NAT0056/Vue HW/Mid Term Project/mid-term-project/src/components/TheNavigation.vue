@@ -5,6 +5,7 @@
         <li><router-link to="/login" class="navbar-link">Login</router-link></li>
         <li><router-link to="/signup" class="navbar-link">Signup</router-link></li>
         <li><router-link to="/about" class="navbar-link">About</router-link></li>
+        <li><router-link to="/dashboard" class="navbar-link">DashBoard</router-link></li>
       </ul>
     </nav>
   </template>
