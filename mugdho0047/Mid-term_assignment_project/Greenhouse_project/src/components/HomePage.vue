@@ -113,7 +113,7 @@ const afterLogin = () => {
   padding: 12px 28px;
   font-size: 1rem;
   font-weight: 600;
-  color: white;
+  color: rgb(255, 255, 255);
   border: whitesmoke;
   cursor: pointer;
   border-radius: 8px;
@@ -126,7 +126,7 @@ const afterLogin = () => {
 }
 
 .login-button {
-  background-color: #ffffff29;
+  background-color: #0846c1dc;
 }
 
 .signup-button {

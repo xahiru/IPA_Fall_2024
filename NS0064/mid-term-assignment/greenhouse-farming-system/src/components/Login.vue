@@ -1,5 +1,31 @@
 <script setup>
+import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import axios from 'axios';
 
+const email = ref('');
+const password = ref('');
+const router = useRouter();
+
+async function login() {
+  try {
+    let result = await axios.get(`http://localhost:3000/user?email=${email.value}&password=${password.value}`);
+    
+    if (result.status === 200 && result.data.length > 0) {
+      localStorage.setItem("user", JSON.stringify(result.data[0]));
+      router.push({ name: 'Dashboard' });
+    }
+  } catch (error) {
+    console.error("Error logging in:", error);
+  }
+}
+
+onMounted(() => {
+  let user = localStorage.getItem("user");
+  if (user) {
+    router.push({ name: "Dashboard" });
+  }
+});
 </script>
 
 <template>
@@ -10,12 +36,12 @@
         <p class="login-subtitle">Log in to manage your greenhouse</p>
       </header>
       
-      <form class="login-form">
+      <form class="login-form" @submit.prevent="login">
         <label for="email" class="input-label">Email</label>
-        <input type="email" id="email" class="input-field" placeholder="Enter your email" required>
+        <input type="email" id="email" class="input-field" v-model="email" placeholder="Enter your email" required>
         
         <label for="password" class="input-label">Password</label>
-        <input type="password" id="password" class="input-field" placeholder="Enter your password" required>
+        <input type="password" id="password" class="input-field" v-model="password" placeholder="Enter your password" required>
         
         <button type="submit" class="login-btn">Log In</button>
       </form>
