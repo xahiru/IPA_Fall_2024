@@ -1,288 +1,231 @@
-<script setup>
-import { ref, onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-
-const router = useRouter();
-
-const settings = ref({
-  temperatureThreshold: 30,
-  humidityThreshold: 60,
-  moistureThreshold: 40,
-  lightThreshold: 70,
-});
-
-const saveSettings = () => {
-  localStorage.setItem('settings', JSON.stringify(settings.value));
-  alert('Settings saved successfully!');
-};
-
-const loadSettings = () => {
-  const savedSettings = localStorage.getItem('settings');
-  if (savedSettings) {
-    settings.value = JSON.parse(savedSettings);
-  }
-};
-
-onMounted(loadSettings);
-
-const logout = () => {
-  localStorage.removeItem('user');
-  window.location.href = '/login';
-};
-</script>
-
 <template>
-  <div id="settings">
-    <nav class="navbar">
-      <div class="logo">Greenhouse</div>
-      <ul class="nav-links">
-        <li><router-link to="/dashboard">Home</router-link></li>
-        <li><router-link to="/over-view">Overview</router-link></li>
-        <li><router-link to="/settings">Settings</router-link></li>
-        <li><router-link to="/historical-data-chart">Logs</router-link></li>
-        <li><a @click="logout">Logout</a></li>
-      </ul>
-    </nav>
+  <div class="settings-panel">
+    <h2>Greenhouse Alert Thresholds</h2>
 
-    <main>
-      <header>
-        <h1>Settings</h1>
-        <p>Adjust alert thresholds for greenhouse monitoring.</p>
-      </header>
+    <!-- Temperature Alert Threshold -->
+    <div class="setting-option">
+      <label for="temperature-threshold">Temperature Alert Threshold (°C)</label>
+      <div class="input-group">
+        <input 
+          type="number" 
+          id="temperature-threshold" 
+          v-model="temperatureThreshold" 
+          min="-50" 
+          max="100"
+          :class="{'error-input': temperatureThreshold < -50 || temperatureThreshold > 100}" 
+          placeholder="Temperature in °C" 
+        />
+        <span>°C</span>
+      </div>
+      <p class="info-text">Set the maximum and minimum temperature limits for alerts.</p>
+      <p v-if="temperatureThreshold < -50 || temperatureThreshold > 100" class="error-text">Temperature must be between -50°C and 100°C.</p>
+    </div>
 
-      <form @submit.prevent="saveSettings" class="settings-form">
-        <div class="form-group">
-          <label for="temperature">Temperature Threshold (°C)</label>
-          <input
-            id="temperature"
-            type="number"
-            v-model="settings.temperatureThreshold"
-          />
-        </div>
+    <!-- Humidity Alert Threshold -->
+    <div class="setting-option">
+      <label for="humidity-threshold">Humidity Alert Threshold (%)</label>
+      <div class="input-group">
+        <input 
+          type="number" 
+          id="humidity-threshold" 
+          v-model="humidityThreshold" 
+          min="0" 
+          max="100"
+          :class="{'error-input': humidityThreshold < 0 || humidityThreshold > 100}"
+          placeholder="Humidity in %" 
+        />
+        <span>%</span>
+      </div>
+      <p class="info-text">Set the maximum and minimum humidity levels for alerts.</p>
+      <p v-if="humidityThreshold < 0 || humidityThreshold > 100" class="error-text">Humidity must be between 0% and 100%.</p>
+    </div>
 
-        <div class="form-group">
-          <label for="humidity">Humidity Threshold (%)</label>
-          <input
-            id="humidity"
-            type="number"
-            v-model="settings.humidityThreshold"
-          />
-        </div>
+    <!-- CO2 Level Alert Threshold -->
+    <div class="setting-option">
+      <label for="co2-threshold">CO2 Alert Threshold (ppm)</label>
+      <div class="input-group">
+        <input 
+          type="number" 
+          id="co2-threshold" 
+          v-model="co2Threshold" 
+          min="300" 
+          max="2000"
+          :class="{'error-input': co2Threshold < 300 || co2Threshold > 2000}"
+          placeholder="CO2 in ppm" 
+        />
+        <span>ppm</span>
+      </div>
+      <p class="info-text">Set the CO2 level for alert thresholds (in parts per million).</p>
+      <p v-if="co2Threshold < 300 || co2Threshold > 2000" class="error-text">CO2 level must be between 300ppm and 2000ppm.</p>
+    </div>
 
-        <div class="form-group">
-          <label for="moisture">Moisture Threshold (%)</label>
-          <input
-            id="moisture"
-            type="number"
-            v-model="settings.moistureThreshold"
-          />
-        </div>
+    <!-- Save Button -->
+    <div class="setting-option">
+      <button @click="saveSettings" :disabled="isSaveDisabled" class="button">Save Settings</button>
+    </div>
 
-        <div class="form-group">
-          <label for="light">Light Threshold (lx)</label>
-          <input
-            id="light"
-            type="number"
-            v-model="settings.lightThreshold"
-          />
-        </div>
-
-        <button type="submit" class="btn-save">Save Settings</button>
-      </form>
-    </main>
+    <!-- Display Alert Settings (optional) -->
+    <div class="alert-display">
+      <h3>Current Alert Settings:</h3>
+      <p><strong>Temperature Threshold:</strong> {{ temperatureThreshold }} °C</p>
+      <p><strong>Humidity Threshold:</strong> {{ humidityThreshold }} %</p>
+      <p><strong>CO2 Threshold:</strong> {{ co2Threshold }} ppm</p>
+    </div>
   </div>
 </template>
 
+<script>
+export default {
+  name: 'SettingsPanel',
+  data() {
+    return {
+      temperatureThreshold: 30,
+      humidityThreshold: 60,
+      co2Threshold: 1000,
+    };
+  },
+  computed: {
+    isSaveDisabled() {
+      return (
+        this.temperatureThreshold < -50 || this.temperatureThreshold > 100 ||
+        this.humidityThreshold < 0 || this.humidityThreshold > 100 ||
+        this.co2Threshold < 300 || this.co2Threshold > 2000
+      );
+    }
+  },
+  methods: {
+    saveSettings() {
+      localStorage.setItem('temperatureThreshold', this.temperatureThreshold);
+      localStorage.setItem('humidityThreshold', this.humidityThreshold);
+      localStorage.setItem('co2Threshold', this.co2Threshold);
+
+      alert('Settings saved!');
+    },
+  },
+  mounted() {
+    const savedTemperatureThreshold = localStorage.getItem('temperatureThreshold');
+    const savedHumidityThreshold = localStorage.getItem('humidityThreshold');
+    const savedCO2Threshold = localStorage.getItem('co2Threshold');
+
+    if (savedTemperatureThreshold) {
+      this.temperatureThreshold = savedTemperatureThreshold;
+    }
+    if (savedHumidityThreshold) {
+      this.humidityThreshold = savedHumidityThreshold;
+    }
+    if (savedCO2Threshold) {
+      this.co2Threshold = savedCO2Threshold;
+    }
+  },
+};
+</script>
+
 <style scoped>
-* {
+/* Full Page Gradient Background */
+body {
+  background: linear-gradient(#1f7439, #132c5f, #371156); /* Light gradient from top left to bottom right */
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-body {
   font-family: 'Roboto', sans-serif;
-  background: #f4f6f9;
-  color: #333;
-  padding-top: 70px;
+  height: 90vh; /* Ensure full viewport height */
 }
 
-.navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
+.settings-panel {
+  padding: 30px;
+  background-color: linear-gradient(#3c453fd6, #d5c389d5, #5316869a);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(104, 21, 21, 0.795);
   width: 100%;
+  max-width: 400px;
+  margin: 20px auto;
+}
+
+h2 {
+  text-align: center;
+  color: #412e2e;
+  margin-bottom: 20px;
+}
+
+.setting-option {
+  margin-bottom: 25px;
+}
+
+label {
+  font-weight: 600;
+  color: #133c9a;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.input-group {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 1.2rem 2rem;
-  background: #2d3e50;
-  color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  z-index: 100;
-}
-
-.logo {
-  font-size: 1.8rem;
-  font-weight: bold;
-  letter-spacing: 1px;
-}
-
-.nav-links {
-  list-style: none;
-  display: flex;
-  gap: 30px;
-}
-
-.nav-links li a {
-  text-decoration: none;
-  color: white;
-  font-size: 1.1rem;
-  font-weight: 500;
-  transition: color 0.3s ease;
-}
-
-.nav-links li a:hover {
-  color: #3498db;
-}
-
-a:hover {
-  cursor: pointer;
-}
-
-main {
-  padding: 2rem 3rem;
-}
-
-header h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #34495e;
-  margin-bottom: 10px;
-}
-
-header p {
-  font-size: 1.1rem;
-  color: #7f8c8d;
-  font-weight: 300;
-}
-
-.settings-form {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 20px;
-  margin-top: 30px;
-}
-
-.form-group {
-  display: flex;
-  flex-direction: column;
-}
-
-.form-group label {
-  font-size: 1rem;
-  font-weight: 500;
-  margin-bottom: 5px;
-}
-
-.form-group input {
-  padding: 0.8rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid #ddd;
   border-radius: 5px;
+  padding: 5px;
 }
 
-.form-group input:focus {
-  outline: none;
-  border-color: #3498db;
-  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
-}
-
-.btn-save {
-  background: #2ecc71;
-  color: white;
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
-  font-weight: 500;
+input {
+  padding: 10px;
   border: none;
-  border-radius: 5px;
+  outline: none;
+  flex-grow: 1;
+  font-size: 16px;
+}
+
+input.error-input {
+  border: 1px solid rgb(139, 49, 49);
+}
+
+span {
+  margin-left: 10px;
+  font-size: 16px;
+  color: #723d3d;
+}
+
+button {
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: rgb(230, 210, 210);
+  background: linear-gradient(90deg, #6c63ff, #a084dc);
+  border: none;
   cursor: pointer;
-  transition: background 0.3s ease;
+  border-radius: 8px;
+  transition: transform 0.2s, background-color 0.3s;
 }
 
-.btn-save:hover {
-  background: #27ae60;
+button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(90deg, #076322, #26a60d);
 }
 
-@media (max-width: 1024px) {
-  .settings-form {
-    grid-template-columns: 1fr;
-  }
-
-  .navbar {
-    padding: 1.2rem 1.5rem;
-  }
-
-  .nav-links li a {
-    font-size: 1rem;
-  }
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
-@media (max-width: 768px) {
-  .navbar {
-    flex-wrap: wrap;
-  }
-
-  .navbar li {
-    margin-left: 20px;
-  }
-
-  header h1 {
-    margin-top: 30px;
-  }
-
-  header p {
-    font-size: 1rem;
-  }
-
-  .form-group input {
-    font-size: 0.9rem;
-  }
-
-  .btn-save {
-    padding: 0.6rem 1.2rem;
-    font-size: 0.9rem;
-  }
+.info-text {
+  font-size: 14px;
+  color: #666;
+  background-color: #f1f1f1;
+  padding: 8px;
+  border-radius: 5px;
 }
 
-@media (max-width: 480px) {
-  .navbar {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1.2rem;
-  }
+.error-text {
+  font-size: 14px;
+  color: rgb(238, 111, 111);
+  margin-top: 5px;
+  background-color: #867f7f;
+  padding: 8px;
+  border-radius: 5px;
+}
 
-  .nav-links {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    max-width: 100%;
-    white-space: nowrap;
-  }
-
-  header h1 {
-    margin-top: 30px;
-  }
-
-  .nav-links li {
-    flex-shrink: 0;
-  }
-
-  .logo {
-    font-size: 1.6rem;
-    margin-bottom: 10px;
-  }
+.alert-display {
+  margin-top: 30px;
+  padding: 10px;
+  background-color: #96c3c9;
+  border-radius: 8px;
 }
 </style>
