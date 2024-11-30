@@ -39,8 +39,6 @@ onMounted(fetchData);
         <li><router-link to="/over-view">Overview</router-link></li>
         <li><router-link to="/settings">Settings</router-link></li>
         <li><router-link to="/logs">Logs</router-link></li>
-        <li><router-link to="/about">About</router-link></li>
-
         <li> <a @click="logout">Logout</a> </li>
       </ul>
     </nav>

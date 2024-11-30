@@ -39,6 +39,19 @@ const signup_page = async () => {
                 <label for="password">Password</label>
                 <input type="password" id="password" class="input-field" v-model="password" placeholder="Create a password" required>
           
+                <label for="gender">Gender</label>
+                <div class="gender-options">
+                    <label>
+                        <input type="radio" v-model="gender" value="Male" required /> Male
+                    </label>
+                    <label>
+                        <input type="radio" v-model="gender" value="Female" required /> Female
+                    </label>
+                    <label>
+                        <input type="radio" v-model="gender" value="Other" /> Other
+                    </label>
+                </div>
+          
                 <button type="submit" class="button login-button">Sign Up</button>
               
                 <p class="signup-prompt">Already have an account? 

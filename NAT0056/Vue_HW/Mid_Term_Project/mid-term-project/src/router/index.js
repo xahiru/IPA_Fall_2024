@@ -42,11 +42,10 @@ import Logs from '../components/Logs.vue';
 	  },
 	  {
 	    path: '/logs',
-	    name: 'Logss',
+	    name: 'Logs',
 	    component: Logs,
 		meta: { requiresAuth: true }
-	  },
-	  
+	  },	  
 	];
 
 	const router = createRouter({
