@@ -1,6 +1,7 @@
 <template>
   <v-container fluid class="dashboard-container">
     <AlertSystem ref="alertSystem" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     
     <v-row>
       <v-col cols="12" class="d-flex align-center justify-space-between">
@@ -17,6 +18,22 @@
       </v-col>
     </v-row>
 
+    <nav class="dashboard-nav">
+      <div class="nav-brand">
+        <span class="brand-text">MyDashboard</span>
+      </div>
+      <div class="nav-links">
+        <router-link to="/dashboard" class="nav-link" active-class="active">
+          <i class="fas fa-chart-line"></i> Dashboard
+        </router-link>
+        <router-link to="/settings" class="nav-link" active-class="active">
+  <i class="fas fa-cog"></i> Settings
+</router-link>
+      </div>
+      <button @click="logout" class="logout-btn">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </button>
+    </nav>
 
     <v-row>
       <v-col v-for="metric in metrics" :key="metric.id" cols="12" md="4">
@@ -60,16 +77,19 @@
 
 <script setup>
 import { ref } from 'vue'
-import AlertSystem from '../AlertSystem.vue';
-import MetricCards from '../MetricCards.vue'
-import MetricCharts from '../MetricCharts.vue'
+import AlertSystem from '../../AlertSystem.vue';
+import MetricCards from '../../MetricCards.vue'
+import MetricCharts from '../../MetricCharts.vue'
 import { onMounted, onUnmounted } from 'vue'
-import { WebSocketService } from '../../services/websocket';
+import { WebSocketService } from '../../../services/websocket'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const alertSystem = ref(null)
 const isLoading = ref(false)
 const showDetailsDialog = ref(false)
 const selectedMetric = ref(null)
+
 const metrics = ref([
   {
     id: 1,
@@ -222,6 +242,7 @@ const checkThresholds = (metric) => {
 <style scoped>
 .dashboard-container {
   padding: 24px;
+  background: var(--gradient-primary);
 }
 
 .elevation-chart {
@@ -255,5 +276,81 @@ const checkThresholds = (metric) => {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: bold;
+}
+
+.dashboard-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: linear-gradient(to right, #1a1a2e, #16213e);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.nav-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.nav-link.active {
+  background-color: rgba(255, 255, 255, 0.2);
+  font-weight: bold;
+}
+
+.logout-btn {
+  background-color: #ff4757;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+}
+
+.logout-btn:hover {
+  background-color: #ff6b81;
+  transform: translateY(-2px);
+}
+
+/* Add smooth hover transitions */
+* {
+  transition: all 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .nav-links {
+    gap: 1rem;
+  }
+  
+  .nav-link, .logout-btn {
+    padding: 0.4rem 0.8rem;
+  }
 }
 </style>
