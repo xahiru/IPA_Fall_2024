@@ -1,61 +1,75 @@
 <template>
-    <div>
-      <button @click="toggleVisibility">
-        See me
-      </button>
-  
-      <p v-if="isVisible">I love Programming</p>
-  
-      <p v-show="isVisible">v-show</p>
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    name: "ToggleVisibility",
-    data() {
-      return {
-        isVisible: false,
-      };
+  <div class="toggle-container">
+    <button @click="toggleVisibility">
+      {{ isVisible ? 'Hide' : 'Show' }} Message
+    </button>
+    
+    <p v-if="isVisible" class="message show">I love Programming</p>
+    <p v-show="isVisible" class="message show">v-show</p>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "ToggleVisibility",
+  data() {
+    return {
+      isVisible: false,
+    };
+  },
+  methods: {
+    toggleVisibility() {
+      this.isVisible = !this.isVisible;
     },
-    methods: {
-      toggleVisibility() {
-        this.isVisible = !this.isVisible;
-      },
-    },
-  };
-  </script>
-  
-  <style scoped>
-/* Styling for the container */
+  },
+};
+</script>
+
+<style scoped>
 .toggle-container {
-  background-color: #e0f7fa; /* Light cyan background color */
+  background-color: #e0f7fa; 
   padding: 20px;
   border-radius: 8px;
   text-align: center;
-  margin: 10px 0;
+  margin: 20px auto;
+  width: 300px; 
+  box-shadow: 0 4px 6px rgb(0, 0, 0, 0.1); 
 }
 
+/* Button styling */
 button {
-  margin-bottom: 15px;
-  padding: 8px 16px;
+  padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
-  background-color: #3e9c90; 
-  color: rgb(199, 192, 208);
-  border: 15px;
-  border-color: rgb(219, 14, 14);
-  border-radius: 10px;
-  transition: background-color 0.3s;
+  background-color: #3e9c90;
+  color: #fff;
+  border: 2px solid #217065;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.2s ease-in-out;
 }
 
 button:hover {
-  background-color: #217065; 
+  background-color: #217065;
+  transform: scale(1.05); 
 }
 
 .message {
   font-size: 18px;
-  color: #004d40; 
-  margin: 5px 0;
+  color: #004d40;
+  margin: 10px 0;
+  opacity: 1;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Optional: Styling for hidden messages */
+.message.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* If using v-if, ensure there's a smooth transition when hidden */
+.message:not(.show) {
+  visibility: hidden;
+  opacity: 0;
 }
 </style>
