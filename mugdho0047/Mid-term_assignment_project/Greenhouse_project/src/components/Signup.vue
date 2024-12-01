@@ -51,49 +51,13 @@ const signup_page = async () => {
 
 <style>
 #bdy {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100vh;
     position: relative;
-    font-family: 'Roboto', sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.abstract-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(135deg, #ff8a00, #e52e71, #8921aa);
-    z-index: -1;
-    overflow: hidden;
-}
-
-.abstract-background::before,
-.abstract-background::after {
-    content: '';
-    position: absolute;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    pointer-events: none;
-}
-
-.abstract-background::before {
-    width: 400px;
-    height: 400px;
-    top: -50px;
-    left: -100px;
-}
-
-.abstract-background::after {
-    width: 300px;
-    height: 300px;
-    bottom: -50px;
-    right: -100px;
+  background-color: #f4f7fc;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .signup-container {
@@ -135,8 +99,8 @@ const signup_page = async () => {
 }
 
 .input-field:focus {
-    border-color: #e52e71;
-    box-shadow: 0px 0px 5px rgba(229, 46, 113, 0.5);
+    border-color: #21de3a;
+    box-shadow: 0px 0px 5px rgba(19, 146, 17, 0.5);
 }
 
 .button {
@@ -144,15 +108,14 @@ const signup_page = async () => {
     font-size: 1rem;
     font-weight: 600;
     color: #fff;
-    background: #e52e71;
+    background: #088d29;
     border: none;
     cursor: pointer;
     border-radius: 8px;
-    transition: background 0.3s ease;
 }
 
 .button:hover {
-    background: #ff8a00;
+    background: #21c845;
 }
 
 .signup-prompt {
@@ -162,7 +125,7 @@ const signup_page = async () => {
 }
 
 .login-link {
-    color: #e52e71;
+    color: #2e5fdc;
     font-weight: bold;
     text-decoration: none;
 }

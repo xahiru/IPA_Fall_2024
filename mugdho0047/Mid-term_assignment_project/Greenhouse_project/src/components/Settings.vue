@@ -81,67 +81,54 @@ watch(
 
 <template>
   <div id="settings">
-    <div class="abstract-background"></div>
-
     <nav class="navbar">
-      <div class="logo">Greenhouse Dashboard</div>
+      <div class="logo">Greenhouse</div>
       <ul class="nav-links">
         <li><router-link to="/dashboard">Home</router-link></li>
         <li><router-link to="/over-view">Overview</router-link></li>
         <li><router-link to="/settings">Settings</router-link></li>
-        <li><router-link to="/historical-data-chart">Logs</router-link></li>
+        <li><router-link to="/logs">Logs</router-link></li>
         <li><a @click="logout">Logout</a></li>
       </ul>
     </nav>
 
     <main>
       <header>
-        <h1>Settings</h1>
-        <p>Configure alert thresholds and monitoring preferences for your greenhouse.</p>
+
       </header>
 
       <form class="settings-form" @submit.prevent="saveSettings">
-        <div
-          class="form-group"
-          v-for="(enabled, key) in settings.alertsEnabled"
-          :key="key"
-        >
-          <div class="input-group">
-            <label :for="key">{{ key.charAt(0).toUpperCase() + key.slice(1) }} Threshold:</label>
-            <input
-              type="number"
-              :id="key"
-              v-model="settings[`${key}Threshold`]"
-              min="0"
-              class="input-field"
-            />
-          </div>
+        <div class="form-group" v-for="(threshold, key) in settings.alertsEnabled" :key="key">
+          <label :for="key">{{ key.charAt(0).toUpperCase() + key.slice(1) }}:</label>
+          <input
+            type="number"
+            :id="key"
+            v-model="settings[`${key}Threshold`]"
+            min="0"
+            class="input-field"
+          />
           <div class="toggle">
             <input
               type="checkbox"
               :id="`${key}-alert`"
               v-model="settings.alertsEnabled[key]"
             />
-            <label :for="`${key}-alert`">Enable Alerts</label>
+            <label :for="`${key}-alert`">Enable {{ key.charAt(0).toUpperCase() + key.slice(1) }} Alerts</label>
           </div>
         </div>
 
         <div class="form-group">
-          <div class="input-group">
-            <label for="frequency">Simulation Frequency (ms):</label>
-            <input
-              type="number"
-              id="frequency"
-              v-model="settings.simulationFrequency"
-              min="1000"
-              class="input-field"
-            />
-          </div>
+          <label for="frequency">Simulation Frequency (ms):</label>
+          <input
+            type="number"
+            id="frequency"
+            v-model="settings.simulationFrequency"
+            min="1000"
+            class="input-field"
+          />
         </div>
 
-        <button type="submit" class="button save-button">
-          Save Settings
-        </button>
+        <button type="submit" class="button save-button">Set thresholds and enable alerts for monitoring</button>
       </form>
 
       <div v-if="settings.activeAlert" class="active-alert">
@@ -152,123 +139,149 @@ watch(
 </template>
 
 <style scoped>
-/* General Styling */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Roboto', sans-serif;
-  background: #f4f7fa;
-  color: #333;
-}
-
-/* Abstract Background */
-.abstract-background {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, #ff8a00, #e52e71, #8921aa);
-  z-index: -1;
+.dashboard {
+  position: relative;
+  background-color: #f4f7fc;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
+  height: 10%;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1.2rem 2rem;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  background-color: #34495e;
+  color: #ffffff;
+  border-bottom: 1px solid #2c3e50;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+  z-index: 100;
 }
 
-.nav-links li a {
-  font-size: 1rem;
-  color: #333;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.nav-links li a:hover {
-  color: #e52e71;
-}
-
-main {
-  padding: 2rem;
-  margin-top: 80px;
-}
-
-header h1 {
-  font-size: 2.5rem;
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
   color: #ffffff;
 }
 
-header p {
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #ecf0f1;
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.7);
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #1abc9c;
+}
+
+main {
+  padding: 2rem 3rem;
+}
+
+header h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+header p {
+  font-size: 1.2rem;
+  color: #000000;
 }
 
 .settings-form {
-  max-width: 700px;
+  display: flex;
   margin: 2rem auto;
-  background: #ffffff;
   padding: 2rem;
+  background: #ffffff;
   border-radius: 10px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1000px;
+  width: 100%;
+  margin: 0px auto;
+  margin-top: 70px;
 }
 
 .form-group {
-  margin-bottom: 1.5rem;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: initial;
+  gap: 10px;
 }
 
-.input-group label {
+label {
   font-size: 1rem;
   color: #34495e;
 }
 
 .input-field {
-  width: 100px;
   padding: 0.4rem;
+  font-size: 1rem;
   border: 1px solid #e0e0e0;
   border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s ease;
 }
 
-.toggle input {
-  margin-right: 10px;
+.input-field:focus {
+  border-color: #8e44ad;
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .button {
-  display: inline-block;
-  background-color: #2ecc71;
-  color: #fff;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #ffffff;
+  background: #2ecc71;
   border: none;
-  border-radius: 5px;
-  padding: 0.8rem 1.2rem;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s ease;
 }
 
 .button:hover {
-  background-color: #27ae60;
+  background: #27ae60;
+}
+
+.save-button {
+  align-self: center;
 }
 
 .active-alert {
-  margin-top: 1rem;
+  margin-top: 5px;
   padding: 1rem;
-  background: #e74c3c;
-  color: #fff;
-  border-radius: 8px;
-  font-size: 1rem;
-  text-align: center;
+  font-size: 1.2rem;
+  color: #ffffff;
+  background: #ff0000;
+  border: 1px solid #ffffff;
+  border-radius: 10px;
 }
 </style>

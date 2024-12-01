@@ -1,93 +1,136 @@
 <template>
-    <div>
-      <h1>Login Page</h1>
-      <form @submit.prevent="handleLogin">
-        <div>
-          <label for="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            v-model="username"
-            placeholder="Enter your username"
-            required
-          />
-        </div>
-        
-        <div>
-          <label for="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            v-model="password"
-            placeholder="Enter your password"
-            required
-          />
-        </div>
-  
-        <button type="submit">Login</button>
-      </form>
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    name: "Login",
-    data() {
-      return {
-        username: "",
-        password: "",
-      };
-    },
-    methods: {
-      handleLogin() {
-        
-        if (this.username && this.password) {
-          alert(`Logging in with Username: ${this.username} and Password: ${this.password}`);
+  <div class="login-container">
+    <header>
+      <h1 class="title">Dashboard Login</h1>
+    </header>
 
-          this.username = "";
-          this.password = "";
-        } else {
-          alert("Please fill in all fields.");
-        }
-      },
-    },
-  };
-  </script>
-  
-  <style>
+    <form @submit.prevent="login_page" class="login-form">
+      <input 
+        v-model="email" 
+        type="email" 
+        placeholder="Enter your email" 
+        class="input-field" 
+        required 
+      />
+      <input 
+        v-model="password" 
+        type="password" 
+        placeholder="Enter your password" 
+        class="input-field" 
+        required 
+      />
+      <button type="submit" class="button">Login</button>
+      <p class="signup-prompt">
+        Don't have an account? 
+        <router-link to="/signup" class="signup-link">Sign up here</router-link>
+      </p>
+    </form>
+  </div>
+</template>
 
-  form {
-    background-color: #369970;
-    display: flex;
-    flex-direction: column;
-    width: 300px;
-    margin: 20px auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
+<script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+import { login } from '../api/api';
+
+const email = ref('');
+const password = ref('');
+const router = useRouter();
+
+const login_page = async () => {
+  const response = await login(email.value, password.value);
+  if (response.success) {
+    router.push({ name: 'Dashboard' });
+  } else {
+    alert(`Login failed: ${response.error || 'Unknown error'}`);
   }
-  label {
-    margin-top: 10px;
-    font-weight: bold;
-  }
-  input {
-    margin: 5px 0 15px;
-    padding: 8px;
-    font-size: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  button {
-    padding: 10px;
-    background-color: #42b983;
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  button:hover {
-    background-color: #369970;
-  }
-  </style>
-  
+};
+</script>
+
+<style scoped>
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+  background: #0d1117;
+  color: #c9d1d9;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #fcfcfc;
+  margin-bottom: 15px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #8b949e;
+  margin-bottom: 25px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+}
+
+.input-field {
+  padding: 12px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.input-field::placeholder {
+  color: #b1b1b1;
+}
+
+.input-field:focus {
+  background: rgba(255, 255, 255, 0.3);
+  outline: none;
+}
+
+.button {
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+  background: #238636;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.button:hover {
+  background-color: #2ea043;
+  transform: translateY(-2px);
+}
+
+.signup-prompt {
+  margin-top: 15px;
+  color: #8b949e;
+  font-size: 0.9rem;
+}
+
+.signup-link {
+  color: #58a6ff;
+  text-decoration: underline;
+}
+
+.signup-link:hover {
+  color: #1f6feb;
+}
+</style>

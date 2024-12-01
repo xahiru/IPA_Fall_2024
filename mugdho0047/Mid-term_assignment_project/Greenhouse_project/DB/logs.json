@@ -1,0 +1,73 @@
+[
+    {
+      "level": "info",
+      "message": "System started successfully",
+      "timestamp": "2024-11-26T08:00:00Z",
+      "user": "Admin",
+      "action": "System initialization"
+    },
+    {
+      "level": "error",
+      "message": "Failed to fetch temperature data from the sensor",
+      "timestamp": "2024-11-26T08:15:45Z",
+      "user": "Admin",
+      "action": "Sensor data fetch"
+    },
+    {
+      "level": "warning",
+      "message": "Humidity levels are nearing the upper threshold",
+      "timestamp": "2024-11-26T08:30:10Z",
+      "user": "Admin",
+      "action": "Monitoring humidity levels"
+    },
+    {
+      "level": "info",
+      "message": "Temperature data updated successfully",
+      "timestamp": "2024-11-26T08:35:30Z",
+      "user": "Admin",
+      "action": "Data update"
+    },
+    {
+      "level": "error",
+      "message": "Failed to connect to the database",
+      "timestamp": "2024-11-26T08:40:20Z",
+      "user": "Admin",
+      "action": "Database connection"
+    },
+    {
+      "level": "success",
+      "message": "User logged in successfully",
+      "timestamp": "2024-11-26T09:00:10Z",
+      "user": "User123",
+      "action": "Login"
+    },
+    {
+      "level": "info",
+      "message": "Settings updated by user",
+      "timestamp": "2024-11-26T09:15:00Z",
+      "user": "User123",
+      "action": "Update settings"
+    },
+    {
+      "level": "warning",
+      "message": "Low soil moisture detected in zone 3",
+      "timestamp": "2024-11-26T09:45:50Z",
+      "user": "Admin",
+      "action": "Soil moisture check"
+    },
+    {
+      "level": "info",
+      "message": "Scheduled system maintenance completed successfully",
+      "timestamp": "2024-11-26T10:00:00Z",
+      "user": "Admin",
+      "action": "System maintenance"
+    },
+    {
+      "level": "error",
+      "message": "Light sensor calibration failed",
+      "timestamp": "2024-11-26T10:10:30Z",
+      "user": "Admin",
+      "action": "Sensor calibration"
+    }
+  ]
+  
