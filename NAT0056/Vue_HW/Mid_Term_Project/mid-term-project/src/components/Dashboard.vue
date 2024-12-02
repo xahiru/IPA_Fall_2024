@@ -86,15 +86,14 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1.2rem 2rem;
-  background: #2d3e50;
+  background: #030d5863;
   color: white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   z-index: 100;
-  overflow-x: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
-a:hover{
-  cursor: pointer;
-}
+
 .logo {
   font-size: 1.8rem;
   font-weight: bold;
@@ -116,7 +115,7 @@ a:hover{
 }
 
 .nav-links li a:hover {
-  color: #3498db; 
+  color: #3498db;
 }
 
 main {

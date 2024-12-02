@@ -6,7 +6,6 @@
       <ul class="nav-links">
         <li><router-link to="/dashboard">Home</router-link></li>
         <li><router-link to="/over-view">Overview</router-link></li>
-        <li><router-link to="/settings">Settings</router-link></li>
         <li><router-link to="/logs">Logs</router-link></li>
         <li> <a @click="logout">Logout</a> </li>
       </ul>
@@ -133,17 +132,17 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
-  height: 100vh; /* Full viewport height */
+  height: 100vh;
   display: flex;
-  flex-direction: column; /* Layout flow from top to bottom */
-  overflow-x: hidden; /* Prevent horizontal overflow */
+  flex-direction: column;
+  overflow-x: hidden;
 }
 
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%; /* Ensure the navbar spans the full width */
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -152,8 +151,8 @@ body {
   color: white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   z-index: 100;
-  overflow-x: hidden; /* Prevent any overflow issues */
-  box-sizing: border-box; /* Include padding and borders in width calculation */
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .logo {
@@ -186,8 +185,10 @@ body {
   border-radius: 30px;
   box-shadow: 0 4px 12px rgba(104, 21, 21, 0.795);
   max-width: 400px;
-  margin: 120px auto; /* Adjust the margin to give space for the navbar */
-  height: auto; /* Let the content determine the height */
+  margin: 120px auto;
+  height: auto;
+  height: calc(98vh);
+  overflow-y: auto;
 }
 
 h2 {
@@ -230,7 +231,7 @@ input.error-input {
 span {
   margin-left: 10px;
   font-size: 16px;
-  color: #ffffff;
+  color: #130846;
 }
 
 button {
@@ -265,7 +266,7 @@ button:disabled {
 
 .error-text {
   font-size: 14px;
-  color: rgb(238, 111, 111);
+  color: rgb(206, 15, 15);
   margin-top: 5px;
   background-color: #867f7f;
   padding: 8px;

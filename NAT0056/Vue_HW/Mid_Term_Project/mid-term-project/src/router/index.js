@@ -3,10 +3,11 @@ import Login from '../components/Login.vue';
 import HomePage from '../components/HomePage.vue';
 import Signup from '../components/Signup.vue';
 import Dashboard from '../components/Dashboard.vue';
-import Overview from '../components/Overview.vue';
+import Overview from '../components/Overview.vue'
 import Settings from '../components/Settings.vue';
 import Logs from '../components/Logs.vue';
-	const routes = [
+
+const routes = [
 	  {
 	    path: '/',
 	    name: 'HomePage',

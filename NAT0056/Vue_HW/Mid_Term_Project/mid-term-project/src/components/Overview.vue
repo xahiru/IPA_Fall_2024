@@ -35,7 +35,6 @@ onMounted(fetchOverviewData);
       <div class="logo">Greenhouse</div>
       <ul class="nav-links">
         <li><router-link to="/dashboard">Home</router-link></li>
-        <li><router-link to="/over-view">Overview</router-link></li>
         <li><router-link to="/settings">Settings</router-link></li>
         <li><router-link to="/historical-data-chart">Logs</router-link></li>
         <li> <a @click="logout">Logout</a> </li>
@@ -45,12 +44,8 @@ onMounted(fetchOverviewData);
     <main>
       <header>
         <h1>Greenhouse Overview</h1>
-        <p>A greenhouse is a structure designed to create a controlled environment for growing plants. It typically features transparent walls and roofs, often made of glass or plastic, to allow sunlight in while trapping heat. This warmth helps maintain a stable temperature, promoting plant growth even in cold or unfavorable weather conditions.
-
-Greenhouses are used for various purposes, such as growing flowers, vegetables, fruits, and ornamental plants, especially in regions where the natural climate isn't ideal for year-round cultivation. They can range from small backyard setups to large commercial operations. Key features often include ventilation systems, heating, cooling, irrigation, and automated climate controls to optimize growing conditions.
-
-By creating a microclimate, greenhouses allow for extended growing seasons, protection from pests, and improved crop yields..</p>
-      </header>
+        <p>A greenhouse is a structure designed to create a controlled environment for plant growth. Made of transparent materials like glass or plastic, it allows sunlight to enter while trapping heat, maintaining a stable temperature. Greenhouses extend growing seasons, protect plants from pests, and improve yields by offering optimal conditions. They often include ventilation, heating, cooling, and irrigation systems to regulate temperature, humidity, and water. Greenhouses are used for growing vegetables, fruits, flowers, and ornamental plants, and are particularly useful in regions with harsh climates. They also offer sustainable farming practices by reducing the need for pesticides and conserving resources</p>
+              </header>
 
       <section class="overview-details">
         <div 
@@ -91,15 +86,12 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1.2rem 2rem;
-  background: #2d3e50;
+  background: #030d5863;
   color: white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   z-index: 100;
-  overflow-x: auto;
-}
-
-a:hover {
-  cursor: pointer;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .logo {
