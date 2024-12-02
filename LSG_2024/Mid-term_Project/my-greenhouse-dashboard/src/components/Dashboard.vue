@@ -87,7 +87,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1.2rem 2rem;
-  background: #2d3e50;
+  background: #026302;
   color: white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   z-index: 100;
@@ -117,7 +117,7 @@ a:hover{
 }
 
 .nav-links li a:hover {
-  color: #3498db;
+  color: #0fc727;
 }
 
 main {
@@ -127,7 +127,7 @@ main {
 header h1 {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #34495e;
+  color: #10b918;
   margin-bottom: 10px;
 }
 
@@ -169,7 +169,7 @@ header p {
 }
 
 .temperature-card {
-  border-left: 5px solid #e74c3c;
+  border-left: 5px solid #cde73c;
 }
 
 .humidity-card {

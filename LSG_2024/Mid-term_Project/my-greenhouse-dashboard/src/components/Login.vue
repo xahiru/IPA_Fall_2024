@@ -19,7 +19,7 @@ const login_page = async () => {
     <div id="bdy">
         <div class="login-page">
             <header class="header">
-                <h1 class="title">Greenhouse Farming System</h1>
+                <h1 class="title">Greenhouse Monitoring System</h1>
                 <p class="subtitle">Login to access your dashboard</p>
             </header>
 
@@ -50,7 +50,7 @@ const login_page = async () => {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, #6c63ff, #a084dc);
+    background: linear-gradient(135deg, #14a008, #036614);
     font-family: 'Poppins', sans-serif;
 }
 
@@ -58,10 +58,10 @@ const login_page = async () => {
     max-width: 400px;
     width: 100%;
     text-align: center;
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(13, 190, 57, 0.2);
     padding: 30px;
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 30px rgba(13, 190, 57, 0.2);
 }
 
 .header {
@@ -72,7 +72,7 @@ const login_page = async () => {
     font-size: 2rem;
     font-weight: bold;
     color: #ffffff;
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 2px 5px rgba(13, 190, 57, 0.2);
 }
 
 .subtitle {
@@ -98,7 +98,7 @@ const login_page = async () => {
 }
 
 .input-field:focus {
-    border-color: #6c63ff;
+    border-color: #03a30b;
     background: #ffffff;
 }
 
@@ -107,7 +107,7 @@ const login_page = async () => {
     font-size: 1rem;
     font-weight: 600;
     color: white;
-    background: linear-gradient(90deg, #6c63ff, #a084dc);
+    background: linear-gradient(90deg, #14a008, #036614);
     border: none;
     cursor: pointer;
     border-radius: 8px;
@@ -116,7 +116,7 @@ const login_page = async () => {
 
 .button:hover {
     transform: scale(1.05);
-    background: linear-gradient(90deg, #076322, #26a60d);
+    background: linear-gradient(90deg, #14a008, #036614);
 }
 
 .signup-prompt {

@@ -14,12 +14,12 @@ const afterLogin = () => {
   <div id="home-page">
     <div class="home-content">
       <header class="header">
-        <h1 class="title">Greenhouse Farming System</h1>
+        <h1 class="title">Greenhouse Monitoring System</h1>
         <p class="subtitle"> sustainable agriculture with technology</p>
       </header>
 
       <section class="info-section">
-        <p>Welcome to the Greenhouse Farming System,  Explore the features:</p>
+        <p>Welcome to the Greenhouse Monitoring System,  Explore the features:</p>
       </section>
 
       <div class="buttons">
@@ -129,11 +129,11 @@ const afterLogin = () => {
 }
 
 .login-button {
-  background-color: #3498db;
+  background-color: #0ab618;
 }
 
 .signup-button {
-  background-color: #3498db;
+  background-color: #0ab618;
 }
 
 .login-button:hover {

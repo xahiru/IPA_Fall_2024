@@ -44,12 +44,8 @@ onMounted(fetchOverviewData);
 
     <main>
       <header>
-        <h1>Greenhouse Overview</h1>
-        <p>A greenhouse is a structure designed to create a controlled environment for growing plants. It typically features transparent walls and roofs, often made of glass or plastic, to allow sunlight in while trapping heat. This warmth helps maintain a stable temperature, promoting plant growth even in cold or unfavorable weather conditions.
-
-Greenhouses are used for various purposes, such as growing flowers, vegetables, fruits, and ornamental plants, especially in regions where the natural climate isn't ideal for year-round cultivation. They can range from small backyard setups to large commercial operations. Key features often include ventilation systems, heating, cooling, irrigation, and automated climate controls to optimize growing conditions.
-
-By creating a microclimate, greenhouses allow for extended growing seasons, protection from pests, and improved crop yields..</p>
+        <h1>Greenhouse Monitoring System Overview</h1>
+        <p>As the global population grows and climate change increasingly impacts agriculture, adopting efficient and sustainable farming practices becomes more critical. A greenhouse monitoring system plays a pivotal role in this effort by providing real-time data on vital environmental parameters such as temperature, humidity, soil moisture, light intensity, carbon dioxide levels, and water usage. This data empowers farmers to optimize crop growth conditions, improve plant health, reduce costs, and conserve resources.A smart monitoring system integrates IoT sensors to continuously monitor and regulate the environment within a greenhouse. These sensors collect data on environmental factors, which is then transmitted to a central control unit or remote system. By using this data, the system can automatically adjust factors like ventilation, lighting, irrigation, and temperature control, ensuring optimal conditions for plant growth.Smart greenhouse systems are versatile and can be implemented in a wide range of settings, from large-scale commercial farms to research facilities and hobbyist greenhouses. They are suitable for cultivating a diverse variety of crops, including vegetables, fruits, flowers, herbs, and more.. </p>
       </header>
 
       <section class="overview-details">
@@ -78,7 +74,7 @@ By creating a microclimate, greenhouses allow for extended growing seasons, prot
 body {
   font-family: 'Roboto', sans-serif;
   background: #f4f6f9;
-  color: #333;
+  color: #333333;
   padding-top: 70px;
 }
 
@@ -91,9 +87,9 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1.2rem 2rem;
-  background: #2d3e50;
+  background: #026302;
   color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(48, 21, 21, 0.1);
   z-index: 100;
   overflow-x: auto;
 }
@@ -123,7 +119,7 @@ a:hover {
 }
 
 .nav-links li a:hover {
-  color: #3498db;
+  color: #06b131;
 }
 
 main {
@@ -160,7 +156,7 @@ header p {
 
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .card h2 {

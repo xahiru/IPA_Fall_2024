@@ -103,7 +103,7 @@ const logout = () => {
 body {
   font-family: 'Roboto', sans-serif;
   background: #f4f6f9;
-  color: #333;
+  color: #1d8308;
   padding-top: 70px;
 }
 
@@ -116,9 +116,9 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1.2rem 2rem;
-  background: #2d3e50;
+  background: #1d8308;
   color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 10px rgba(3, 54, 2, 0.959);
   z-index: 100;
 }
 
@@ -143,7 +143,7 @@ body {
 }
 
 .nav-links li a:hover {
-  color: #3498db;
+  color: #07b10f;
 }
 
 a:hover {
@@ -157,13 +157,13 @@ main {
 header h1 {
   font-size: 2.5rem;
   font-weight: 700;
-  color: #34495e;
+  color: #1a9609;
   margin-bottom: 10px;
 }
 
 header p {
   font-size: 1.1rem;
-  color: #7f8c8d;
+  color: #afc2af;
   font-weight: 300;
 }
 
@@ -194,12 +194,12 @@ header p {
 
 .form-group input:focus {
   outline: none;
-  border-color: #3498db;
-  box-shadow: 0 0 5px rgba(52, 152, 219, 0.5);
+  border-color: #05ad1b;
+  box-shadow: 0 0 5px rgba(6, 167, 14, 0.781);
 }
 
 .btn-save {
-  background: #2ecc71;
+  background: #178003;
   color: white;
   padding: 0.8rem 1.5rem;
   font-size: 1rem;

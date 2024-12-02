@@ -25,7 +25,7 @@ const signup_page = async () => {
     <div id="bdy">
         <div class="login-page">
             <header class="header">
-              <h1 class="title">Greenhouse Farming System</h1>
+              <h1 class="title">Greenhouse Monitoring System</h1>
               <p class="subtitle">Create an account to get started</p>
             </header>
           
@@ -58,7 +58,7 @@ const signup_page = async () => {
 
 body {
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #f0c27b, #4b1248);
+    background: linear-gradient(135deg, #014101, #11a30c);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -114,7 +114,7 @@ body {
 
 .input-field:focus {
     background: #ffffff;
-    border-color: #6c63ff;
+    border-color: #09b411;
 }
 
 .button {
@@ -122,7 +122,7 @@ body {
     font-size: 1.1rem;
     font-weight: 600;
     color: white;
-    background: linear-gradient(90deg, #6c63ff, #8e70c9);
+    background: linear-gradient(90deg, #014101, #11a30c);
     border: none;
     cursor: pointer;
     border-radius: 8px;
@@ -147,7 +147,7 @@ body {
 }
 
 .signup-link:hover {
-    color: #8e70c9;
+    color: #0cb614;
     text-decoration: none;
 }
 </style>
