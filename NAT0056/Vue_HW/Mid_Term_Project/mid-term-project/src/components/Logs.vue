@@ -8,10 +8,9 @@ ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale
 
 const router = useRouter();
 const logs = ref([]);
-const timePeriod = ref('24h'); // default time period is 24 hours
-
+const timePeriod = ref('24h');
 const historicalData = ref({
-  labels: [],  // time labels for x-axis
+  labels: [],
   datasets: [
     {
       label: 'Temperature',
@@ -51,7 +50,6 @@ const fetchLogs = async () => {
 };
 
 const fetchHistoricalData = async (period) => {
-  // This is a mock for the data, you can replace it with real API data
   let labels = [];
   let tempData = [];
   let humidityData = [];
@@ -131,9 +129,6 @@ const logout = async () => {
 </template>
 
 <style scoped>
-/* Your existing styles go here */
-
-/* Add a style for the chart container */
 .chart-container {
   margin-top: 2rem;
   padding: 1rem;
