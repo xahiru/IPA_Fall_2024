@@ -1,5 +1,6 @@
 # 🚀 GREENHOUSE DASHBOARD
 > LOOKING FORWARD TO IMPLEMENT THIS PROJECT
+A Vue.js application for monitoring and controlling greenhouse environments.
 
 ## ✨ Features
 
