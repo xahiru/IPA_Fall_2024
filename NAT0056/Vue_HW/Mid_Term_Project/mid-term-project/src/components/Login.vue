@@ -22,8 +22,8 @@ const login_page = async () => {
                 <h3>Welcome Back!</h3>
             </div>
             <header class="header">
-                <h2 class="title">Greenhouse Farming System</h2>
-                <p class="subtitle">Login to access your Account</p>
+                <h2 class="title">Greenhouse Monitoring System</h2>
+                <p class="subtitle">Login to see your Dashboard</p>
             </header>
 
             <form class="login-form" @submit.prevent="login_page">

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import { Line } from 'vue-chartjs';
 import { Chart as ChartJS, Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale } from 'chart.js';
@@ -9,7 +9,9 @@ ChartJS.register(Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale
 const router = useRouter();
 const logs = ref([]);
 const timePeriod = ref('24h');
-const historicalData = ref({
+
+// Use reactive for chart data to track changes
+const historicalData = reactive({
   labels: [],
   datasets: [
     {
@@ -64,13 +66,9 @@ const fetchHistoricalData = async (period) => {
     humidityData = [58, 62, 64, 70, 73, 72, 69];
   }
 
-  historicalData.value = {
-    labels: labels,
-    datasets: [
-      { ...historicalData.value.datasets[0], data: tempData },
-      { ...historicalData.value.datasets[1], data: humidityData }
-    ]
-  };
+  historicalData.labels = labels;
+  historicalData.datasets[0].data = tempData;
+  historicalData.datasets[1].data = humidityData;
 };
 
 const changeTimePeriod = (period) => {
@@ -108,6 +106,7 @@ const logout = async () => {
       </section>
 
       <section class="chart-container">
+        <!-- Pass historicalData to the Line chart component -->
         <Line :data="historicalData" />
       </section>
 
@@ -129,6 +128,47 @@ const logout = async () => {
 </template>
 
 <style scoped>
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  background: #030d5863;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #3498db;
+}
+
 .chart-container {
   margin-top: 2rem;
   padding: 1rem;
