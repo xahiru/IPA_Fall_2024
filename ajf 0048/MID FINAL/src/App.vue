@@ -15,7 +15,12 @@
     </v-app-bar>
 
     <!-- Navigation Drawer -->
-    <v-navigation-drawer v-model="drawer" permanent class="nav-drawer">
+      <v-navigation-drawer 
+      v-if="!$route.path.includes('dashboard')" 
+      v-model="drawer" 
+      permanent 
+      class="nav-drawer"
+    >
       <NavBar />
     </v-navigation-drawer>
 
@@ -44,22 +49,18 @@ onMounted(() => {
 })
 </script>
 
-<style scoped>
-/* Fade transition */
-.page-enter-active,
-.page-leave-active {
+<style>
+/* Transitions */
+.page-enter-active, .page-leave-active {
   transition: all 0.4s ease;
 }
 
-.page-enter-from,
-.page-leave-to {
+.page-enter-from, .page-leave-to {
   opacity: 0;
   transform: translateY(20px);
 }
 
-/* Slide transition */
-.slide-enter-active,
-.slide-leave-active {
+.slide-enter-active, .slide-leave-active {
   transition: all 0.4s ease;
 }
 
@@ -73,26 +74,30 @@ onMounted(() => {
   transform: translateX(-50px);
 }
 
+/* Root Variables */
 :root {
-  --gradient-primary: linear-gradient(135deg, #00C9FF, #92FE9D);
-  --gradient-secondary: linear-gradient(135deg, #FC466B, #3F5EFB);
+  --gradient-primary: linear-gradient(135deg, #283048 0%, #859398 100%);
+  --gradient-secondary: linear-gradient(120deg, #24243e 0%, #302b63 100%);
   --accent: #6C63FF;
   --success: #00F260;
   --warning: #FFA63D;
   --card-bg: rgba(255, 255, 255, 0.9);
 }
 
+/* Layout Components */
 .nav-drawer {
-  background: #1A1A1A !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px);
   border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .main-content {
-  background: var(--gradient-primary) !important;
-  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+  background: transparent !important;
 }
 
-
+/* Cards and UI Elements */
 .glass-card {
   background: rgba(255, 255, 255, 0.25) !important;
   backdrop-filter: blur(15px) !important;
@@ -100,7 +105,18 @@ onMounted(() => {
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15) !important;
 }
 
-/* Button styling */
+.metric-card {
+  background: rgba(255, 255, 255, 0.15) !important;
+  backdrop-filter: blur(12px);
+}
+
+.metric-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Buttons */
 .v-btn {
   background-color: #f48fb1 !important;
   color: white !important;
@@ -112,6 +128,7 @@ onMounted(() => {
   transform: translateY(-2px);
 }
 
+/* Background Effects */
 .v-application {
   background: var(--gradient-primary) !important;
   min-height: 100vh;
@@ -132,25 +149,6 @@ onMounted(() => {
   z-index: 0;
 }
 
-.dashboard-container {
-  backdrop-filter: blur(10px);
-  background: var(--glass-effect);
-  border-radius: 24px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-}
-
-.metric-card {
-  background: rgba(255, 255, 255, 0.15) !important;
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
-}
-
-.metric-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-  border-color: rgba(255, 255, 255, 0.3);
-}
 .background-effects {
   position: fixed;
   top: 0;
@@ -165,7 +163,7 @@ onMounted(() => {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #1a2a6c 0%, #b21f1f 50%, #fdbb2d 100%);
+  background: linear-gradient(to right, #141e30, #243b55);
   opacity: 0.8;
 }
 
@@ -198,15 +196,10 @@ onMounted(() => {
   }
 }
 
-.main-content {
-  position: relative;
-  z-index: 1;
-  background: transparent !important;
-}
-
-.nav-drawer {
-  background: rgba(255, 255, 255, 0.1) !important;
+.dashboard-container {
   backdrop-filter: blur(10px);
-  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--glass-effect);
+  border-radius: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 </style>

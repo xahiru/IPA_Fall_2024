@@ -71,6 +71,7 @@
       </v-col>
     </v-row>
 
+  
   </v-container>
 </template>
 
@@ -110,6 +111,7 @@ const benefits = ref([
   height: 100vh;
   display: flex;
   flex-direction: column;
+  background: var(--gradient-primary);
 }
 
 .hero-section {

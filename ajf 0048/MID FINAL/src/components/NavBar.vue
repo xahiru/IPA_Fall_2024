@@ -1,32 +1,27 @@
 <template>
-    <v-list class="nav-list">
-      <v-list-item
-       prepend-avatar="https://randomuser.me/api/portraits/women/79.jpg"
-      title="RITAH"
-      subtitle="Greenhouse Admin"
-    ></v-list-item>
-      <v-list-item
-      v-for="item in menuItems"
-      :key="item.title"
-      :to="item.path"
-      class="nav-item"
-      v-ripple
-    >
-    <v-icon class="nav-icon">{{ item.icon }}</v-icon>
-      <span class="nav-text">{{ item.title }}</span>
-    </v-list-item>
-
-    <v-divider></v-divider>
-
-    <v-divider class="mt-auto"></v-divider>
-    
+  <v-list class="nav-list">
     <v-list-item
-      prepend-icon="mdi-logout"
-      title="Logout"
-      @click="handleLogout"
-      class="logout-item"
-    ></v-list-item>
-  </v-list>
+     prepend-avatar="https://randomuser.me/api/portraits/women/79.jpg"
+    title="RITAH"
+    subtitle="Greenhouse Admin"
+  ></v-list-item>
+    <v-list-item
+    v-for="item in menuItems"
+    :key="item.title"
+    :to="item.path"
+    class="nav-item"
+    v-ripple
+  >
+  <v-icon class="nav-icon">{{ item.icon }}</v-icon>
+    <span class="nav-text">{{ item.title }}</span>
+  </v-list-item>
+
+  <v-divider></v-divider>
+
+  <v-divider class="mt-auto"></v-divider>
+
+
+</v-list>
 </template>
 
 <script setup>
@@ -37,15 +32,12 @@ const router = useRouter()
 
 const menuItems = [
 { title: 'Home', icon: 'mdi-home', path: '/' },
-  { title: 'Dashboard', icon: 'mdi-view-dashboard', path: '/dashboard' },
-  { title: 'Settings', icon: 'mdi-cog', path: '/settings' },
-  { title: 'Login', icon: 'mdi-login', path: '/login' },
-  { title: 'Register', icon: 'mdi-account-plus', path: '/register' }
+
+{ title: 'Login', icon: 'mdi-login', path: '/login' },
+{ title: 'Register', icon: 'mdi-account-plus', path: '/register' }
 ]
 
-const handleLogout = () => {
-  router.push('/login')
-}
+
 </script>
 
 <style scoped>
