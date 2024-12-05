@@ -1,4 +1,4 @@
-<script setup>
+<script>
 import { useRouter } from 'vue-router';
 const router = useRouter();
 
@@ -41,14 +41,14 @@ const afterLogin = () => {
 
 <style scoped>
 :root {
-  --primary-color: #3498db;
-  --secondary-color: #2ecc71;
-  --accent-color: #f39c12;
-  --background-color: #ffffff;
-  --text-color: #333333;
-  --light-text-color: #7f8c8d;
-  --button-hover-color: rgba(0, 0, 0, 0.2);
-  --shadow-color: #3eaa00e7;
+  --primary-color: #94adbe;
+  --secondary-color: #8d2ecc;
+  --accent-color: #d7724b;
+  --background-color: #e176a8;
+  --text-color: #557268;
+  --light-text-color: #56524b;
+  --button-hover-color: rgba(92, 88, 88, 0.2);
+  --shadow-color: #002baae7;
 }
 
 #home-page {
@@ -89,7 +89,7 @@ const afterLogin = () => {
   font-size: 2.8rem;
   color: var(--text-color);
   font-weight: 700;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 2px 2px 4px rgba(21, 183, 110, 0.528);
 }
 
 .subtitle {
@@ -103,25 +103,6 @@ const afterLogin = () => {
   color: var(--text-color);
   line-height: 1.6;
   margin: 20px 0;
-}
-
-.features-list {
-  list-style-type: none;
-  padding: 0;
-  margin: 15px 0;
-  font-size: 1.1rem;
-}
-
-.features-list li {
-  background: #ecf8e1;
-  padding: 12px;
-  border-radius: 8px;
-  margin-bottom: 12px;
-  font-weight: 500;
-}
-
-.features-list li:nth-child(odd) {
-  background: #d1f1e1;
 }
 
 .buttons {
@@ -179,10 +160,6 @@ const afterLogin = () => {
     font-size: 1rem;
   }
 
-  .features-list li {
-    font-size: 1rem;
-  }
-
   .button {
     padding: 12px 26px;
   }
@@ -195,10 +172,6 @@ const afterLogin = () => {
 
   .subtitle {
     font-size: 0.9rem;
-  }
-
-  .features-list li {
-    font-size: 0.95rem;
   }
 
   .buttons {

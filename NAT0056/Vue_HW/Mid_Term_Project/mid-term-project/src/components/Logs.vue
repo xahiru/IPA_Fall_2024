@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, reactive } from 'vue';
+import { ref, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import { Line } from 'vue-chartjs';
 import { Chart as ChartJS, Title, Tooltip, Legend, LineElement, CategoryScale, LinearScale } from 'chart.js';
@@ -10,8 +10,7 @@ const router = useRouter();
 const logs = ref([]);
 const timePeriod = ref('24h');
 
-// Use reactive for chart data to track changes
-const historicalData = reactive({
+const historicalData = ref({
   labels: [],
   datasets: [
     {
@@ -66,9 +65,13 @@ const fetchHistoricalData = async (period) => {
     humidityData = [58, 62, 64, 70, 73, 72, 69];
   }
 
-  historicalData.labels = labels;
-  historicalData.datasets[0].data = tempData;
-  historicalData.datasets[1].data = humidityData;
+  historicalData.value = {
+    labels: labels,
+    datasets: [
+      { ...historicalData.value.datasets[0], data: tempData },
+      { ...historicalData.value.datasets[1], data: humidityData }
+    ]
+  };
 };
 
 const changeTimePeriod = (period) => {
@@ -87,11 +90,10 @@ const logout = async () => {
     <nav class="navbar">
       <div class="logo">Greenhouse</div>
       <ul class="nav-links">
-        <li><router-link to="/dashboard">Home</router-link></li>
-        <li><router-link to="/over-view">Overview</router-link></li>
-        <li><router-link to="/settings">Settings</router-link></li>
-        <li><a @click="logout">Logout</a></li>
-      </ul>
+        <li><router-link to="/dashboard">🏠Home</router-link></li>
+        <li><router-link to="/over-view">🌍Overview</router-link></li>
+        <li><router-link to="/settings">🛠️Settings</router-link></li>
+          <li> <a @click="logout">↪️Logout</a> </li>      </ul>
     </nav>
 
     <main>
@@ -106,7 +108,6 @@ const logout = async () => {
       </section>
 
       <section class="chart-container">
-        <!-- Pass historicalData to the Line chart component -->
         <Line :data="historicalData" />
       </section>
 
