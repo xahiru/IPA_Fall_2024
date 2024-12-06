@@ -106,7 +106,13 @@ export default {
 
       alert('Settings saved!');
     },
+    logout(){
+    localStorage.removeItem('authToken');
+    alert('Logged out successfully!');
+    this.$router.push('/login');
+  }
   },
+
   mounted() {
     const savedTemperatureThreshold = localStorage.getItem('temperatureThreshold');
     const savedHumidityThreshold = localStorage.getItem('humidityThreshold');
