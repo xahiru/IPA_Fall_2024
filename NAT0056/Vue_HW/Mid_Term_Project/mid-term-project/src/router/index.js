@@ -7,6 +7,7 @@ import Overview from '../components/Overview.vue'
 import Settings from '../components/Settings.vue';
 import Logs from '../components/Logs.vue';
 
+
 const routes = [
 	  {
 	    path: '/',
