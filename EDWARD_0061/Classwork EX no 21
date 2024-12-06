@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+int main() {
+    
+    int base_address = 1000;
+    int rows = 4;
+    int cols = 5;
+    int element_size = 4;
+    
+    int i = 2; 
+    int j = 3;
+    
+    int address = base_address + ((i * cols + j) * element_size);
+    
+    printf("The address of A[2][3] is: %d\n", address);
+    
+    return 0;
+}
