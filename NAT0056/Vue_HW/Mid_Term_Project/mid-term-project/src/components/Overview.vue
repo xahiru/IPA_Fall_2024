@@ -65,8 +65,8 @@ onMounted(fetchOverviewData);
 <style scoped>
 
 * {
-  margin: 0.5%;
-  padding: 0.5%;
+  margin: 0.0%;
+  padding: 0.0%;
   box-sizing: border-box;
 }
 

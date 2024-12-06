@@ -152,7 +152,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.2rem 2rem;
+  padding: 1rem 1.5rem;
   background: #030d5863;
   color: white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
