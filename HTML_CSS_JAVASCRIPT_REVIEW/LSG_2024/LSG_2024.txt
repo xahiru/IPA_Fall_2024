@@ -1,0 +1,48 @@
+class SequentialList:
+    def __init__(self):
+        self.items = []
+
+    def is_empty(self):
+        return not bool(self.items)
+
+    def size(self):
+        return len(self.items)
+
+    def append(self, data):
+        self.items.append(data)
+
+    def insert(self, index, data):
+        if index < 0 or index > self.size():
+            raise IndexError("Index out of range.")
+        self.items.insert(index, data)
+
+    def delete_by_value(self, value):
+        if value in self.items:
+            self.items.remove(value)
+
+    def display(self):
+        print("[", end="")
+        for i in range(len(self.items)):
+            print(self.items[i], end=" ")
+        print("]")
+
+# Example usage:
+if __name__ == "__main__":
+    seq_list = SequentialList()
+    
+    seq_list.append(10)
+    seq_list.append(20)
+    seq_list.append(30)
+    print("After appending: ")
+    seq_list.display()  # Output: [10 20 30]
+    
+    seq_list.insert(1, 15)
+    print("After inserting 15 at index 1: ")
+    seq_list.display()  # Output: [10 15 20 30]
+    
+    seq_list.delete_by_value(20)
+    print("After deleting 20: ")
+    seq_list.display()  # Output: [10 15 30]
+    
+    print("Is the list empty? ", seq_list.is_empty())  # Output: Is the list empty? False
+    print("Size of the list: ", seq_list.size())  # Output: Size of the list: 3
