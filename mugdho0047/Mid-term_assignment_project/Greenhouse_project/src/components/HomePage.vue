@@ -1,24 +1,29 @@
 <script setup>
-import router from '../router';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 
 
+const afterLogin = () => {
+  const user = localStorage.getItem("user");
+  if (user) {
+    router.push({ name: 'Dashboard' });
+  }
+};
 
 </script>
 
 <template>
   <div id="body">
-    
     <div class="home">
       <header class="header">
         <h1 class="title">Greenhouse Farming System</h1>
-        <p class="subtitle">Empowering sustainable agriculture with technology</p>
+        <p class="subtitle">Enhancing growth with data-driven insights</p>
       </header>
     
       <section class="info-section">
+        <div class="highlight">
+        </div>
         <ul class="features-list">
-          <li>Real-time temperature and humidity monitoring</li>
-          <li>Automated irrigation and lighting controls</li>
-          <li>Data analytics for optimal crop growth</li>
         </ul>
       </section>
       
@@ -47,25 +52,20 @@ import router from '../router';
   align-items: center;
 }
 
-body {
-  font-family: 'Roboto', sans-serif;
-  background: linear-gradient(135deg, #88d8b0, #56ab2f);
-  color: #333;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  margin: 0;
+.home {
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 50px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    max-width: 550px;
+    width: 100%;
+    animation: fadeIn 1s ease;
 }
 
-.home {
-  text-align: center;
-  background: #ffffff26;
-  padding: 40px;
-  border-radius: 15px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
-  max-width: 500px;
-  width: 100%;
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 .header {
@@ -113,7 +113,7 @@ body {
   padding: 12px 28px;
   font-size: 1rem;
   font-weight: 600;
-  color: white;
+  color: rgb(255, 255, 255);
   border: whitesmoke;
   cursor: pointer;
   border-radius: 8px;
@@ -126,7 +126,7 @@ body {
 }
 
 .login-button {
-  background-color: #ffffff29;
+  background-color: #0846c1dc;
 }
 
 .signup-button {
