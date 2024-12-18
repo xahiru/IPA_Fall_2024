@@ -80,18 +80,9 @@
 30. remove the navbar from all the pages and make a component for navbar
 31. create the setting page structure
 32. write the setting page functionalities
-
-
-
-
-
-
-
-
-
-30. create a component for charts(not used yet)
-31. install vue-chartjs (not used yet)
+33. create a component for charts(not used yet)
+34. install vue-chartjs 
     1. npm install chart.js vue-chartjs
-32. install zoom plugin
+35. install zoom plugin
     1. npm install chartjs-plugin-zoom
-33. 
+36. complete the charts part
