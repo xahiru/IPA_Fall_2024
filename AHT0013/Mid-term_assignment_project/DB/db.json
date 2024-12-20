@@ -1,0 +1,23 @@
+{
+  "user": [
+    {
+      "id": "e67c",
+      "username": "Abuhamza Tuhin",
+      "email": "ahdcd8@gmail.com",
+      "password": "1234"
+    },
+    {
+      "id": "5623",
+      "username": "Sizuka",
+      "email": "Sizuka@gmail.com",
+      "password": "12345"
+    },
+    {
+      "id": "dcd9",
+      "username": "Abuhamza Tuhin",
+      "email": "ahtuhin758@gmail.com",
+      "password": "12345"
+    }
+  ],
+  "alertSettings": []
+}
