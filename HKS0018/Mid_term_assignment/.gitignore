@@ -7,6 +7,7 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# Node modules and related files
 node_modules
 .DS_Store
 dist
@@ -14,6 +15,7 @@ dist-ssr
 coverage
 *.local
 
+# Cypress outputs
 /cypress/videos/
 /cypress/screenshots/
 
@@ -27,4 +29,8 @@ coverage
 *.sln
 *.sw?
 
+# TypeScript build info
 *.tsbuildinfo
+
+# Ignore package-lock.json
+package-lock.json
