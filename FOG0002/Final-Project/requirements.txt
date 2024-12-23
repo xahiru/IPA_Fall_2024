@@ -1,0 +1,5 @@
+Django
+rest_framework
+djoser 
+django-cors-headers
+
