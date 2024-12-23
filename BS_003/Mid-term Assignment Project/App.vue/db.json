@@ -1,0 +1,8 @@
+{
+  "greenhouse-metrics": {
+    "temperature": 25,
+    "humidity": 60,
+    "soilMoisture": 45,
+    "lightLevel": 1000
+  }
+}
