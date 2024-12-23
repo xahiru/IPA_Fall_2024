@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Get in Touch</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="scripts.js" defer></script>
+</head>
+<body>
+  <div id="welcome-message">Welcome! Glad you're here.</div>
+
+  <div class="menu-toggle">☰ Open Menu</div>
+  <nav>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">About</a></li>
+      <li><a href="#">Contact</a></li>
+    </ul>
+  </nav>
+
+  <section>
+    <h2>Reach Out</h2>
+    <form id="contactForm">
+      <label for="email">Your Email:</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email" required>
+
+      <label for="message">Message:</label>
+      <textarea id="message" name="message" placeholder="Write something here..." required></textarea>
+
+      <button type="submit">Send</button>
+    </form>
+  </section>
+
+  <button id="darkModeToggle" class="toggle-btn">Toggle Theme</button>
+</body>
+</html>
