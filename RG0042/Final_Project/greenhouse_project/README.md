@@ -25,7 +25,7 @@ Install Django:
 Step:3
 create a django project:
 
-    windows: django-admin startproject 
+    windows: django-admin startproject <..name..>
     
     greenhouse_project
     run the live server:
@@ -38,4 +38,8 @@ Install all Dependencies:
     installation commend:
     windows: pip install -r requirements.txt
 
+Step:5
+Django Create App:
+
+    windows: python manage.py startapp <...name...>
 
