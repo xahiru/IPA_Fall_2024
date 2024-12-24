@@ -1,4 +1,5 @@
 #First we need to install python, pip & virtual environment in our local system.
+
     check version: python --version 
                    pip --version
 
@@ -21,10 +22,20 @@ Install Django:
     windows: python -m pip install Django
     check version : django-admin --version
 
-3.create a django project:
+Step:3
+create a django project:
 
     windows: django-admin startproject 
     
     greenhouse_project
     run the live server:
      windows: python manage.py runserver
+
+Step:4
+Install all Dependencies:
+    first we need to add requirements.txt file & write all dependencies in txt file.
+
+    installation commend:
+    windows: pip install -r requirements.txt
+
+
