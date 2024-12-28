@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content=" Contact Anna - Reach out with any inquiries or collaboration requests.">
+    <title>Contact | Anna CV</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <nav aria-label="Main Navigation">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html" aria-current="page">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Get in Touch</h1>
+
+        <form id="contact-form" aria-labelledby="form-title" method="POST" action="/submit-form">
+            <fieldset>
+                <legend id="form-title">Contact Form</legend>
+
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Your name" required><br><br>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" placeholder="your@example.com" required><br><br>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" placeholder="Write your message here..." required></textarea><br><br>
+
+                <input type="submit" value="Send Message">
+            </fieldset>
+        </form>
+
+        <div id="error-message" role="alert" aria-live="polite"></div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Anna. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const form = document.getElementById('contact-form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+            const errorMessage = document.getElementById('error-message');
+
+            if (name && email && message) {
+                console.log('Message sent successfully!');
+                errorMessage.innerHTML = '';  
+            } else {
+                errorMessage.innerHTML = 'Please fill in all fields.';
+            }
+        });
+    </script>
+</body>
+
+</html>
