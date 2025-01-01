@@ -43,3 +43,11 @@ Django Create App:
 
     windows: python manage.py startapp <...name...>
 
+Step:5
+Migrate: 
+
+    python manage.py makemigrations
+    python manage.py migrate
+
+Step:6
+Now We will add File & Code What we need to complete this project step ny step.
