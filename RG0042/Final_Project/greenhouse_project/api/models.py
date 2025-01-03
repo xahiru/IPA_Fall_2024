@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Metrice(models.Model):
+class Metric(models.Model):
     TEMPERATURE = 'Temperature'
     HUMIDITY = 'Humidity'
     SOIL_MOISTURE = 'Soil Moistire'
