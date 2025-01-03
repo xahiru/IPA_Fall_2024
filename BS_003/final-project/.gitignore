@@ -1,6 +1,5 @@
-# Ignore Python cache files
-__pycache__/
-*.pyc
-
-# Ignore the environment directory
-environment/
+[main 1a2b3c4] Updated .gitignore and removed Python cache files
+ 3 files changed, 3 insertions(+), 5 deletions(-)
+ create mode 100644 .gitignore
+ delete mode 100644 test.pyc
+ delete mode 040000 __pycache__
