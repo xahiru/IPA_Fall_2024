@@ -1,10 +1,10 @@
 from django.contrib.auth.models import User
-from rest_framework.views import APIView # type: ignore
-from rest_framework.response import Response # type: ignore
-from rest_framework import status # type: ignore
-from rest_framework.authtoken.models import Token # type: ignore
-from rest_framework.viewsets import ModelViewSet # type: ignore
-from rest_framework.permissions import IsAuthenticated # type: ignore
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework.authtoken.models import Token
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.permissions import IsAuthenticated
 
 
 from .models import Metric, UserSetting
