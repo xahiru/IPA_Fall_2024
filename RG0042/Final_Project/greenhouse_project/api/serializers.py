@@ -1,7 +1,7 @@
-from rest_framework import serializers
+from rest_framework import serializers # type: ignore
 from .models import Metric, UserSetting
 
-class MetricSerializers(serializers.ModelSerializer):
+class MetricSerializer(serializers.ModelSerializer):
     class Meta:
         model = Metric
         fields = '__all__'

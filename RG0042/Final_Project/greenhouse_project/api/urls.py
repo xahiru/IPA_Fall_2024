@@ -5,7 +5,8 @@ from .views import MetricViewSet, UserSettingViewSet
 
 router = DefaultRouter()
 router.register(r'metrics', MetricViewSet, basename='metric')
-router.register(r'settings', UserSettingViewSet, basename='setting')
+router.register(r'settings', UserSettingViewSet, basename='setting') # type: ignore
+
 
 urlpatterns = [
     path('register/', RegisterView.as_view(), name='register'),
