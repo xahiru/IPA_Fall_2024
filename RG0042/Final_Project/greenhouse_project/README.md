@@ -51,3 +51,9 @@ Migrate:
 
 Step:6
 Now We will add File & Code What we need to complete this project step ny step.
+
+Step:7
+Django Admin - Create User
+
+    py manage.py createsuperuser
+
