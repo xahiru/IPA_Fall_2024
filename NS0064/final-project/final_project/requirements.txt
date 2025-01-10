@@ -1,5 +1,5 @@
-Django
-rest_framework
-djoser 
-django-cors-headers
-djangorestframework-simplejwt
+Django==4.2
+djangorestframework==3.14.0
+djoser==2.1.0
+django-cors-headers==3.10.0
+djangorestframework-simplejwt==5.0.0
