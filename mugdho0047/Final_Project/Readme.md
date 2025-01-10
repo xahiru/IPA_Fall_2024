@@ -1,24 +1,26 @@
-#Install Django
-#Steps:
-1. created a virtual environment for the project:
-   Command: python -m venv env
-*activate the virtual environment 
-   Command: vevn\Scripts\activate
-2. Install Django:
-   Command:python -m pip install Django
-   check version : django-admin --version
-3. create a django project:
-   Command: django-admin startproject Final_Project
-   Command: cd Final_Project
-4. Install all Dependencies:
-   Command: pip install -r requirements.txt
-   Command: Readme.md
-   Command: .gitignore 
-5. Django Create App:
-   Command: python manage.py startapp Final_Project
+# Greenhouse Monitoring System
+Superuser id:admin
+Password: admin
 
-*run the live server:
-  Command: python manage.py runserver
+Setup:
+1.Create Virtual Environment
+* python -m venv venv
+* source venv/bin/activate
 
-MUGDHO MEHEDI HASAN
-20233120047
+2.Install Django
+* pip install Django
+
+3.Django Create Project
+* django-admin startproject Final_Project
+
+4.Django Create App
+* python manage.py startapp api
+
+Project:
+5.create serializers for registration and login
+6.create views for registration, login and logout
+7.create models for greenhouse data and user-setting
+migrate with the database
+8.create serializers for the models 
+9.create views for greenhouse data and user-setting
+10.create urls using router
