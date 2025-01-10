@@ -1,3 +1,5 @@
+*****superuser id:admin, pass:admin****
+
 ***installed python,pip and virtual environment***
 
 # created a virtual environment
@@ -21,3 +23,4 @@
 4. create serializers for the models
 5. create views for greenhouse data and user-setting
 6. create urls using router
+7. create superuser 
