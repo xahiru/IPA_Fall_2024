@@ -1,4 +1,6 @@
-#first install python,pip and virtual environment in your system
+*****superuser id:admin, password: admin******
+
+#### first install python,pip and virtual environment in your system ####
 1. created a virtual environment for the project
     ubuntu - python3 -m venv .venv
     windows - python -m venv .venv
@@ -20,6 +22,7 @@
 7. create serializers for registration and login
 8. create views for registration, login and logout
 9. create models for greenhouse data and user-setting
+    migrate with the database
 10. create serializers for the models 
 11. create views for greenhouse data and user-setting
 12. create urls using router
