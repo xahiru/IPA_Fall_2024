@@ -1,3 +1,6 @@
 from django.contrib import admin
+from .models import GreenhouseMetrics, UserSettings
 
-# Register your models here.
+
+admin.site.register(GreenhouseMetrics)
+#admin.site.register(UserSettings)

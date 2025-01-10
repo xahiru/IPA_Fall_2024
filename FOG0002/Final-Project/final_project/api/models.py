@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class GreenhouseMetrics(models.Model):
+class GreenhouseMetrics(models.Model):    
     temperature = models.FloatField()
     humidity = models.FloatField()
     soil_moisture = models.FloatField()

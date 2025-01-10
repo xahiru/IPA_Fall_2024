@@ -42,7 +42,7 @@ class GreenhouseMetricsViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     # Optional action for additional functionality (e.g., filtering, or custom methods)
-    #@action(detail=False, methods=['get'])
+    @action(detail=False, methods=['get'])
     def latest(self, request):
         latest_metrics = GreenhouseMetrics.objects.last()
         serializer = self.get_serializer(latest_metrics)
