@@ -1,3 +1,15 @@
+# Greenhouse Monitoring API
+
+## Project Overview
+A Django REST API for monitoring and managing greenhouse metrics and user-specific settings. The API supports user authentication, CRUD operations, pagination, and filtering.
+
+## Features
+- User registration, login, and logout.
+- CRUD operations for greenhouse metrics and user settings.
+- Token and JWT-based authentication.
+- Pagination and filtering for metrics.
+- Admin panel for managing data.
+
 #First we need to install python, pip & virtual environment in our local system.
 
     check version: python --version 
@@ -9,7 +21,7 @@ created a virtual environment for the project:
     windows: python -m venv env
 
     activate the virtual environment (ALWAYS ACTIVATE THE VIRTUAL ENVIRONMENT BEFORE START WORKING)
-    windows: (evn)\Scripts\activate.bat
+    windows: (evn)\Scripts\activate
 
 Step:2
 Install Django:
@@ -56,4 +68,3 @@ Step:7
 Django Admin - Create User
 
     py manage.py createsuperuser
-

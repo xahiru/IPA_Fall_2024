@@ -6,7 +6,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.permissions import IsAuthenticated
 
-
+from django_filters.rest_framework import DjangoFilterBackend
 from .models import Metric, UserSetting
 from .serializers import MetricSerializer, UserSettingSerializer
 
@@ -39,6 +39,7 @@ class LoginView(APIView):
         return Response({'error': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
 
 class LogoutView(APIView):
+    permission_classes = [IsAuthenticated]
     def post(self, request):
         request.user.auth_token.delete()
         return Response({'message': 'Logged out successfully'}, status=status.HTTP_200_OK)
@@ -46,7 +47,9 @@ class LogoutView(APIView):
 class MetricViewSet(ModelViewSet):
     queryset = Metric.objects.all()
     serializer_class = MetricSerializer
-    permission_classes = [IsAuthenticated]  # Protect endpoint
+    permission_classes = [IsAuthenticated]
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['metric_typr', 'timestamp'] # Protect endpoint
 
 class UserSettingViewSet(ModelViewSet):
     queryset = UserSetting.objects.all()
