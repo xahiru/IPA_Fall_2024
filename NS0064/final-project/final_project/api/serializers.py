@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
+from .models import GreenhouseData, UserControl
 
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
@@ -20,3 +21,15 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
 class UserLoginSerializer(serializers.Serializer):
     username = serializers.CharField()
     password = serializers.CharField()
+
+class GreenhouseDataSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GreenhouseData
+        fields = ['id', 'temperature', 'humidity', 'soil_moisture', 'light_level', 'timestamp']
+
+class UserControlSerializer(serializers.ModelSerializer):
+    user = serializers.PrimaryKeyRelatedField(queryset=User.objects.all())
+
+    class Meta:
+        model = UserControl
+        fields = ['id', 'user', 'temp_threshold', 'humidity_threshold', 'soil_moisture_threshold', 'alert_light_level']
