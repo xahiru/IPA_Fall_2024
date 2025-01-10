@@ -13,9 +13,11 @@ class GreenhouseMetrics(models.Model):
 
 class UserSettings(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    temp_threshold = models.FloatField(null=True, blank=True)
-    humidity_threshold = models.FloatField(null=True, blank=True)
-    soil_moisture_threshold = models.FloatField(null=True, blank=True)
+    temp_threshold = models.FloatField(default=100.0)
+    humidity_threshold = models.FloatField(default=100.0)
+    soil_moisture_threshold = models.FloatField(default=100.0)
+    alert_light_level = models.FloatField(default=100.0)
 
     def __str__(self):
         return f"Settings for {self.user.username}"
+
