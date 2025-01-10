@@ -17,4 +17,9 @@
 6. run the live server
     ubuntu - python3 manage.py runserver
     windows - python manage.py runserver
-7. 
+7. create serializers for registration and login
+8. create views for registration, login and logout
+9. create models for greenhouse data and user-setting
+10. create serializers for the models 
+11. create views for greenhouse data and user-setting
+12. create urls using router

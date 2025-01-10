@@ -14,5 +14,5 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='user-logout'),
     path('token/refresh/', TokenRefreshView.as_view(), name='token-refresh'),
 
-    path('', include(router.urls)),
+    path('api/', include(router.urls)),
 ]
