@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "title": "Temperature",
+        "value": "15°C",
+        "label": "Current Temperature",
+        "color": "#e74c3c" 
+    },
+    {
+        "id": 2,
+        "title": "Humidity",
+        "value": "68%",
+        "label": "Current Humidity",
+        "color": "#16a085"
+    },
+    {
+        "id": 3,
+        "title": "Soil Moisture",
+        "value": "45%",
+        "label": "Soil Moisture Level",
+        "color": "#f39c12"
+    },
+    {
+        "id": 4,
+        "title": "Light Level",
+        "value": "300 lx",
+        "label": "Current Light Intensity",
+        "color": "#3498db"
+    }
+  
+  
+  ]
