@@ -1,0 +1,742 @@
+{% extends 'metrics/base.html' %}
+
+{% block content %}
+<!-- Add required libraries -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+<script src="https://cdn.jsdelivr.net/npm/heatmap.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<div class="dashboard-container classic-theme">
+        <div class="controls-panel classic-controls">
+    <div class="controls-panel">
+        <div class="user-preferences">
+            <button id="themeToggle">Toggle Theme</button>
+            <button id="settingsBtn">User Preferences</button>
+        </div>
+        <div class="view-controls">
+            <select id="chartType" onchange="updateVisualization()">
+                <option value="2d">2D Chart</option>
+                <option value="3d">3D Visualization</option>
+                <option value="heatmap">Heat Map</option>
+            </select>
+            <select id="timeRange" onchange="updateTimeRange()">
+                <option value="1h">Last Hour</option>
+                <option value="24h">Last 24 Hours</option>
+                <option value="7d">Last 7 Days</option>
+                <option value="30d">Last 30 Days</option>
+                <option value="custom">Custom Range</option>
+            </select>
+        </div>
+        </div>
+        <div class="weather-widget" id="weatherInfo">
+        </div>
+    </div>
+
+    <!-- Main Dashboard Content -->
+    <div class="dashboard-content">
+        <div class="metrics-cards classic-cards">
+            <div class="metric-card temperature">
+                <h3>Temperature</h3>
+                <div class="current-value">{{ current_temp }}°C</div>
+                <div class="prediction">Predicted: <span id="tempPrediction"></span>°C</div>
+                <div class="trend" id="tempTrend"></div>
+                <div class="goal-progress" id="tempGoal"></div>
+            </div>
+            <div class="metric-card humidity">
+                <h3>Humidity</h3>
+                <div class="current-value">{{ current_humidity }}%</div>
+                <div class="prediction">Predicted: <span id="humidityPrediction"></span>%</div>
+                <div class="trend" id="humidityTrend"></div>
+                <div class="goal-progress" id="humidityGoal"></div>
+            </div>
+            <div class="metric-card soil">
+                <h3>Soil Moisture</h3>
+                <div class="current-value">{{ current_soil }}%</div>
+                <div class="prediction">Predicted: <span id="soilPrediction"></span>%</div>
+                <div class="trend" id="soilTrend"></div>
+                <div class="goal-progress" id="soilGoal"></div>
+            </div>
+        </div>
+
+        <!-- Plant Growth Tracking -->
+        <div class="growth-tracking">
+            <h3>Plant Growth Analysis</h3>
+            <div id="growthChart"></div>
+            <div class="growth-predictions" id="growthPredictions"></div>
+        </div>
+
+        <!-- Enhanced Visualization Container -->
+        <div class="visualization-container">
+            <div id="chartContainer" class="chart-view">
+                <canvas id="mainChart"></canvas>
+            </div>
+            <div id="3dContainer" class="three-d-view hidden">
+                <canvas id="3dChart"></canvas>
+            </div>
+            <div id="heatmapContainer" class="heatmap-view hidden">
+                <canvas id="heatMap"></canvas>
+            </div>
+        </div>
+
+        <!-- Enhanced Analytics Panel -->
+        <div class="analytics-panel">
+            <div class="analysis-card">
+                <h3>ML Predictions</h3>
+                <div id="mlPredictions"></div>
+            </div>
+            <div class="analysis-card">
+                <h3>Weather Impact</h3>
+                <div id="weatherAnalysis"></div>
+            </div>
+            <div class="analysis-card">
+                <h3>Growth Metrics</h3>
+                <div id="growthMetrics"></div>
+            </div>
+        </div>
+
+        <!-- Enhanced Export Options -->
+        <div class="export-panel">
+            <button onclick="exportData('png')">Export Chart</button>
+            <button onclick="exportData('csv')">Export CSV</button>
+            <button onclick="exportData('pdf')">Export Report</button>
+            <button onclick="scheduleReport()">Schedule Reports</button>
+        </div>
+    </div>
+
+    <!-- Alerts and Notifications -->
+    <div id="alertsContainer" class="alerts-panel"></div>
+</div>
+
+<script>
+// Initialize all features
+document.addEventListener('DOMContentLoaded', function() {
+    initializeCharts();
+    initializePredictions();
+    setupWebSocket();
+    setupEventListeners();
+    initializeWeatherData();
+    initializeGrowthTracking();
+    loadUserPreferences();
+    init3DVisualization();
+    initHeatMap();
+});
+
+function initHeatMap() {
+    const heatmapContainer = document.getElementById('heatmapContainer');
+    const config = {
+        container: heatmapContainer,
+        radius: 30,
+        maxOpacity: .8,
+        minOpacity: 0.1,
+        gradient: {
+            '.5': '#4dabf7',
+            '.8': '#ff6b6b',
+            '.95': '#ff3333'
+        },
+        blur: .75
+    };
+
+    const heatmapInstance = h337.create(config);
+
+    // Generate sample data points
+    const points = [];
+    const max = 100;
+    const width = heatmapContainer.offsetWidth;
+    const height = heatmapContainer.offsetHeight;
+
+    for (let i = 0; i < 50; i++) {
+        const point = {
+            x: Math.floor(Math.random() * width),
+            y: Math.floor(Math.random() * height),
+            value: Math.floor(Math.random() * max)
+        };
+        points.push(point);
+    }
+
+    const data = {
+        max: max,
+        data: points
+    };
+
+    heatmapInstance.setData(data);
+}
+
+function setupWebSocket() {
+    const ws = new WebSocket(`ws://${window.location.host}/ws/metrics/`);
+    
+    ws.onmessage = function(event) {
+        const data = JSON.parse(event.data);
+        updateRealTimeMetrics(data);
+    };
+}
+
+function setupEventListeners() {
+    document.getElementById('themeToggle').addEventListener('click', toggleDarkMode);
+    document.getElementById('settingsBtn').addEventListener('click', openSettings);
+    document.getElementById('chartType').addEventListener('change', updateVisualization);
+    document.getElementById('timeRange').addEventListener('change', updateTimeRange);
+}
+
+function updateVisualization() {
+    const type = document.getElementById('chartType').value;
+    document.getElementById('chartContainer').classList.toggle('hidden', type !== '2d');
+    document.getElementById('3dContainer').classList.toggle('hidden', type !== '3d');
+    document.getElementById('heatmapContainer').classList.toggle('hidden', type !== 'heatmap');
+}
+
+function updateTimeRange() {
+    const range = document.getElementById('timeRange').value;
+    fetchDataForRange(range);
+}
+
+function displayPredictions(predictions) {
+    document.getElementById('tempPrediction').textContent = predictions[0].toFixed(1);
+    document.getElementById('humidityPrediction').textContent = predictions[1].toFixed(1);
+    document.getElementById('soilPrediction').textContent = predictions[2].toFixed(1);
+}
+
+function exportData(format) {
+    switch(format) {
+        case 'png':
+            const canvas = document.getElementById('mainChart');
+            const image = canvas.toDataURL('image/png');
+            downloadFile(image, 'dashboard-chart.png');
+            break;
+        case 'csv':
+            exportToCSV();
+            break;
+        case 'pdf':
+            generatePDFReport();
+            break;
+    }
+}
+
+function updateWeatherWidget(data) {
+    const widget = document.getElementById('weatherInfo');
+    widget.innerHTML = `
+        <h4>Current Weather</h4>
+        <p>Temperature: ${data.temperature}°C</p >
+        <p>Humidity: ${data.humidity}%</p >
+        <p>Conditions: ${data.conditions}</p >
+    `;
+}
+
+function updateRealTimeMetrics(data) {
+    // Update charts and displays with real-time data
+    window.mainChart.data.datasets.forEach((dataset) => {
+        dataset.data.push(data[dataset.label.toLowerCase()]);
+        if (dataset.data.length > 50) dataset.data.shift();
+    });
+    window.mainChart.update();
+    updateGoalProgress();
+}
+
+// Weather Integration
+async function initializeWeatherData() {
+    try {
+        const response = await axios.get('/api/weather/');
+        updateWeatherWidget(response.data);
+    } catch (error) {
+        console.error('Weather data fetch failed:', error);
+    }
+}
+
+// Plant Growth Tracking
+function initializeGrowthTracking() {
+    const growthData = {
+        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+        datasets: [{
+            label: 'Plant Height (cm)',
+            data: [5, 10, 15, 20],
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1
+        }]
+    };
+
+    const ctx = document.getElementById('growthChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'line',
+        data: growthData,
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Plant Growth Over Time'
+                }
+            }
+        }
+    });
+}
+
+// User Preferences
+function loadUserPreferences() {
+    const preferences = JSON.parse(localStorage.getItem('userPreferences')) || {
+        darkMode: false,
+        alertThresholds: {
+            temperature: { min: 18, max: 30 },
+            humidity: { min: 40, max: 80 },
+            soil_moisture: { min: 20, max: 60 }
+        },
+        reportSchedule: 'weekly'
+    };
+    applyUserPreferences(preferences);
+}
+
+// Automated Reports
+function scheduleReport() {
+    const schedule = {
+        frequency: 'weekly',
+        day: 'Monday',
+        time: '09:00',
+        format: 'pdf'
+    };
+    saveReportSchedule(schedule);
+}
+
+// Goal Tracking
+function updateGoalProgress() {
+    const goals = {
+        temperature: { current: 25, target: 24 },
+        humidity: { current: 60, target: 65 },
+        soil_moisture: { current: 40, target: 45 }
+    };
+    
+    Object.keys(goals).forEach(metric => {
+        const progress = (goals[metric].current / goals[metric].target) * 100;
+        document.getElementById(`${metric}Goal`).style.width = `${progress}%`;
+    });
+}
+
+// Enhanced ML Predictions
+async function updatePredictions() {
+    const model = await tf.loadLayersModel('/static/model/greenhouse_model.json');
+    const predictions = await model.predict(tf.tensor2d([[/* input data */]])).array();
+    displayPredictions(predictions);
+}
+
+    // Initialize 2D Chart
+    const ctx = document.getElementById('mainChart').getContext('2d');
+    window.mainChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{ timestamps|safe }},
+            datasets: [{
+                    label: 'Temperature',
+                    data: {{ temperatures|safe }},
+                    borderColor: 'rgb(255, 99, 132)',
+                    tension: 0.4
+                }, {
+                    label: 'Humidity',
+                    data: {{ humidity|safe }},
+                    borderColor: 'rgb(54, 162, 235)',
+                    tension: 0.4
+                }, {
+                    label: 'Soil Moisture',
+                    data: {{ soil_moisture|safe }},
+                    borderColor: 'rgb(75, 192, 192)',
+                    tension: 0.4
+                }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                zoom: {
+                    pan: { enabled: true },
+                    zoom: { enabled: true }
+                },
+                tooltip: {
+                    mode: 'index',
+                    intersect: false
+                }
+            }
+        }
+    });
+
+    // Initialize 3D Visualization
+    init3DVisualization();
+
+    // Initialize Heat Map
+    initHeatMap();
+
+function init3DVisualization() {
+    const container = document.getElementById('3dContainer');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer();
+    
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    container.appendChild(renderer.domElement);
+    
+    // Add 3D elements
+    const geometry = new THREE.BoxGeometry();
+    const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
+    
+    camera.position.z = 5;
+    
+    function animate() {
+        requestAnimationFrame(animate);
+        cube.rotation.x += 0.01;
+        cube.rotation.y += 0.01;
+        renderer.render(scene, camera);
+    }
+    animate();
+}
+
+// Enhanced Dark Mode Toggle
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+}
+
+function initializeClassicTheme() {
+    // Add hover effects
+    const cards = document.querySelectorAll('.metric-card');
+    cards.forEach(card => {
+        card.addEventListener('mouseover', () => {
+            card.style.transform = 'translateY(-2px)';
+            card.style.boxShadow = '2px 4px 8px rgba(0,0,0,0.15)';
+        });
+        
+        card.addEventListener('mouseout', () => {
+            card.style.transform = 'translateY(0)';
+            card.style.boxShadow = '2px 2px 5px rgba(0,0,0,0.1)';
+        });
+    });
+
+    // Classic Chart Theme
+    Chart.defaults.font.family = 'Georgia, serif';
+    Chart.defaults.color = '#2c3e50';
+}
+</script>
+
+<style>
+body {
+    background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+    min-height: 100vh;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    background: linear-gradient(145deg, #1a2634 0%, #2c3e50 100%);
+    color: #e2e8f0;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+}
+
+/* Metric Cards */
+.metrics-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.metric-card {
+    border-radius: 12px;
+    background: linear-gradient(135deg, #2d3748 0%, #2c3e50 100%);
+    border-left: 4px solid #4a90e2;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+    text-align: center;
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.metric-card h3 {
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+}
+
+.metric-card .current-value {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #4a90e2;
+    margin: 10px 0;
+}
+
+.metric-card .prediction {
+    color: #a0aec0;
+    font-size: 0.9rem;
+}
+
+.metric-card.temperature {
+    background: linear-gradient(135deg, #fff 0%, #fff6f6 100%);
+    border-left: 4px solid #ff6b6b;
+}
+
+.metric-card.humidity {
+    background: linear-gradient(135deg, #fff 0%, #f0f7ff 100%);
+    border-left: 4px solid #4dabf7;
+}
+
+.metric-card.soil {
+    background: linear-gradient(135deg, #fff 0%, #f3fff0 100%);
+    border-left: 4px solid #51cf66;
+}
+
+.metric-card h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+/* Controls Panel */
+.controls-panel {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+.user-preferences, .view-controls {
+    margin: 10px 0;
+}
+
+/* Visualization Containers */
+.visualization-container {
+    height: 400px;
+    margin: 20px 0;
+    background: linear-gradient(135deg, #2d3748 0%, #2c3e50 100%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden
+}
+
+
+/* Weather Widget */
+.weather-widget {
+    background: linear-gradient(135deg, #4a90e2 0%, #67b26f 100%);
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+/* Growth Tracking */
+.growth-tracking {
+    background: linear-gradient(135deg, #2d3748 0%, #2c3e50 100%);
+    padding: 20px;
+    border-radius: 12px;
+    margin: 20px 0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+    min-height: 200px;
+}
+
+.growth-tracking h3 {
+    color: #ffffff;
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-bottom: 20px;
+    letter-spacing: 0.5px;
+}
+
+#growthChart {
+    height: 150px;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.growth-predictions {
+    margin-top: 15px;
+    padding: 10px;
+    background: rgba(74, 144, 226, 0.1);
+    border-left: 4px solid #4a90e2;
+    border-radius: 4px;
+}
+
+/* Analytics Panel */
+.analytics-panel {
+    background: linear-gradient(135deg, #2d3748 0%, #2c3e50 100%);
+    padding: 20px;
+    border-radius: 12px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    margin: 20px 0;
+}
+
+h3, h4 {
+    color: #e2e8f0;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+.analysis-card {
+    background: linear-gradient(135deg, #2d3748 0%, #2c3e50 100%);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+    min-height: 150px;
+}
+
+.analysis-card h3 {
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+}
+
+#mlPredictions, #weatherAnalysis, #growthMetrics {
+    margin-top: 10px;
+    padding: 10px;
+    background: rgba(74, 144, 226, 0.1);
+    border-left: 4px solid #4a90e2;
+    border-radius: 4px;
+}
+
+/* Buttons and Controls */
+button, select {
+    background: #4a90e2;
+    color: white;
+    border: 1px solid #cbd5e0;
+    padding: 8px 15px;
+    border-radius: 6px;
+    margin: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+button:hover, select:hover {
+    background: #f8fafc;
+    border-color: #a0aec0;
+}
+
+/* Progress Indicators */
+.goal-progress {
+    background: rgba(255, 255, 255, 0.1);
+    height: 6px;
+    margin-top: 10px;
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.goal-progress div {
+    height: 100%;
+    background: linear-gradient(to right, #4a90e2, #63b3ed);
+    transition: width 0.3s ease;
+}
+
+.goal-progress div.temperature {
+    background: linear-gradient(to right, #ff6b6b, #ffa8a8);
+}
+
+.goal-progress div.humidity {
+    background: linear-gradient(to right, #4dabf7, #74c0fc);
+}
+
+.goal-progress div.soil {
+    background: linear-gradient(to right, #51cf66, #8ce99a);
+}
+/* Dark Mode */
+body.dark-mode {
+    background: #1e2430;
+    color: #e2e8f0;
+}
+
+body.dark-mode .dashboard-container {
+    background: #252d3b;
+}
+
+body.dark-mode .metric-card {
+    background: #2c3444;
+    color: #e2e8f0;
+}
+
+body.dark-mode .visualization-container,
+body.dark-mode .growth-tracking,
+body.dark-mode .analysis-card {
+    background: #2c3444;
+    color: #e2e8f0;
+}
+
+@media (max-width: 768px) {
+    .metrics-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .analytics-panel {
+        grid-template-columns: 1fr;
+    }
+    
+    .dashboard-container {
+        padding: 10px;
+    }
+}
+
+.hidden {
+    display: none;
+}
+
+#mainChart {
+    max-height: 360px; 
+    width: 100%;
+}
+
+.chart-view {
+    height: 100%;
+    position: relative;
+}
+.chart-colors {
+    --temp-color: #ff6b6b;
+    --humidity-color: #4dabf7;
+    --soil-color: #51cf66;
+}
+.export-panel {
+    background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e0 100%);
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+button, select {
+    background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    cursor: pointer;
+}
+
+button:hover, select:hover {
+    background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+
+select option {
+    background: #2c3e50;
+    color: #ffffff;
+}
+</style>
+{% endblock content %}
