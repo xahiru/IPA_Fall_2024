@@ -1,0 +1,245 @@
+<script setup>
+import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+const overviewData = ref([]);
+
+onMounted(() => {
+    const user = localStorage.getItem("user");
+    if (!user) {
+        router.push({ name: 'Login' });
+    }
+});
+
+const logout = async () => {
+    localStorage.removeItem("user");
+    window.location.href = '/login';
+};
+
+const fetchOverviewData = async () => {
+    try {
+        const response = await fetch('../../DB/overview.json'); // Adjust path as needed
+        overviewData.value = await response.json();
+    } catch (error) {
+        console.error('Error fetching overview data:', error);
+    }
+};
+
+onMounted(fetchOverviewData);
+</script>
+
+<template>
+  <div id="overview">
+    <nav class="navbar">
+      <div class="logo">Greenhouse</div>
+      <ul class="nav-links">
+        <li><router-link to="/dashboard">Home</router-link></li>
+        <li><router-link to="/over-view">Overview</router-link></li>
+        <li><router-link to="/settings">Settings</router-link></li>
+        <li><router-link to="/historical-data-chart">Logs</router-link></li>
+        <li> <a @click="logout">Logout</a> </li>
+      </ul>
+    </nav>
+
+    <main>
+      <header>
+        <h1>Greenhouse Monitoring System Overview</h1>
+        <p>As the global population grows and climate change increasingly impacts agriculture, adopting efficient and sustainable farming practices becomes more critical. A greenhouse monitoring system plays a pivotal role in this effort by providing real-time data on vital environmental parameters such as temperature, humidity, soil moisture, light intensity, carbon dioxide levels, and water usage. This data empowers farmers to optimize crop growth conditions, improve plant health, reduce costs, and conserve resources.A smart monitoring system integrates IoT sensors to continuously monitor and regulate the environment within a greenhouse. These sensors collect data on environmental factors, which is then transmitted to a central control unit or remote system. By using this data, the system can automatically adjust factors like ventilation, lighting, irrigation, and temperature control, ensuring optimal conditions for plant growth.Smart greenhouse systems are versatile and can be implemented in a wide range of settings, from large-scale commercial farms to research facilities and hobbyist greenhouses. They are suitable for cultivating a diverse variety of crops, including vegetables, fruits, flowers, herbs, and more.. </p>
+      </header>
+
+      <section class="overview-details">
+        <div 
+          v-for="(item, index) in overviewData" 
+          :key="index" 
+          class="card" 
+          :style="{ borderLeft: `5px solid ${item.color}` }"
+        >
+          <h2>{{ item.title }}</h2>
+          <p>{{ item.description }}</p>
+        </div>
+      </section>
+    </main>
+  </div>
+</template>
+
+<style scoped>
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background: #f4f6f9;
+  color: #333333;
+  padding-top: 70px;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  background: #026302;
+  color: white;
+  box-shadow: 0 4px 10px rgba(48, 21, 21, 0.1);
+  z-index: 100;
+  overflow-x: auto;
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+.logo {
+  font-size: 1.8rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #06b131;
+}
+
+main {
+  padding: 2rem 3rem;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-top: 100px;
+}
+
+header p {
+  font-size: 1.1rem;
+  color: #ffffff;
+  font-weight: 300;
+}
+
+.overview-details {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.card {
+  padding: 1.8rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+@media (max-width: 1024px) {
+  .overview-details {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .overview-details {
+    grid-template-columns: 1fr;
+  }
+
+  header h1 {
+    font-size: 2rem;
+  }
+
+  header p {
+    font-size: 1rem;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  .card h2 {
+    font-size: 1.3rem;
+  }
+
+  .card p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.2rem;
+  }
+
+  .nav-links {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+    white-space: nowrap;
+  }
+
+  header h1 {
+    margin-top: 30px;
+  }
+
+  .nav-links li {
+    flex-shrink: 0;
+  }
+
+  .overview-details {
+    margin-top: 20px;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+
+  .card h2 {
+    font-size: 1.2rem;
+  }
+
+  .card p {
+    font-size: 0.9rem;
+  }
+}
+</style>
