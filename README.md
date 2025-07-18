@@ -1,3 +1,8 @@
+# 📦 Archived
+
+> ⚠️ This repository is no longer maintained and will not receive any further updates or support.  
+> It has been archived for reference purposes only.
+
 # IPA_Fall_2024
 Repository for the course IPA
 
